@@ -1,0 +1,7 @@
+{
+    "appId": "com.concret.pay",
+    "appName": "concrete-pay",
+    "bundledWebRuntime": false,
+    "npmClient": "yarn",
+    "webDir": "www"
+}

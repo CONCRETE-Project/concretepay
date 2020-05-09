@@ -1,0 +1,35 @@
+<ion-list>
+  <ion-item (click)="goToTxDetails(txs, coin)">
+    <ion-avatar slot="start">
+      <i *ngIf="!isConfirmed" class="fas fa-2x fa-clock" style="color: #cd4b5c"></i>
+      <i *ngIf="isSent && isConfirmed && !isReceived" class="fas fa-2x fa-arrow-circle-up" style="color: #cd4b5c"></i>
+      <i *ngIf="isReceived && isConfirmed && !isSent" class="fas fa-2x fa-arrow-circle-down" style="color: #0ed3a7"></i>
+      <i *ngIf="isSent && isConfirmed && isReceived" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
+    </ion-avatar>
+
+    <ion-grid>
+
+      <ion-row *ngIf="isConfirmed">
+        <span *ngIf="isReceived && !isSent">Received on {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && !isReceived ">Sent on {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && isReceived ">Moved on {{ txs.timestamp * 1000 | date:'short' }}</span>
+      </ion-row>
+
+      <ion-row *ngIf="!isConfirmed">
+        <span>Confirming...</span>
+      </ion-row>
+
+      <ion-row>
+        <span *ngIf="isReceived  && !isSent && isConfirmed" class="received"><span>{{ Amount | satToUnit:coin }}</span></span>
+        <span *ngIf="isSent && isReceived  && isConfirmed" class="moved"><span>{{ Amount| satToUnit:coin }}</span></span>
+        <div *ngIf="isSent && !isReceived  && isConfirmed" class="sent" style="color: #cd4b5c">
+          <span style="color: #cd4b5c">{{  Amount| satToUnit:coin }}</span>
+          <br/>
+          <span style="font-size: 12px;"> (Miner fee {{  fee| satToUnit:coin }})</span>
+        </div>
+      </ion-row>
+
+    </ion-grid>
+
+  </ion-item>
+</ion-list>

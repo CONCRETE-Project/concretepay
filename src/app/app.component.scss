@@ -1,0 +1,18 @@
+.background {
+    background: var(--ion-color-menu-background);
+    --background: var(--ion-color-menu-background);
+}
+.menu-toolbar {
+    text-align: center;
+    height: 90px;
+    padding-top: 10px;
+    color: var(--ion-color-primary-contrast);
+    --background: var(--ion-color-primary-shade);
+}
+.ios .menu-toolbar {
+    text-align: center;
+    height: 90px;
+    padding-top: 30px;
+    color: var(--ion-color-primary-contrast);
+    --background: var(--ion-color-primary-shade);
+}

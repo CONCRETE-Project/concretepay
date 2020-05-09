@@ -1,0 +1,42 @@
+.amount-content {
+    position: relative;
+    height: 100%;
+}
+.amounts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.continue-btn {
+    position: absolute;
+    bottom: 10px;
+}
+
+.currency-outline {
+    --border-width: 2px;
+    --border-style: solid;
+    --box-shadow: none;
+    --background-activated: transparent;
+    --background-focused: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);
+    --background-hover: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.04);
+    --color-activated: var(--color);
+    --border-color: var(--color);
+    --background: transparent;
+    --color: var(--color);
+    --color-focused: var(--color);
+}
+.modal-background {
+    --background: var(--ion-color-modal-background);
+}
+.modal-background-alt {
+    --background: var(--ion-color-modal-background-alt);
+}
+.modal-send {
+    color: var(--ion-color-modal-send);
+}
+.send-icons {
+    color: var(--color) !important;
+}
+.amount-pinpad {
+    height: 100%;
+}

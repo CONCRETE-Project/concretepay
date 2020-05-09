@@ -1,0 +1,102 @@
+<ion-header class="modal-fullscreen " color="secondary">
+  <ion-item  class="card-header " color="secondary">
+    <ion-icon class="settings-element fas fa-times" (click)="closeModal(false)" slot="start"></ion-icon>
+    <ion-grid class="grid-adjust " color="secondary">
+      <ion-row class="ion-justify-content-center ion-align-items-center " color="secondary">
+        <span class="span-white">Import Wallet</span>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-header>
+<ion-content class="page-content-with-slim-header ion-padding modal-background" *ngIf="!unsafe">
+  <ion-card class="card">
+    <ion-grid *ngIf="!mnemonicSize">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <h4>Select your mnemonic size</h4>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-button size="small" shape="round" (click)="selectSize(12)">12 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(15)">15 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(18)">18 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(21)">21 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(24)">24 Words</ion-button>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="mnemonicSize && !mnemonicLanguage">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <h4>Select your prefered language</h4>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center modal-background">
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')">English</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')">Spanish</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')">French</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')">Italian</ion-button>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="mnemonicSize && mnemonicLanguage">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <h4>Build your mnemonic phrase</h4>
+      </ion-row>
+      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+        <span>Selected words</span>&nbsp;&nbsp;<ion-button (click)="clear()" size="small" shape="round">Clear</ion-button>
+      </ion-row>
+      <ion-row class="word-container ion-padding ion-justify-content-center ion-align-items-center">
+        <ion-button *ngFor="let word of selectedWords; index as i" size="small" shape="round" (click)="removeWord(i)">{{ word }}</ion-button>
+      </ion-row>
+      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+        <ion-button (click)="addWord()">{{ this.currentSelectionWord }}</ion-button>
+      </ion-row>
+      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+        <span>Click on the buttons to add the {{this.selectedWords.length + 1}} word</span>
+      </ion-row>
+      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+        <ion-button  *ngFor="let char of selectionChars" size="small" shape="round" (click)="addCharToWord(char)">{{char}}</ion-button>
+      </ion-row>
+      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+        <ion-button (click)="clearWord()">Clear</ion-button>
+        <ion-button (click)="removeLastChar()">Delete </ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
+<ion-footer class="page-content-with-slim-header" *ngIf="!unsafe">
+  <ion-button style="margin: 0px" expand="full" size="large" (click)="closeModal(true)"
+              [disabled]="(!this.mnemonicPhrase || !this.mnemonicLanguage)">Confirm
+  </ion-button>
+</ion-footer>
+
+<ion-content class="page-content-with-slim-header ion-padding modal-background" *ngIf="unsafe">
+  <ion-grid *ngIf="!mnemonicLanguage">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h4>Select your prefered language</h4>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')">English</ion-button>
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')">Spanish</ion-button>
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')">French</ion-button>
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')">Italian</ion-button>
+    </ion-row>
+  </ion-grid>
+  <ion-card class="card" *ngIf="mnemonicLanguage">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center ion-align-items-center ion-padding ion-text-center">
+        <h2 style="color: var(--ion-color-danger)">Warning</h2>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center ion-padding ion-text-center">
+        <span style="color: var(--ion-color-danger)">Using your mnemonic with clipboard (copy/paste) or plain text could leak your coins. Please use it only if you know what you are doing.</span>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center ion-padding ion-text-center">
+        <span style="color: var(--ion-color-danger)">For importing your mnemonic securely, use the Encrypted QR or the Safe Import</span>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center ion-padding">
+        <span>Mnemonic Phrase</span>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center ion-padding">
+        <ion-input type="text" #mnemonic placeholder="Your mnemonic phrase"></ion-input>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-button shape="round" [disabled]="!mnemonic.value" color="secondary" (click)="setMnemonic(mnemonic.value)">Submit</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

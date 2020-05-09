@@ -1,0 +1,19 @@
+<div class="pinpad">
+    <ion-row *ngFor="let row of buttonRows">
+        <ion-col *ngFor="let button of row" (click)="onKeystroke(button.value)" class="nopadding" tappable>
+            <div class="pinpad-buttons" [ngSwitch]="button.value">
+                <ion-button expand="full" color="secondary" class="nopadding" *ngSwitchCase="'delete'">
+                    <ion-icon class="fas fa-backspace"></ion-icon>
+                </ion-button>
+                <ion-button color="secondary" class="nopadding" expand="full" *ngSwitchCase="'.'">
+                    <span class="text-base-color">.</span>
+                </ion-button>
+                <ion-button color="secondary" class="nopadding" expand="full" *ngSwitchDefault>{{ button.value }}
+                </ion-button>
+            </div>
+        </ion-col>
+    </ion-row>
+    <div class="pinpad-buttons">
+        <ion-button color="secondary" class="nopadding" (click)="onKeystroke('send-max')" expand="full">Send Max</ion-button>
+    </div>
+</div>

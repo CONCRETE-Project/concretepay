@@ -1,0 +1,52 @@
+<ion-row class="ion-padding">
+  <div *ngIf="!fee">
+    <div>...</div>
+    <div>...</div>
+  </div>
+  <ion-col *ngIf="fee && coin">
+    <ion-button  fill="outline" color="secondary" style="height: auto; width: 100%" (click)="setFeeSpeed('fast')">
+      <ion-grid>
+        <ion-row>
+          <span>Fast:</span>
+        </ion-row>
+        <ion-row>
+          <span>{{fee.fast | satToUnit: coin}}</span>
+        </ion-row>
+        <ion-row>
+          <span>{{fee.fast | satToFiat: coin:alternative | async}}</span>
+        </ion-row>
+      </ion-grid>
+    </ion-button>
+  </ion-col>
+  <ion-col *ngIf="fee && coin">
+    <ion-button fill="outline" color="secondary" style="height: auto; width: 100%" (click)="setFeeSpeed('medium')">
+      <ion-grid>
+        <ion-row>
+          <span>Medium:</span>
+        </ion-row>
+        <ion-row>
+          <span>{{fee.medium | satToUnit: coin}}</span>
+        </ion-row>
+        <ion-row>
+          <span>{{fee.medium | satToFiat: coin:alternative | async}}</span>
+        </ion-row>
+      </ion-grid>
+    </ion-button>
+  </ion-col>
+  <ion-col *ngIf="fee && coin">
+    <ion-button  fill="outline" color="secondary" style="height: auto; width: 100%" (click)="setFeeSpeed('slow')">
+      <ion-grid>
+        <ion-row>
+          <span>Slow:</span>
+        </ion-row>
+        <ion-row>
+          <span>{{fee.slow | satToUnit: coin}}</span>
+        </ion-row>
+        <ion-row>
+          <span>{{fee.slow | satToFiat: coin:alternative | async}}</span>
+        </ion-row>
+      </ion-grid>
+    </ion-button>
+  </ion-col>
+
+</ion-row>

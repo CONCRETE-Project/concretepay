@@ -1,0 +1,17 @@
+<ion-header class="modal-fullscreen">
+  <ion-item color="secondary" class="card-header">
+    <ion-icon class="settings-element fas fa-times" (click)="closeModal()" slot="start"></ion-icon>
+    <ion-grid class="grid-adjust">
+      <ion-row color ="secondary" class="ion-justify-content-center ion-align-items-center">
+        <span class="span-white">Export Mnemonic</span>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-header>
+<ion-content class="page-content-with-slim-header ion-padding-top modal-background">
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center" *ngIf="MnemonicPhrase">
+      <qrcode class="qr-code" [qrdata]="MnemonicPhrase"  [size]="256" [level]="'M'"></qrcode>
+    </ion-row>
+  </ion-grid>
+</ion-content>

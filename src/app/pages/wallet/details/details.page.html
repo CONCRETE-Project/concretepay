@@ -1,0 +1,43 @@
+<ion-header *ngIf="wallet">
+    <ion-toolbar class="background"[ngStyle]="{'background': wallet.Properties.color}">
+        <ion-buttons slot="start">
+            <ion-back-button class="back-button" color="light" defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="title">{{getCoinNameFromTag()}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="background" [ngStyle]="{'background': wallet.Properties.color}" *ngIf="wallet">
+    <ion-row class="ion-justify-content-center ion-align-items-center balance-title">Balance</ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 65%">
+        <div style="color:white;text-align: center;">
+            <div *ngIf="credentials.Balance">
+                <div class="balance-str">{{ credentials.Balance.Confirmed | satToUnit: credentials.Coin }} <i *ngIf="wallet.Properties.encrypted" class="i-white fas fa-lock"></i>
+                </div>
+                <div  class="balance-alt-str">{{ credentials.Balance.Confirmed | satToFiat: credentials.Coin:AlternativeCoin | async }}</div>
+            </div>
+
+            <div class="balance-spendable" *ngIf="credentials.Balance && credentials.Balance.Unconfirmed !== 0">
+                <ion-icon name="timer-outline"></ion-icon>
+                <strong>
+                    {{ credentials.Balance.Unconfirmed | satToUnit: credentials.Coin }}
+                </strong>
+                &nbsp;
+                <strong>
+              {{ credentials.Balance.Unconfirmed | satToFiat: credentials.Coin:AlternativeCoin | async }}
+                </strong>
+            </div>
+            <div>
+            </div>
+            <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+        </div>
+    </ion-row>
+        <ion-fab vertical="bottom">
+           <ion-row class="ion-text-center">
+               <ion-col *ngFor="let option of options">
+                   <ion-fab-button color="secondary" [disabled]="isLoading" (click)="option.click.call()" class="button">
+                       <ion-icon [class]="option.icon"></ion-icon>
+                   </ion-fab-button>
+               </ion-col>
+           </ion-row>
+        </ion-fab>
+</ion-content>

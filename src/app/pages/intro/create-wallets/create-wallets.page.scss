@@ -1,0 +1,67 @@
+ion-content {
+    --background: none,
+        linear-gradient(
+            to bottom,
+            var(--ion-color-primary-shade) 0%,
+            var(--ion-color-primary-tint) 100%
+        );
+    background-position: top center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.top-description {
+    font-size: 1.4rem;
+    padding: 0 3rem 0 3rem;
+    color: var(--ion-color-primary-contrast);
+    text-align: center;
+}
+.middle-description {
+    font-family: "Century Gothic";
+    font-size: 1rem;
+    padding: 0 3rem 0 3rem;
+    color: var(--ion-color-primary-contrast);
+    text-align: center;
+}
+.logo-tagline {
+    margin-top: calc(3vh + 3vw);
+    text-align: center;
+    img {
+        max-width: 150px;
+        margin: 5rem 0;
+    }
+    p {
+        line-height: 1.6;
+        font-size: 1.6rem;
+    }
+}
+.agree-to-terms {
+    font-family: "Century Gothic";
+    font-size: 1rem;
+    background: none;
+    color: #fff;
+}
+.button-standard {
+    width: 90%;
+    max-width: 300px !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    min-height: 57px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    box-shadow: none;
+    font-weight: 400;
+    font-size: 14px;
+}
+.external-link {
+    margin: 2px;
+}
+
+.agreement-text {
+    font-size: 0.5rem;
+}
+
+.checkBoxCreate {
+    color: #323232 !important;
+}

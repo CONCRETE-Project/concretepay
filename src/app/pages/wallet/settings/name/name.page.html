@@ -1,0 +1,20 @@
+<app-tool-bar [back]="true" titleText="Wallet Name"></app-tool-bar>
+<ion-content class="page-content-with-slim-header ion-padding">
+  <ion-card class="card">
+      <div class="settings-heading" translate>What do you call this wallet?</div>
+    <form [formGroup]="walletNameForm">
+        <ion-item>
+          <ion-label class="text">Name</ion-label>
+          <ion-input type="text" formControlName="walletName" [value]="walletNameForm.value.walletName" required></ion-input>
+        </ion-item>
+        <br />
+        <ion-item color="secondary" class="item-button" (click)="save()" [disabled]="!walletNameForm.valid">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center ion-align-items-center">
+              <span class="span-white">Save</span>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </form>
+  </ion-card>
+</ion-content>

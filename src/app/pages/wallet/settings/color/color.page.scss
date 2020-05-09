@@ -1,0 +1,137 @@
+.settings-color-block {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    float: left;
+    margin: 1rem;
+    align-items: center;
+}
+/* generate classes for all colors */
+.wallet-color-0 {
+    background: var(--ion-color-wallet-cinnabar);
+    --background: var(--ion-color-wallet-cinnabar);
+}
+
+.wallet-color-0:before {
+    content: "Cinnabar";
+    margin-left: 4rem;
+}
+
+.wallet-color-1 {
+    background: var(--ion-color-wallet-carrot-orange);
+}
+
+.wallet-color-1:before {
+    content: "Carrot Orange";
+    margin-left: 4rem;
+}
+
+.wallet-color-2 {
+    background: var(--ion-color-wallet-light-salmon);
+}
+
+.wallet-color-2:before {
+    content: "Light Salmon";
+    margin-left: 4rem;
+}
+
+.wallet-color-3 {
+    background: var(--ion-color-wallet-metallic-gold);
+}
+
+.wallet-color-3:before {
+    content: "Metallic Gold";
+    margin-left: 4rem;
+}
+
+.wallet-color-4 {
+    background: #9edd72;
+}
+
+.wallet-color-4:before {
+    content: "Feijoa";
+    margin-left: 4rem;
+}
+
+.wallet-color-5 {
+    background: #00a099;
+}
+
+.wallet-color-5:before {
+    content: "Shamrock";
+    margin-left: 4rem;
+}
+
+.wallet-color-6 {
+    background: var(--ion-color-wallet-observatory);
+    --background: var(--ion-color-wallet-observatory);
+}
+
+.wallet-color-6:before {
+    content: "Observatory";
+    margin-left: 4rem;
+}
+
+.wallet-color-7 {
+    background: var(--ion-color-wallet-turquoise-blue);
+}
+
+.wallet-color-7:before {
+    content: "Turquoise Blue";
+    margin-left: 4rem;
+}
+
+.wallet-color-8 {
+    background: var(--ion-color-wallet-dark-gunmetal-blue);
+}
+
+.wallet-color-8:before {
+    content: "Dark Gunmetal Blue";
+    margin-left: 4rem;
+}
+
+.wallet-color-9 {
+    background: var(--ion-color-wallet-free-speech-blue);
+}
+
+.wallet-color-9:before {
+    content: "Free Speech Blue";
+    margin-left: 4rem;
+}
+
+.wallet-color-10 {
+    background: var(--ion-color-wallet-deep-liliac);
+}
+
+.wallet-color-10:before {
+    content: "Deep Lilac";
+    margin-left: 4rem;
+}
+
+.wallet-color-11 {
+    background: var(--ion-color-wallet-free-speech-magenta);
+}
+
+.wallet-color-11:before {
+    content: "Free Speech Magenta";
+    margin-left: 4rem;
+}
+
+.wallet-color-12 {
+    background: var(--ion-color-wallet-brilliant-rose);
+}
+
+.wallet-color-12:before {
+    content: "Brilliant Rose";
+    margin-left: 4rem;
+}
+
+.wallet-color-13 {
+    background: var(--ion-color-wallet-light-slate-gray);
+}
+
+.wallet-color-13:before {
+    content: "Light Slate Grey";
+    margin-left: 4rem;
+}

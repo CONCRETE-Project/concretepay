@@ -1,0 +1,17 @@
+<ion-header *ngIf="!logo">
+  <div *ngIf="addPaddingTop" class="desktop-div"></div>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" *ngIf="back">
+      <ion-back-button class="back-button" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="title" *ngIf="titleText">{{ titleText }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="logo">
+  <div *ngIf="addPaddingTop" class="desktop-div"></div>
+  <ion-toolbar class="extended-toolbar">
+    <ion-buttons slot="start" *ngIf="back"><ion-back-button class="back-button" defaultHref="/"></ion-back-button></ion-buttons>
+    <ion-title class="home-logo-container" style="color: #fff">Coin Wallet</ion-title>
+  </ion-toolbar>
+</ion-header>

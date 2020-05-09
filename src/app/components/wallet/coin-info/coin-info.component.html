@@ -1,0 +1,35 @@
+<ion-item-sliding *ngIf="credentials">
+  <ion-item (click)="goToDetails()" class="settings-element ion-activatable">
+      <ion-avatar slot="start">
+          <img [src]="this.coinData.icon" class="home-coin-balance-logo" alt="wallets" width="20" />
+      </ion-avatar>
+      <ion-grid>
+          <ion-row class="ion-align-items-center">
+              <span class="info-header-text">Balance {{ credentials.Balance.Confirmed | satToFiat:credentials.Coin:AlternativeCoin | async }}</span>
+          </ion-row>
+          <ion-row>
+              <span class="info-sub-text" *ngIf="credentials.Balance.Confirmed !== 0.0">Confirmed {{ credentials.Balance.Confirmed | satToUnit:credentials.Coin }}</span>
+          </ion-row>
+          <ion-row>
+              <span class="info-sub-text" *ngIf="credentials.Balance.Unconfirmed !== 0.0">Unconfirmed {{ credentials.Balance.Unconfirmed | satToUnit:credentials.Coin }}</span>
+          </ion-row>
+          <ion-ripple-effect></ion-ripple-effect>
+      </ion-grid>
+  </ion-item>
+  <ion-item-options side="start">
+      <ion-item-option color="secondary" expandable (click)="goToSend()">
+          <ion-grid>
+              <ion-row class="ion-justify-content-center ion-align-items-center">
+                  <i class="i-white fas fa-1x fa-arrow-circle-up"></i>
+              </ion-row>
+          </ion-grid>
+      </ion-item-option>
+      <ion-item-option [ngStyle]="{'background': wallet.Properties.color}" expandable (click)="goToReceive()">
+          <ion-grid >
+              <ion-row class="ion-justify-content-center ion-align-items-center ">
+                  <i class="i-white fas fa-1x fa-arrow-circle-down"></i>
+              </ion-row>
+          </ion-grid>
+      </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

@@ -1,0 +1,7 @@
+{
+    "name": "concrete-pay",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "angular"
+}

@@ -1,0 +1,25 @@
+<app-tool-bar [back]="true" titleText="Coin Endpoint"></app-tool-bar>
+<ion-content class="page-content-with-slim-header ion-padding">
+  <ion-card class="card">
+      <div class="settings-heading" translate>Write the desired endpoint link below</div>
+    <form [formGroup]="walletBlockbookForm">
+        <ion-item>
+          <ion-label class="text">Blockbook Node URL</ion-label>
+          <ion-input type="text" formControlName="walletBlockbook" placeholder="{{blockbook}}" [value]="walletBlockbookForm.value.walletBlockbook" required></ion-input>
+        </ion-item>
+        <br />
+        <ion-item color="secondary" class="item-button" (click)="save()" [disabled]="!walletBlockbookForm.valid">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center ion-align-items-center">
+              <span class="span-white">Save</span>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </form>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-button color="danger" style="margin: 0" expand="full" size="large" (click)="showResetAlert()">reset url
+  </ion-button>
+</ion-footer>

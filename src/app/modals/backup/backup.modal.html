@@ -1,0 +1,66 @@
+<ion-header class="modal-fullscreen " color="secondary">
+  <ion-item class="card-header " color="secondary">
+    <ion-icon class="settings-element fas fa-times" (click)="closeModal(false)" slot="start"></ion-icon>
+    <ion-grid class="grid-adjust">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <span class="span-white">Backup Wallet</span>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-header>
+
+<ion-content *ngIf="firstPage" class="backup-warning-container ion-padding modal-background">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h3>Are you being watched?</h3>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <img src='assets/img/app/onboarding/backup-warning.svg' alt="backup-warning"/>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center ion-padding">
+      <span class="span-white">Now is a perfect time to assess your surroundings. Nearby windows? Hidden cameras? Shoulder-spies?</span>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center ion-padding">
+      <span class="span-white">Anyone with your backup phrase can access or spend your coins.</span>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center ion-padding">
+      <ion-button size="large" shape="round" color="primary" (click)="nextPage(1)">Got it</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="secondPage" class="ion-padding" >
+  <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+    <span>Mnemonic phrase</span>
+  </ion-row>
+  <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+    <span>Please write this words somewhere safe. </span>
+  </ion-row>
+  <ion-row class="word-container ion-padding ion-justify-content-center ion-align-items-center">
+    <ion-text class="ion-text-center mnemonicWords">{{ this.mnemonic }}</ion-text>
+  </ion-row>
+  <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+    <ion-button (click)="nextPage(2)">Start Backup</ion-button>
+  </ion-row>
+</ion-content>
+
+<ion-content *ngIf="thirdPage" class="ion-padding">
+  <ion-row>
+    <ion-button (click)="nextPage(3)"><ion-icon class="fa fa-arrow-left"></ion-icon></ion-button>
+  </ion-row>
+  <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+    <span>Selected words</span>&nbsp;&nbsp;<ion-button (click)="clear()" size="small" shape="round">Clear</ion-button>
+  </ion-row>
+  <ion-row class="word-container ion-padding ion-justify-content-center ion-align-items-center">
+    <ion-button *ngFor="let word of selectedWords; index as i" size="small" shape="round" (click)="removeWord(i, word)">{{ word }}</ion-button>
+  </ion-row>
+  <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+    <span>Click on the words to add them on the correct order</span>
+  </ion-row>
+  <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+    <ion-button  *ngFor="let word of MnemonicArray" size="small" shape="round" (click)="addWordToSelection(word)">{{word}}</ion-button>
+  </ion-row>
+</ion-content>
+<ion-footer *ngIf="thirdPage">
+  <ion-button style="margin: 0" expand="full" size="large" (click)="finish()">Confirm</ion-button>
+</ion-footer>

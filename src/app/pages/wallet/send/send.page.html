@@ -1,0 +1,21 @@
+<app-tool-bar [back]="true" [titleText]="'Send'"></app-tool-bar>
+<ion-content class="page-content-with-slim-header ion-padding">
+    <ion-card class="card">
+        <ion-card-content>
+            <ion-list lines="none">
+                <ion-item>
+                    <ion-label>Recipient</ion-label>
+                </ion-item>
+                <ion-item [ngClass]="{'invalid': invalidAddress && search !== ''}">
+                    <ion-input placeholder="recipient address" [(ngModel)]="search" (ngModelChange)="processInput()"></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button color="secondary" (click)="openScanner()">
+            <ion-icon name="qr-code-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

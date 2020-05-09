@@ -1,0 +1,49 @@
+<ion-content *ngIf="success && !canceled" color="success" class="ion-padding modal-fullscreen">
+  <ion-grid>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <ion-icon class="fas fa-8x fa-check-circle"></ion-icon>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <span class="span-white ion-text-center" style="font-size: 40px" >Success!</span>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <span class="span-white ion-text-center" style="font-size: 15px" >{{message}}</span>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <ion-button color="success" (click)="close()">Close</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-content *ngIf="!success && !canceled" color="danger" class="ion-padding modal-fullscreen">
+  <ion-grid>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <ion-icon class="fas fa-8x fa-exclamation-circle"></ion-icon>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <span class="span-white ion-text-center" style="font-size: 40px" >Error!</span>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <span class="span-white ion-text-center" style="font-size: 15px" >{{message}}</span>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <ion-button color="danger" (click)="close()">Close</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-content *ngIf="!success && canceled" color="warning" class="ion-padding modal-fullscreen">
+  <ion-grid>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <ion-icon class="fas fa-8x fa-exclamation-circle"></ion-icon>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <span class="ion-text-center" style="font-size: 40px; color: black" >Canceled</span>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <span class="ion-text-center" style="font-size: 15px; color: black" >{{message}}</span>
+    </ion-row>
+    <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+      <ion-button color="warning" (click)="close()">Close</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

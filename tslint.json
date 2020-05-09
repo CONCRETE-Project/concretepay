@@ -1,0 +1,62 @@
+{
+    "extends": "tslint:recommended",
+    "rulesDirectory": ["codelyzer"],
+    "rules": {
+        "array-type": false,
+        "arrow-parens": false,
+        "deprecation": {
+            "severity": "warn"
+        },
+        "import-blacklist": [true, "rxjs/Rx"],
+        "interface-name": false,
+        "max-classes-per-file": false,
+        "max-line-length": false,
+        "member-access": false,
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "static-field",
+                    "instance-field",
+                    "static-method",
+                    "instance-method"
+                ]
+            }
+        ],
+        "no-duplicate-imports": true,
+        "no-unused-variable": true,
+        "no-unused-expression": true,
+        "no-consecutive-blank-lines": false,
+        "no-console": false,
+        "no-empty": false,
+        "no-inferrable-types": [true, "ignore-params"],
+        "no-non-null-assertion": true,
+        "prefer-const": false,
+        "no-redundant-jsdoc": true,
+        "no-switch-case-fall-through": true,
+        "no-string-literal": false,
+        "no-use-before-declare": true,
+        "no-var-requires": false,
+        "object-literal-key-quotes": false,
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "quotemark": [false, "single"],
+        "trailing-comma": false,
+        "no-output-on-prefix": true,
+        "no-inputs-metadata-property": true,
+        "no-host-metadata-property": true,
+        "no-input-rename": false,
+        "no-trailing-whitespace": false,
+        "no-bitwise": false,
+        "no-output-rename": true,
+        "no-shadowed-variable": false,
+        "use-lifecycle-interface": true,
+        "use-pipe-transform-interface": true,
+        "one-variable-per-declaration": false,
+        "component-class-suffix": [true, "Page", "Component"],
+        "directive-class-suffix": true,
+        "variable-name": false,
+        "directive-selector": [true, "attribute", "app", "camelCase"],
+        "component-selector": [true, "element", "app", "page", "kebab-case"]
+    }
+}

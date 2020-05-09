@@ -1,0 +1,38 @@
+<app-tool-bar [back]="false" [logo]="true"></app-tool-bar>
+
+<ion-content class="page-content-with-extended-header ion-padding ionBckg">
+  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="card" *ngIf="wallets && wallets.length === 0">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-card-header>
+          <ion-card-title>You have created no wallets yet.</ion-card-title>
+        </ion-card-header>
+      </ion-row>
+    </ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-card-content style="font-size: 1em;">
+        To start, please create a wallet by tapping over the <i class="fas fa-plus"></i> button in the bottom right, select either the scan or create wallet option and follow the shown steps.
+      </ion-card-content>
+    </ion-row>
+
+
+
+  </ion-card>
+
+  <app-wallet *ngFor="let wallet of wallets" [wallet]="wallet" [AlternativeCoin]="AlternativeCoin"></app-wallet>
+
+</ion-content>
+
+<ion-fab vertical="bottom"  horizontal="end">
+  <ion-fab-button color="secondary">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button color="secondary" (click)="goToSettings()" ><i class="i-white fas fa-cogs"></i></ion-fab-button>
+    <ion-fab-button color="secondary" (click)="goToAddView()" ><i class="i-white fas fa-wallet"></i></ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

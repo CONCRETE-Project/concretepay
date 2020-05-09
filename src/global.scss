@@ -1,0 +1,218 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+/* Font Awesome */
+@import "assets/vendor/fontawesome/css/all.min.css";
+
+/* Global PolisPay Clases */
+
+ion-item {
+    --inner-border-width: 0 0 0.5px 0;
+}
+ion-spinner {
+    color: var(--ion-color-spinner) !important;
+}
+
+.text-base-color {
+    color: var(--color);
+}
+.primary-button {
+    --background: var();
+}
+
+.page-content-with-extended-header {
+    --background: none;
+    margin-bottom: 0 !important;
+    position: relative;
+    top: -100px;
+    bottom: 0;
+    z-index: 100;
+    --offset-bottom: 100px !important;
+}
+
+.page-content-with-slim-header {
+    --background: var(--ion-color-primary-background);
+    background: var(--ion-color-primary-background);
+}
+
+.pages-bg {
+    --background: var(--ion-color-pages-background);
+    background: var(--ion-color-pages-background);
+}
+
+.icon-home-green {
+    color: var(--ion-color-wallet-working);
+    margin: 5px;
+}
+
+.icon-home-red {
+    color: var(--ion-color-wallet-not-working);
+    margin: 5px;
+}
+
+.card {
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: 0 7px 12px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin: 20px auto;
+    display: block;
+    background-color: var(--ion-color-light-background);
+    .item-divider {
+        background-color: #fff;
+        margin-bottom: 5px;
+    }
+    .item-block {
+        padding: 5px 0 0 24px;
+    }
+    .input-wrapper {
+        padding-bottom: 4px;
+    }
+}
+.card-format {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+span {
+    color: var(--ion-color-dark-tint);
+}
+
+.back-button {
+    color: white !important;
+}
+
+.span-white {
+    margin: 5px;
+    font-weight: bolder;
+    font-size: large;
+    color: var(--ion-color-light);
+}
+
+ion-label {
+    color: var(--ion-color-light);
+}
+i {
+    color: var(--ion-color-dark-tint);
+}
+.i-white {
+    color: var(--ion-color-light);
+}
+
+.voucher-name {
+    margin: 10px;
+    font-size: 1.4rem;
+    padding: 10px;
+}
+
+.settings-element {
+    cursor: pointer;
+}
+.item-button {
+    text-align: center;
+    cursor: pointer;
+    --border-style: none !important;
+}
+.modal-wrapper {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+ion-icon {
+    color: #fff;
+}
+.ion-icon-dark {
+    color: var(--ion-color-dark);
+}
+.ion-icon-green {
+    color: var(--ion-color-primary-tint);
+}
+
+.grid-adjust {
+    margin-left: -55px;
+}
+
+@mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.address-divider {
+    width: 1px;
+    height: 25px;
+    background-color: rgb(227, 227, 227);
+    display: inline-block;
+    margin-left: 6px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+.text-address.ellipsis {
+    margin: 10px;
+    flex: 0 0 47px;
+    img {
+        margin: 12px 0 12px 12px;
+        vertical-align: middle;
+    }
+}
+.ellipsis {
+    margin: 10px;
+}
+
+.info-header-text {
+    font-size: 18px;
+}
+
+.info-sub-text {
+    font-size: 12px;
+}
+
+.voucher-card {
+    text-align: center;
+    --background-color: var(--ion-color-settings-background);
+    cursor: pointer;
+}
+
+.card-btn {
+    color: white !important;
+}
+
+.truncate-string {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.qr-code {
+    padding: 40px;
+    border: 2px solid rgb(229, 229, 229);
+    border-radius: 20px;
+    background: #fff;
+}
+
+.ios .modal-fullscreen {
+    top: 30px;
+}

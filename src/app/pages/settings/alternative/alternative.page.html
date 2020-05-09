@@ -1,0 +1,24 @@
+<app-tool-bar [back]="true" [titleText]="'Alternative Currency'"></app-tool-bar>
+<ion-content class="page-content-with-slim-header">
+  <ion-searchbar placeholder="Search your currency" [(ngModel)]="searchedAltCurrency" (ngModelChange)="findCurrency(searchedAltCurrency)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let lastUsedAltCurrency of lastUsedAltCurrencyList" (click)="save(lastUsedAltCurrency)">
+      {{ lastUsedAltCurrency.name }}
+      <span slot="end">{{lastUsedAltCurrency.code}}</span>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let alt of altCurrencyList" (click)="save(alt)" class="settings-element">
+      {{ alt.name }}
+      <ion-note slot="end">{{alt.code}}</ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-spinner *ngIf="!altCurrencyList" name="crescent"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="loadAltCurrencies($event)" >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

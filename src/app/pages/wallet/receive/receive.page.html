@@ -1,0 +1,56 @@
+<app-tool-bar [back]="true" [titleText]="'Receive Coins'"></app-tool-bar>
+<ion-content class="page-content-with-slim-header ">
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center" *ngIf="wallet && wallet.Properties.backup">
+      <qrcode class="qr-code" copyToClipboard="{{ qrAddress }}" [qrdata]="qrAddress"  *ngIf="wallet && address" [size]="256" [level]="'M'"></qrcode>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center ion-text-center" *ngIf="wallet && wallet.Properties.backup">
+      <ion-item class="ion-padding">
+        <ion-label>Amount</ion-label>
+        <ion-input type="digit" placeholder="10.00" #amount></ion-input>
+        <ion-button color="secondary" (click)="setAmount(amount.value)">Set Amount</ion-button>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center ion-text-center" *ngIf="wallet && wallet.Properties.backup">
+      <ion-button
+              *ngIf="credentials.isSegwit"
+              (click)="getAddress('P2SHInP2WPKH')"><span class="span-white" style="font-size: 16px">Segwit</span></ion-button>
+      <ion-button
+              *ngIf="credentials.isSegwit"
+              (click)="getAddress('P2WPKH')"
+      ><span class="span-white" style="font-size: 16px">Bech32</span></ion-button>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <div *ngIf="wallet && !wallet.Properties.backup">
+        <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+          <img src="assets/img/app/backup-needed-page.svg" alt="backup-needed" />
+        </ion-row>
+        <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+          <span>Paper Key Unverified</span>
+        </ion-row>
+        <ion-row class="ion-padding ion-align-items-center ion-justify-content-center" style="text-align: center">
+          <span>Before retrieving your wallet address, it's recommended that you first write down your paper key and store it securely
+            so that your wallet can be recovered in the case your device was lost or stolen.</span>
+        </ion-row>
+        <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
+          <ion-button (click)="backupWallet()">Write Down Paper Key</ion-button>
+        </ion-row>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer *ngIf="wallet && wallet.Properties.backup">
+  <div *ngIf="wallet && credentials && address" style="text-align: center">
+    <div *ngIf="wallet && wallet.Properties.backup" class="address-container">
+      <div class="text-address ellipsis">
+        <div
+          class="address-text ellipsis">
+          <span class="addressReceive" copyToClipboard="{{ address }}">{{ address }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-footer>

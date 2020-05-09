@@ -1,0 +1,29 @@
+.backup-warning-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    --background: var(--ion-color-primary-shade);
+    --color: white;
+}
+
+.backup-continue {
+    width: 100%;
+    text-align: center;
+    background-color: #2dab66;
+    color: white;
+    font-size: 1.5em;
+    padding: 20px;
+}
+
+.word-container {
+    border: 0.5px dashed;
+    background-color: #fff;
+    min-height: 30px;
+    border-radius: 5px;
+}
+
+.mnemonicWords {
+    color: black;
+}

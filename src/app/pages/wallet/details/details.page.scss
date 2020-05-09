@@ -1,0 +1,53 @@
+.background {
+    --background: none;
+    color: var(--ion-color-primary-contrast);
+    text-align: center;
+}
+.wallet-color-line {
+    --background: none;
+    height: 3px;
+    width: 100%;
+}
+.balance-str {
+    cursor: pointer;
+    font-size: 32px;
+    font-weight: 600;
+}
+.balance-alt-str {
+    padding-top: 5px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.balance-hidden {
+    .title {
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
+.balance-spendable {
+    margin-top: 5px;
+    font-size: 13px;
+    ion-icon {
+        vertical-align: text-bottom;
+        margin-right: 5px;
+    }
+}
+ion-fab {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+
+.balance-title {
+    text-align: center;
+    font-size: 3em;
+    color: white;
+    font-weight: bolder;
+    margin-top: 5%;
+}
+.button {
+    color: var(--ion-color-wallet-shade);
+}

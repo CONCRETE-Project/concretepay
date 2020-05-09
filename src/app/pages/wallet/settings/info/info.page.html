@@ -1,0 +1,29 @@
+<app-tool-bar [back]="true" titleText="Wallet Information"></app-tool-bar>
+<ion-content class="page-content-with-slim-header">
+  <ion-list style="background: none" *ngIf="wallet" lines="none">
+    <ion-list-header>Main Wallet Information</ion-list-header>
+    <ion-item copyToClipboard="{{wallet.Properties.id}}">
+      <span slot="start">Wallet ID</span>
+      <ion-note style="white-space: nowrap;" slot="end">
+        {{wallet.Properties.id}}
+      </ion-note>
+    </ion-item>
+    <ion-item copyToClipboard="{{wallet.Properties.encrypted}}">
+      <span slot="start">Is Encrypted</span>
+      <ion-note style="white-space: nowrap;" slot="end">
+        {{wallet.Properties.encrypted}}
+      </ion-note>
+    </ion-item>
+    <ion-item copyToClipboard="{{wallet.Properties.backup}}">
+      <span slot="start">Is Backup</span>
+      <ion-note style="white-space: nowrap;" slot="end">
+        {{wallet.Properties.backup}}
+      </ion-note>
+    </ion-item>
+    <br/>
+    <ion-list-header>Coin Information:</ion-list-header>
+    <ion-item class="settings-element" (click)="goToCoinInfo(wallet.Credentials.wallet)">
+      <span>{{ getCoinName()}}</span>
+    </ion-item>
+  </ion-list>
+</ion-content>

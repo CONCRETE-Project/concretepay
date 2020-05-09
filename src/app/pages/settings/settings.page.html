@@ -1,0 +1,20 @@
+<app-tool-bar [back]="true" titleText="Settings"></app-tool-bar>
+<ion-content class="page-content-with-slim-header">
+    <ion-list style="background: none" lines="none">
+        <ion-list-header>Preferences</ion-list-header>
+
+        <ion-item class="settings-element ion-activatable" (click)="goToAltCoinPage()">
+            <ion-icon slot="start" color="black" name="logo-bitcoin"></ion-icon>
+            <span>  Alternative currency</span>
+            <ion-note *ngIf="selectedAlternative" slot="end">{{ selectedAlternative.name }}</ion-note>
+            <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+
+        <ion-item class="settings-element ion-activatable" (click)="clearRatesData()">
+            <ion-icon slot="start" color="black" name="refresh"></ion-icon>
+            <span>  Clear rates data</span>
+            <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+        <br/>
+    </ion-list>
+</ion-content>

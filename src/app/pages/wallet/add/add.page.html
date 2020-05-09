@@ -1,0 +1,29 @@
+<app-tool-bar [back]="true" titleText="Create Wallet" ></app-tool-bar>
+<ion-content class="page-content-with-slim-header ion-padding">
+    <ion-card class="card">
+      <form [formGroup]="createForm">
+      <ion-item>
+        <ion-label position="stacked">Wallet Name</ion-label>
+        <ion-input type="text" formControlName="walletName" placeholder="Your wallet name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Wallet Key</ion-label>
+        <ion-select formControlName="selectedSeed" placeholder="Select a seed option" #Seed (ionChange)="SetSeed(Seed.value)">
+          <ion-select-option value="Random">Random</ion-select-option>
+          <ion-select-option value="Scan">Scan</ion-select-option>
+          <ion-select-option value="MnemonicPhrase">Safe Import</ion-select-option>
+          <ion-select-option value="UnsafeMnemonicPhrase">Unsafe Import</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item color="secondary" class="item-button" (click)="createWallets()" [disabled]="!createForm.valid">
+        <ion-grid>
+          <ion-row class="ion-justify-content-center ion-align-items-center">
+            <span class="span-white">Create Wallet</span>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      </form>
+    </ion-card>
+</ion-content>

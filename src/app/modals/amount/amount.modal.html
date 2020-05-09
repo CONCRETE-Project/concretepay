@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-item class="card-header modal-fullscreen " color="secondary">
+    <ion-icon class="settings-element fas fa-times" (click)="closeModal()" slot="start"></ion-icon>
+    <ion-grid class="grid-adjust">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <span class="span-white">Select an Amount</span>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-header>
+
+<ion-content class="page-content-with-slim-header ion-padding-top bac modal-background">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-item style="--background: none; --inner-border-width: 0">
+        <h1 *ngIf="!isFiat">{{this.selectedAmountStr}}</h1>
+        <br />
+        <h1 *ngIf="isFiat">${{this.fiatAmount.toLocaleString() }}&nbsp;{{this.alternative.toUpperCase()}}</h1>
+        <ion-button *ngIf="satoshiAmount" shape="round" fill="outline" class="modal-send currency-outline" slot="end"
+          (click)="dismissModal()">
+          <ion-icon class="send-icons fas fa-arrow-right"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-button (click)="toggleCurrency()" class="modal-send currency-outline">{{this.selectedCurrency}}&nbsp;&nbsp;
+        <ion-icon class="send-icons fas fa-exchange-alt"></ion-icon>
+      </ion-button>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <h3 *ngIf="isFiat && !this.satoshiAmount">{{0 | satToUnit:coin}}</h3>
+      <h3 *ngIf="isFiat && this.satoshiAmount">{{this.satoshiAmount | satToUnit:coin}}</h3>
+      <h3 *ngIf="!isFiat">${{this.fiatAmount.toLocaleString() }}&nbsp;{{this.alternative.toUpperCase()}}</h3>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer >
+  <ion-toolbar class="modal-background-alt">
+    <app-pin-pad class="amount-pinpad" (keystroke)="pushDigit($event)"></app-pin-pad>
+  </ion-toolbar>
+</ion-footer>

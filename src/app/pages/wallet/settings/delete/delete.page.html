@@ -1,0 +1,16 @@
+<app-tool-bar [back]="true" [titleText]="'Delete Wallet'"></app-tool-bar>
+<ion-content class="page-content-with-slim-header">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <h3 style="color: darkred"><span >Warning!</span></h3>
+    </ion-row>
+    <br/>
+    <ion-row class="ion-align-items-center ion-justify-content-center ion-padding">
+      <span style="text-align: center">Warning, removing your wallet without having the backup seed can result on funds lost</span>
+    </ion-row>
+    <br/>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-button color="danger" size="large" shape="round" (click)="showDeletePopup()">Delete Wallet</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,14 @@
+<app-tool-bar [back]="true" titleText="Wallet Color"></app-tool-bar>
+<ion-content class="page-content-with-slim-header">
+  <ion-list style="background: none">
+    <ion-radio-group [(ngModel)]="currentColorIndex">
+      <ion-item *ngFor="let i of colorCount">
+        <ion-label>
+          <span class="settings-color-block wallet-color-{{i}}" ></span> <span class=""></span>
+        </ion-label>
+        <ion-radio (click)="save(i)" [value]="i"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-item-divider></ion-item-divider>
+</ion-content>
