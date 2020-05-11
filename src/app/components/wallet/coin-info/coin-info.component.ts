@@ -6,7 +6,7 @@ import { WalletStorageService } from "../../../services/storage/wallet/wallet.se
 import { WalletService } from "../../../services/wallet/wallet.service";
 import { UserSettingsStorageService } from "../../../services/storage/user-settings/user-settings.service";
 import { CoinData } from "../../../models/coin/coin";
-import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 
 @Component({
     selector: "app-coin-info",
@@ -31,8 +31,10 @@ export class CoinInfoComponent implements OnInit {
     coinData: CoinData;
 
     async init() {
-        this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === this.Coin)
-        this.coinData = CoinFactory.getCoin(this.Coin)
+        this.credentials = this.wallet.Credentials.wallet.find(
+            (coinCred) => coinCred.Coin === this.Coin
+        );
+        this.coinData = CoinFactory.getCoin(this.Coin);
         await this.getAlternative();
         await this.getInfo();
     }

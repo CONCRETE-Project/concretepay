@@ -115,10 +115,7 @@ export class CoinData {
         Change: boolean
     ): string {
         // TODO derive root.
-        let nodeBtc = bip32.fromBase58(
-            "",
-            this.getNetwork(AddressScheme)
-        );
+        let nodeBtc = bip32.fromBase58("", this.getNetwork(AddressScheme));
         let childBtc = nodeBtc.derive(Change ? 1 : 0).derive(AddressIndex);
         return childBtc.toWIF();
     }

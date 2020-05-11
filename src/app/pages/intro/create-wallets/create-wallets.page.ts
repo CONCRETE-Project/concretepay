@@ -15,7 +15,7 @@ export class CreateWalletsPage {
 
     constructor(
         public navController: NavController,
-        private externalLinkService: ExternalLinkService,
+        private externalLinkService: ExternalLinkService
     ) {
         this.accepted = {
             first: false,

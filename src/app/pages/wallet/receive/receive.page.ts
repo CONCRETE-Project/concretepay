@@ -7,7 +7,7 @@ import { WalletService } from "../../../services/wallet/wallet.service";
 import { OnGoingProcessService } from "../../../services/on-going-process/on-going-process.service";
 import { PopupService } from "../../../services/popup/popup.service";
 import { ModalService } from "../../../services/modal/modal.service";
-import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 
 @Component({
     selector: "app-receive",
@@ -29,7 +29,7 @@ export class WalletReceivePage implements OnInit, OnDestroy {
         private walletService: WalletService,
         private onGoingProcessService: OnGoingProcessService,
         private popupService: PopupService,
-        public modalService: ModalService,
+        public modalService: ModalService
     ) {}
 
     async ngOnInit() {
@@ -47,7 +47,9 @@ export class WalletReceivePage implements OnInit, OnDestroy {
             this.wallet = await this.walletServiceStorage.get(
                 "wallet-" + walletid
             );
-            this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === coin);
+            this.credentials = this.wallet.Credentials.wallet.find(
+                (coinCred) => coinCred.Coin === coin
+            );
             let DefaultDerivation = this.credentials.isSegwit
                 ? "P2SHInP2WPKH"
                 : "P2PKH";
@@ -82,7 +84,7 @@ export class WalletReceivePage implements OnInit, OnDestroy {
     }
 
     private updateQrAddress(address) {
-        let coinConfig = CoinFactory.getCoin(this.credentials.Coin)
+        let coinConfig = CoinFactory.getCoin(this.credentials.Coin);
         let qrAddress = coinConfig.protocol + ":" + address;
         this.address = address;
         this.qrAddress = qrAddress;

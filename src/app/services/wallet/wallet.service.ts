@@ -12,9 +12,7 @@ import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
     providedIn: "root",
 })
 export class WalletService {
-    constructor(
-        public blockbook: BlockbookService
-    ) {}
+    constructor(public blockbook: BlockbookService) {}
 
     public async getWalletCredentials(MnemonicPhrase, coin: string) {
         let coinInfo = CoinFactory.getCoin(coin);

@@ -1633,10 +1633,10 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
-angularx-qrcode@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/angularx-qrcode/-/angularx-qrcode-2.1.0.tgz#94ba30647f851305c58b6365ec9eb8fb91bb97dc"
-  integrity sha512-4mtlPJmemQINEz8OH6cYOllLJ77kFamk38G1L8OLF4X/nrxWaFIxMiKcPHf/HVeqATSAPismgqPu9aM5RhF/ig==
+angularx-qrcode@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/angularx-qrcode/-/angularx-qrcode-2.1.1.tgz#cb0af05272cecb00480829526c8f3570cc2bddd0"
+  integrity sha512-9eAF8Fn5pEK5VCDGvrusJzXGNOlIN6kUgMGfiGqCOSsYUvQmAJMS5HkRIx8umKT/Pt6VWKAOxvjFjdyd5UBnLw==
   dependencies:
     "@angular/common" ">= 5.0.0 < 9.1.0"
     qrcode "1.4.2"

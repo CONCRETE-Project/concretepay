@@ -6,7 +6,7 @@ import { ExternalLinkService } from "../../services/external-link/external-link.
 import { BlockbookService } from "../../services/blockbook/blockbook.service";
 import { PopupService } from "../../services/popup/popup.service";
 import { ModalController } from "@ionic/angular";
-import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 
 @Component({
     selector: "app-tx-details",
@@ -43,7 +43,7 @@ export class TxDetailsModal implements OnInit {
 
     async init() {
         await this.onGoingProcessService.set("Loading transaction details");
-        let coinConfig = CoinFactory.getCoin(this.coin)
+        let coinConfig = CoinFactory.getCoin(this.coin);
         this.blockExplorerURL = coinConfig.blockbook;
         try {
             this.btx = await this.blockbookService.getTx(

@@ -43,5 +43,4 @@ export class WalletInfoPage implements OnInit, OnDestroy {
             { animated: true, animationDirection: "forward" }
         );
     }
-
 }

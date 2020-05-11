@@ -7,7 +7,7 @@ import { WalletService } from "../../../services/wallet/wallet.service";
 import { UserSettingsStorageService } from "../../../services/storage/user-settings/user-settings.service";
 import { NavController } from "@ionic/angular";
 import { ExternalLinkService } from "src/app/services/external-link/external-link.service";
-import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 
 @Component({
     selector: "app-details",
@@ -107,7 +107,9 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
                 "wallet-" + walletid
             );
             let coin = params.get("coin");
-            this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === coin);
+            this.credentials = this.wallet.Credentials.wallet.find(
+                (coinCred) => coinCred.Coin === coin
+            );
             this.isLoading = true;
             await this.getInfo();
             this.isLoading = false;
@@ -115,7 +117,7 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
     }
 
     getCoinNameFromTag(): string {
-        return CoinFactory.getCoin(this.credentials.Coin).name
+        return CoinFactory.getCoin(this.credentials.Coin).name;
     }
 
     public getAlternative() {

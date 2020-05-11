@@ -29,10 +29,9 @@ export class AddWalletPage implements OnInit {
     constructor(
         private fb: FormBuilder,
         private popupProvider: PopupService,
-        private walletPrv: WalletService,
         public platformProv: PlatformService,
         public modalService: ModalService,
-        private navCtrl: NavController,
+        private navController: NavController,
         private onGoingProcessService: OnGoingProcessService,
         private userSettingsStorage: UserSettingsStorageService
     ) {
@@ -75,6 +74,4 @@ export class AddWalletPage implements OnInit {
             await this.popupProvider.ionicAlert("Error", "Invalid Seed");
         }
     }
-
-  
 }

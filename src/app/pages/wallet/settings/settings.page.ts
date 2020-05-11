@@ -66,7 +66,7 @@ export class WalletSettingsPage implements OnInit, OnDestroy {
 
     public async openBackupSettings() {
         let success = await this.modalService.backupModal({
-             mnemonic: this.wallet.Credentials.phrase,
+            mnemonic: this.wallet.Credentials.phrase,
         });
         if (success) {
             await this.walletServiceStorage.update(
@@ -75,7 +75,7 @@ export class WalletSettingsPage implements OnInit, OnDestroy {
                 true
             );
             await this.init();
-         }
+        }
     }
 
     public async openWalletInformation() {

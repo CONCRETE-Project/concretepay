@@ -5,7 +5,7 @@ import { ClipboardPluginWeb } from "@capacitor/core";
 import { CoinCredentials, Tx } from "../../models/wallet/wallet";
 import { TxDetailsModalInput } from "../../models/modals/tx-details";
 import { ModalService } from "../../services/modal/modal.service";
-import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 
 @Component({
     selector: "app-tx-history",
@@ -86,7 +86,7 @@ export class TxHistoryComponent implements OnInit {
     }
 
     public async viewOnBlockchain() {
-        let coinConf = CoinFactory.getCoin(this.credentials.Coin)
+        let coinConf = CoinFactory.getCoin(this.credentials.Coin);
         let url = coinConf.blockbook + "/tx/" + this.txs.txid;
         await this.externalLinkService.open(url);
     }
