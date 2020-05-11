@@ -1,6 +1,6 @@
 <ion-content>
   <div class="logo-tagline">
-    <h1 style="color: #fff">[LOGO HERE]</h1>
+    <h1 style="color: #fff">ConcretePay</h1>
   </div>
   <p class="top-description" *ngIf="accepted.first && accepted.second">You can import your wallet using a mnemonic or create a new one!</p>
   <p *ngIf="!accepted.first || !accepted.second" class="middle-description">Wallets are created using the top standards, so they are compatible with other crypto tools.</p>
@@ -22,11 +22,7 @@
     </ion-list>
     <ion-button *ngIf="accepted.first && accepted.second"  class="button-standard introButtons" color="secondary" [disabled]="!accepted.first || !accepted.second" (click)="createDefaultWallets()">
       <ion-icon slot="start" name="wallet"></ion-icon>
-      Create New Wallet
-    </ion-button>
-    <ion-button *ngIf="accepted.first && accepted.second"  class="button-standard introButtons" color="secondary" [disabled]="!accepted.first || !accepted.second" (click)="importWallet()">
-      <ion-icon slot="start" name="paper"></ion-icon>
-      Import Mnemonic Phrase
+      Get started
     </ion-button>
   </div>
 </ion-content>

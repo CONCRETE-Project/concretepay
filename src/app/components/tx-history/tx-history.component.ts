@@ -5,7 +5,7 @@ import { ClipboardPluginWeb } from "@capacitor/core";
 import { CoinCredentials, Tx } from "../../models/wallet/wallet";
 import { TxDetailsModalInput } from "../../models/modals/tx-details";
 import { ModalService } from "../../services/modal/modal.service";
-import { CoinService } from "../../services/coin/coin";
+import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
 
 @Component({
     selector: "app-tx-history",
@@ -25,7 +25,6 @@ export class TxHistoryComponent implements OnInit {
     public Amount: number;
     public fee: number;
     constructor(
-        public coinService: CoinService,
         public externalLinkService: ExternalLinkService,
         public clipboard: ClipboardPluginWeb,
         public platform: PlatformService,
@@ -87,7 +86,8 @@ export class TxHistoryComponent implements OnInit {
     }
 
     public async viewOnBlockchain() {
-        let url = this.coinService.coin.blockbook + "/tx/" + this.txs.txid;
+        let coinConf = CoinFactory.getCoin(this.credentials.Coin)
+        let url = coinConf.blockbook + "/tx/" + this.txs.txid;
         await this.externalLinkService.open(url);
     }
 }

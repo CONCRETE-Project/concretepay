@@ -4,7 +4,6 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { WalletStorageService } from "../../../../services/storage/wallet/wallet.service";
 import { NavController } from "@ionic/angular";
-import { CoinService } from "../../../../services/coin/coin";
 
 @Component({
     selector: "app-info",
@@ -16,7 +15,6 @@ export class WalletInfoPage implements OnInit, OnDestroy {
     paramsSub: Subscription;
 
     constructor(
-        public coinService: CoinService,
         private route: ActivatedRoute,
         public walletServiceStorage: WalletStorageService,
         public navController: NavController
@@ -46,7 +44,4 @@ export class WalletInfoPage implements OnInit, OnDestroy {
         );
     }
 
-    getCoinName() {
-        return this.coinService.coin.name;
-    }
 }

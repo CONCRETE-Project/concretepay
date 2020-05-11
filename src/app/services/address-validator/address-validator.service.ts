@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import { AddressValidationModel } from "../../models/validations/address-validation";
-import { CoinService } from "../coin/coin";
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 
 @Injectable({
     providedIn: "root",
 })
 export class AddressValidatorService {
-    constructor(public coinService: CoinService) {}
+    constructor() {}
 
     validateAddress(address, Coin) {
         try {
-            let valid = this.coinService.validateAddress(address);
+            let coinConfig = CoinFactory.getCoin(Coin);
+            let valid = coinConfig.validateAddress(address);
             return { valid, coin: Coin };
         } catch (e) {
             return { valid: false, coin: null };
@@ -21,6 +22,7 @@ export class AddressValidatorService {
         try {
             let splitCoinAddress = uri.split(":");
             let coin = splitCoinAddress[0];
+            let coinConfig = CoinFactory.getCoin(coin);
             let splitAddressParams = splitCoinAddress[1].split("?");
             let address = splitAddressParams[0];
             let params = splitAddressParams[1]
@@ -77,7 +79,7 @@ export class AddressValidatorService {
                 // Asume privkey is valid
                 valid = true;
             } else {
-                valid = this.coinService.validateAddress(address);
+                valid = coinConfig.validateAddress(address);
             }
             return {
                 success: valid,

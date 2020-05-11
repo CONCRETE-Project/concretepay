@@ -32,10 +32,11 @@ export class CoinSettingsPage implements OnInit, OnDestroy {
     async init() {
         this.paramsSub = this.route.paramMap.subscribe(async (params) => {
             let walletid = params.get("walletid");
+            let coin = params.get("coin");
             this.wallet = await this.walletServiceStorage.get(
                 "wallet-" + walletid
             );
-            this.credentials = this.wallet.Credentials.wallet;
+            this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === coin);
         });
     }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import { ExternalLinkService } from "../../services/external-link/external-link.service";
 import { UserSettingsStorageService } from "../../services/storage/user-settings/user-settings.service";
 import { Wallet } from "../../models/wallet/wallet";
 import { WalletStorageService } from "../../services/storage/wallet/wallet.service";

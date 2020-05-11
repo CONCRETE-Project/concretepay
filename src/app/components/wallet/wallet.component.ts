@@ -70,19 +70,14 @@ export class WalletComponent implements OnInit, OnChanges {
     }
 
     public async calculateBalance() {
-        let btcBalance = 0;
-        let btcConv = await this.rateService.toFiat(
-            this.wallet.Credentials.wallet.Balance.Confirmed,
-            "BTC",
-            this.wallet.Credentials.wallet.Coin
-        );
-        btcBalance += btcConv;
-        this.TotalBalance = btcBalance * 1e8;
-        this.TotalBalanceFiat = await this.rateService.toFiat(
-            this.TotalBalance,
-            this.AlternativeCoin,
-            "BTC"
-        );
+        for (let credential of this.wallet.Credentials.wallet) {
+            let fiatConf = await this.rateService.toFiat(
+                credential.Balance.Confirmed,
+                this.AlternativeCoin,
+                credential.Coin
+            );
+            this.TotalBalanceFiat += fiatConf;
+        }
     }
 
     public async displayInfo(m: string) {

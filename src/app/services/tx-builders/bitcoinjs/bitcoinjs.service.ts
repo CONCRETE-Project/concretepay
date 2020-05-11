@@ -6,7 +6,8 @@ import { ModalController } from "@ionic/angular";
 import { PlatformService } from "../../platform/platform.service";
 import { HttpClient } from "@angular/common/http";
 import { HTTP } from "@ionic-native/http/ngx";
-import { CoinService } from "../../coin/coin";
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
+import { CoinData } from "src/app/models/coin/coin";
 
 @Injectable({
     providedIn: "root",
@@ -15,7 +16,6 @@ export class BitcoinjsService {
     public corsAnywhere = "https://cors-anywhere-eabz.herokuapp.com/";
 
     constructor(
-        public coinService: CoinService,
         public platform: PlatformService,
         public http: HttpClient,
         public httpnative: HTTP
@@ -31,9 +31,10 @@ export class BitcoinjsService {
         ChangeAddress: string,
         TotalAmount: number
     ): Promise<string> {
-        let network = this.coinService.getNetwork();
+        let coinConfig = CoinFactory.getCoin(coinCredentials.Coin);
+        let network = coinConfig.getNetwork();
         const txb = new bitcoin.TransactionBuilder(network);
-        txb.setVersion(this.coinService.coin.tx_version);
+        txb.setVersion(coinConfig.tx_version);
         // Add Inputs
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < Utxos.length; i++) {
@@ -43,8 +44,7 @@ export class BitcoinjsService {
                 addrPathDeconstructed[4] === "1" ? "Change" : "Direct";
             let addressIndex = parseInt(addrPathDeconstructed[5], 10);
             if (utxo.scheme === "P2WPKH") {
-                let privateKey = this.coinService.getAddressPrivKey(
-                    coinCredentials.Derivations[utxo.scheme].AccountPrivkey,
+                let privateKey = coinConfig.getAddressPrivKey(
                     addressIndex,
                     utxo.scheme,
                     addressType === "Change"
@@ -85,8 +85,7 @@ export class BitcoinjsService {
                 addrPathDeconstructed[4] === "1" ? "Change" : "Direct";
             let addressIndex = parseInt(addrPathDeconstructed[5], 10);
             if (utxo.scheme === "P2WPKH") {
-                let privateKey = this.coinService.getAddressPrivKey(
-                    coinCredentials.Derivations[utxo.scheme].AccountPrivkey,
+                let privateKey = coinConfig.getAddressPrivKey(
                     addressIndex,
                     utxo.scheme,
                     addressType === "Change"
@@ -95,8 +94,7 @@ export class BitcoinjsService {
                 txb.sign(i, key, null, null, parseInt(utxo.value, 10));
             }
             if (utxo.scheme === "P2SHInP2WPKH") {
-                let privateKey = this.coinService.getAddressPrivKey(
-                    coinCredentials.Derivations[utxo.scheme].AccountPrivkey,
+                let privateKey = coinConfig.getAddressPrivKey(
                     addressIndex,
                     utxo.scheme,
                     addressType === "Change"
@@ -116,8 +114,7 @@ export class BitcoinjsService {
                 );
             }
             if (utxo.scheme === "P2PKH") {
-                let privateKey = this.coinService.getAddressPrivKey(
-                    coinCredentials.Derivations[utxo.scheme].AccountPrivkey,
+                let privateKey = coinConfig.getAddressPrivKey(
                     addressIndex,
                     utxo.scheme,
                     addressType === "Change"
@@ -131,29 +128,18 @@ export class BitcoinjsService {
         return transaction.toHex();
     }
 
-    async getUtxoFromAddress(address, coinConfig): Promise<Utxo[]> {
+    async getUtxoFromAddress(address, coinConfig: CoinData): Promise<Utxo[]> {
         if (this.platform.isiOS || this.platform.isAndroid) {
             let response = await this.httpnative.get(
-                this.getUrl() + "/api/v2/utxo/" + address,
+                coinConfig.blockbook + "/api/v2/utxo/" + address,
                 {},
                 {}
             );
             return JSON.parse(response.data);
         } else {
             return this.http
-                .get<Utxo[]>(this.getUrl() + "/api/v2/utxo/" + address)
+                .get<Utxo[]>(coinConfig.blockbook + "/api/v2/utxo/" + address)
                 .toPromise();
         }
-    }
-
-    public getUrl(): string {
-        if (
-            !this.platform.isiOS &&
-            !this.platform.isAndroid &&
-            !this.platform.isElectron
-        ) {
-            return this.corsAnywhere + this.coinService.coin.blockbook;
-        }
-        return this.coinService.coin.blockbook;
     }
 }

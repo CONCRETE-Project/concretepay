@@ -46,7 +46,7 @@ export class WalletSendPage implements OnInit, OnDestroy {
             this.wallet = await this.walletStorageService.get(
                 "wallet-" + walletid
             );
-            this.credentials = this.wallet.Credentials.wallet;
+            this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === coin);
         });
     }
 

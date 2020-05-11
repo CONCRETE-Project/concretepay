@@ -14,7 +14,6 @@ import { WalletInfoPage } from "./wallet/settings/info/info.page";
 import { WalletColorPage } from "./wallet/settings/color/color.page";
 import { WalletDeletePage } from "./wallet/settings/delete/delete.page";
 import { AddWalletPage } from "./wallet/add/add.page";
-import { BlockbookPage } from "./wallet/settings/blockbook/blockbook.page";
 import { PIN_PAGES } from "./pin/pin";
 
 export const PAGES = [
@@ -27,7 +26,6 @@ export const PAGES = [
     WalletSendPage,
     WalletSettingsPage,
     WalletHistoryPage,
-    BlockbookPage,
     SettingsPage,
     AlternativePage,
     CoinSettingsPage,

@@ -7,7 +7,7 @@ import { WalletService } from "../../../services/wallet/wallet.service";
 import { OnGoingProcessService } from "../../../services/on-going-process/on-going-process.service";
 import { PopupService } from "../../../services/popup/popup.service";
 import { ModalService } from "../../../services/modal/modal.service";
-import { CoinService } from "../../../services/coin/coin";
+import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
 
 @Component({
     selector: "app-receive",
@@ -30,7 +30,6 @@ export class WalletReceivePage implements OnInit, OnDestroy {
         private onGoingProcessService: OnGoingProcessService,
         private popupService: PopupService,
         public modalService: ModalService,
-        public coinService: CoinService
     ) {}
 
     async ngOnInit() {
@@ -48,7 +47,7 @@ export class WalletReceivePage implements OnInit, OnDestroy {
             this.wallet = await this.walletServiceStorage.get(
                 "wallet-" + walletid
             );
-            this.credentials = this.wallet.Credentials.wallet;
+            this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === coin);
             let DefaultDerivation = this.credentials.isSegwit
                 ? "P2SHInP2WPKH"
                 : "P2PKH";
@@ -83,32 +82,16 @@ export class WalletReceivePage implements OnInit, OnDestroy {
     }
 
     private updateQrAddress(address) {
-        let qrAddress = this.coinService.coin.protocol + ":" + address;
+        let coinConfig = CoinFactory.getCoin(this.credentials.Coin)
+        let qrAddress = coinConfig.protocol + ":" + address;
         this.address = address;
         this.qrAddress = qrAddress;
         timer(200);
     }
 
     public async backupWallet() {
-        let mnemonicPhrase: string;
-        if (this.wallet.Properties.encrypted) {
-            let pass: string = await this.popupService.ionicPrompt(
-                "Decrypt Wallet",
-                "To update your wallet we need to decrypt it. Please type your password",
-                { type: "password" }
-            );
-            if (pass) {
-                let tempWallet = await this.walletService.decryptWallet(
-                    this.wallet,
-                    pass
-                );
-                mnemonicPhrase = tempWallet.Credentials.phrase;
-            }
-        } else {
-            mnemonicPhrase = this.wallet.Credentials.phrase;
-        }
         let success = await this.modalService.backupModal({
-            mnemonic: mnemonicPhrase,
+            mnemonic: this.wallet.Credentials.phrase,
         });
         if (success) {
             await this.walletServiceStorage.update(this.wallet, "backup", true);

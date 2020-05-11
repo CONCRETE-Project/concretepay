@@ -33,7 +33,8 @@ export class WalletHistoryPage implements OnInit, OnDestroy {
             this.wallet = await this.walletServiceStorage.get(
                 "wallet-" + walletid
             );
-            this.credentials = this.wallet.Credentials.wallet;
+            let coin = params.get("coin");
+            this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === coin);
             this.TxHistory = this.credentials.Transactions;
         });
     }

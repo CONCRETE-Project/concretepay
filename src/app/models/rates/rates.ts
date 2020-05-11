@@ -1,4 +1,4 @@
 export interface CoinRates {
-    Rates: { code: string; rate: number; name: string }[];
+    Rates: { code: string; rate: number }[];
     LastChecked: number;
 }

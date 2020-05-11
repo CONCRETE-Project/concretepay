@@ -12,7 +12,7 @@ export class RateService {
     private BTC_TO_SAT = 1e8;
     private ratesCachedTime = 60 * 5 * 1000; // 5 minutes;
 
-    private obol = "https://obol.polispay.com/";
+    private obol = "https://concretepay-rates.herokuapp.com/";
 
     constructor(
         private http: HttpClient,
@@ -33,13 +33,12 @@ export class RateService {
         let btcRates = await this.getCoinRates("BTC");
         let alternatives = _.map(btcRates, (item: any) => {
             return {
-                name: item.name,
                 code: item.code,
             };
         });
         if (sort) {
             alternatives.sort((a, b) => {
-                return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+                return a.code.toLowerCase() > b.code.toLowerCase() ? 1 : -1;
             });
         }
         return _.uniqBy(alternatives, "code");

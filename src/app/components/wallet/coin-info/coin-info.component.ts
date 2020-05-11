@@ -6,7 +6,7 @@ import { WalletStorageService } from "../../../services/storage/wallet/wallet.se
 import { WalletService } from "../../../services/wallet/wallet.service";
 import { UserSettingsStorageService } from "../../../services/storage/user-settings/user-settings.service";
 import { CoinData } from "../../../models/coin/coin";
-import { CoinService } from "../../../services/coin/coin";
+import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
 
 @Component({
     selector: "app-coin-info",
@@ -15,7 +15,6 @@ import { CoinService } from "../../../services/coin/coin";
 })
 export class CoinInfoComponent implements OnInit {
     constructor(
-        public coinService: CoinService,
         private walletStorage: WalletStorageService,
         private navCtrl: NavController,
         public popup: PopupService,
@@ -32,8 +31,8 @@ export class CoinInfoComponent implements OnInit {
     coinData: CoinData;
 
     async init() {
-        this.credentials = this.wallet.Credentials.wallet;
-        this.coinData = this.coinService.coin;
+        this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === this.Coin)
+        this.coinData = CoinFactory.getCoin(this.Coin)
         await this.getAlternative();
         await this.getInfo();
     }
@@ -43,11 +42,11 @@ export class CoinInfoComponent implements OnInit {
     }
 
     async getInfo() {
-        let walletInfo = await this.walletService.getInfo(this.wallet);
-        if (walletInfo) {
-            this.wallet = walletInfo.Wallet;
-            await this.walletStorage.updateFullWallet(this.wallet);
-        }
+        //let walletInfo = await this.walletService.getInfo(this.wallet);
+        //if (walletInfo) {
+        //    this.wallet = walletInfo.Wallet;
+        //    await this.walletStorage.updateFullWallet(this.wallet);
+        //}
     }
 
     public async goToSend() {

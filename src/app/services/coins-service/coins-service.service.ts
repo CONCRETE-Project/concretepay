@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { PlatformService } from "../platform/platform.service";
-import { UserSettingsStorageService } from "../storage/user-settings/user-settings.service";
 import {
     CoinsServiceResponse,
     CoinsServiceRequest,
@@ -13,12 +12,11 @@ import { CoinData } from "src/app/models/coin/coin";
     providedIn: "root",
 })
 export class CoinsService {
-    public url = "http://localhost:8080";
+    public url = "https://concretepay-coins.herokuapp.com/";
 
     constructor(
         private http: HttpClient,
-        private platformService: PlatformService,
-        private userSettingsStorageService: UserSettingsStorageService
+        private platformService: PlatformService
     ) {}
 
     async getCoins(): Promise<CoinsServiceResponse> {

@@ -44,60 +44,6 @@ export class WalletStorageService {
         return;
     }
 
-    public async updateCredentials(wallet: Wallet, coin, value) {
-        let walletData = await this.storage.get({
-            key: "wallet-" + wallet.Properties.id,
-        });
-        let walletInfo: Wallet = JSON.parse(walletData.value);
-        this.credentials = walletInfo.Credentials.wallet;
-        this.credentials.Blockbook = value;
-
-        await this.storage.set({
-            key: "wallet-" + wallet.Properties.id,
-            value: JSON.stringify(walletInfo),
-        });
-        return;
-    }
-
-    public async validateBlockbookLink(wallet: Wallet, coin, value) {
-        let valid = false;
-        let corsAnywhere = "https://cors-anywhere-eabz.herokuapp.com/";
-
-        let walletData = await this.storage.get({
-            key: "wallet-" + wallet.Properties.id,
-        });
-        let walletInfo: Wallet = JSON.parse(walletData.value);
-        this.credentials = walletInfo.Credentials.wallet;
-        let endpointResponse = this.blockbookService.getSingleCoin(
-            corsAnywhere + value
-        );
-        let res = await endpointResponse;
-        let cmp = res + " (" + this.credentials.Coin + ")";
-
-        if (this.credentials.CoinName === cmp) {
-            return (valid = true);
-        } else {
-            return valid;
-        }
-    }
-
-    public async resetBlockbookLink(wallet: Wallet, coin) {
-        let walletData = await this.storage.get({
-            key: "wallet-" + wallet.Properties.id,
-        });
-        let walletInfo: Wallet = JSON.parse(walletData.value);
-        this.credentials = walletInfo.Credentials.wallet;
-        this.credentials.Blockbook = this.blockbookService.getUrl(
-            this.credentials
-        );
-
-        await this.storage.set({
-            key: "wallet-" + wallet.Properties.id,
-            value: JSON.stringify(walletInfo),
-        });
-        return;
-    }
-
     public async updateFullWallet(wallet: Wallet) {
         await this.storage.set({
             key: "wallet-" + wallet.Properties.id,

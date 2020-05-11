@@ -60,55 +60,22 @@ export class WalletSettingsPage implements OnInit, OnDestroy {
 
     public async openExportMnemonic() {
         await this.modalService.exportMnemonic({
-            encrypted: this.wallet.Properties.encrypted,
             mnemonic: this.wallet.Credentials.phrase,
         });
     }
 
     public async openBackupSettings() {
-        if (this.wallet.Properties.encrypted) {
-            let pass: string = await this.popupService.ionicPrompt(
-                "Decrypt Wallet",
-                "To update your wallet we need to decrypt it. Please type your password",
-                { type: "password" }
+        let success = await this.modalService.backupModal({
+             mnemonic: this.wallet.Credentials.phrase,
+        });
+        if (success) {
+            await this.walletServiceStorage.update(
+                this.wallet,
+                "isBackup",
+                true
             );
-            if (pass) {
-                let tempWallet = await this.walletService.decryptWallet(
-                    this.wallet,
-                    pass
-                );
-                if (!tempWallet) {
-                    await this.popupService.ionicAlert(
-                        "Error",
-                        "Your password is not correct, please try again."
-                    );
-                    return;
-                }
-                let success = await this.modalService.backupModal({
-                    mnemonic: tempWallet.Credentials.phrase,
-                });
-                if (success) {
-                    await this.walletServiceStorage.update(
-                        this.wallet,
-                        "isBackup",
-                        true
-                    );
-                    await this.init();
-                }
-            }
-        } else {
-            let success = await this.modalService.backupModal({
-                mnemonic: this.wallet.Credentials.phrase,
-            });
-            if (success) {
-                await this.walletServiceStorage.update(
-                    this.wallet,
-                    "isBackup",
-                    true
-                );
-                await this.init();
-            }
-        }
+            await this.init();
+         }
     }
 
     public async openWalletInformation() {

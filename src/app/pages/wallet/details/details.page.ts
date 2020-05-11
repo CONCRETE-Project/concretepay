@@ -7,7 +7,7 @@ import { WalletService } from "../../../services/wallet/wallet.service";
 import { UserSettingsStorageService } from "../../../services/storage/user-settings/user-settings.service";
 import { NavController } from "@ionic/angular";
 import { ExternalLinkService } from "src/app/services/external-link/external-link.service";
-import { CoinService } from "../../../services/coin/coin";
+import { CoinFactory } from 'src/app/models/coin-factory/coin-factory';
 
 @Component({
     selector: "app-details",
@@ -31,7 +31,6 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        public coinService: CoinService,
         public walletService: WalletService,
         public walletStorageService: WalletStorageService,
         public userSettingsStorage: UserSettingsStorageService,
@@ -45,12 +44,12 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
     }
 
     async getInfo() {
-        let walletInfo = await this.walletService.getInfo(this.wallet);
-        if (walletInfo) {
-            this.wallet = walletInfo.Wallet;
-            this.TxHistory = walletInfo.TxHistory;
-            await this.walletStorageService.updateFullWallet(this.wallet);
-        }
+        //let walletInfo = await this.walletService.getInfo(this.wallet);
+        //if (walletInfo) {
+        //    this.wallet = walletInfo.Wallet;
+        //    this.TxHistory = walletInfo.TxHistory;
+        //    await this.walletStorageService.updateFullWallet(this.wallet);
+        //}
     }
 
     public async goToSend() {
@@ -107,7 +106,8 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
             this.wallet = await this.walletStorageService.get(
                 "wallet-" + walletid
             );
-            this.credentials = this.wallet.Credentials.wallet;
+            let coin = params.get("coin");
+            this.credentials = this.wallet.Credentials.wallet.find(coinCred => coinCred.Coin === coin);
             this.isLoading = true;
             await this.getInfo();
             this.isLoading = false;
@@ -115,7 +115,7 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
     }
 
     getCoinNameFromTag(): string {
-        return this.coinService.coin.name;
+        return CoinFactory.getCoin(this.credentials.Coin).name
     }
 
     public getAlternative() {

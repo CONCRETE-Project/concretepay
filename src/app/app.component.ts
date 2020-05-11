@@ -30,7 +30,6 @@ export class AppComponent {
         if (!UserSettings) {
             let DefaultSettings: UserSettingsModel = {
                 alt_coin: {
-                    name: "US Dollar",
                     code: "USD",
                 },
                 first_time: true,

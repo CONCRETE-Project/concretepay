@@ -11,7 +11,7 @@
 <ion-content class="page-content-with-slim-header ion-padding-top modal-background">
   <ion-grid class="ion-padding">
     <ion-row class="ion-align-items-center ion-justify-content-center" *ngIf="MnemonicPhrase">
-      <qrcode class="qr-code" [qrdata]="MnemonicPhrase"  [size]="256" [level]="'M'"></qrcode>
+      <qrcode class="qr-code" [qrdata]="mnemonic"  [size]="256" [level]="'M'"></qrcode>
     </ion-row>
   </ion-grid>
 </ion-content>

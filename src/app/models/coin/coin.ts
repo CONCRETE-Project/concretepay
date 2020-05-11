@@ -103,8 +103,6 @@ export class CoinData {
             "m/" + purposeBtc + "'/" + this.hd_index + "'/0'";
         let accBtc = nodeBtc.derivePath(accDerivationBtc);
         return {
-            RootPrivKey: nodeBtc.toBase58(),
-            AccountPrivkey: accBtc.toBase58(),
             AccountPublicKey: accBtc.neutered().toBase58(),
             LastDerivationPathChange: 0,
             LastDerivationPathDirect: 0,
@@ -112,13 +110,13 @@ export class CoinData {
     }
 
     getAddressPrivKey(
-        HDMasterPrivkey: string,
         AddressIndex: number,
         AddressScheme: string,
         Change: boolean
     ): string {
+        // TODO derive root.
         let nodeBtc = bip32.fromBase58(
-            HDMasterPrivkey,
+            "",
             this.getNetwork(AddressScheme)
         );
         let childBtc = nodeBtc.derive(Change ? 1 : 0).derive(AddressIndex);

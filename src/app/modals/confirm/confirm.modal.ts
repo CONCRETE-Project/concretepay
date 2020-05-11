@@ -55,36 +55,6 @@ export class ConfirmModal implements OnInit {
     }
 
     public async init() {
-        let walletCred: CoinCredentials;
-        if (this.wallet.Properties.encrypted) {
-            let pass = await this.popupProvider.ionicPrompt(
-                "Decrypt Wallet",
-                "Please type your password",
-                { type: "password" }
-            );
-            if (pass) {
-                let tempWallet = await this.walletProvider.decryptWallet(
-                    this.wallet,
-                    pass
-                );
-                if (!tempWallet) {
-                    await this.popupProvider.ionicAlert(
-                        "Error",
-                        "Your password is not correct."
-                    );
-                    await this.closeModal(false, false);
-                    return;
-                }
-                walletCred = tempWallet.Credentials.wallet;
-            } else {
-                this.onGoingProcess.clear();
-                await this.closeModal(false, false);
-                return;
-            }
-        } else {
-            walletCred = this.credentials;
-        }
-        this.credentials = walletCred;
         await this.onGoingProcess.set("Loading balances");
         this.Utxos = await this.getUtxos();
         await this.onGoingProcess.clear();
