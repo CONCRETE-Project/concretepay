@@ -12,7 +12,7 @@ export class RateService {
     private BTC_TO_SAT = 1e8;
     private ratesCachedTime = 60 * 5 * 1000; // 5 minutes;
 
-    private obol = "https://concretepay-rates.herokuapp.com/";
+    private rates = "https://concretepay-rates.herokuapp.com/";
 
     constructor(
         private http: HttpClient,
@@ -20,9 +20,9 @@ export class RateService {
     ) {}
 
     public async updateRates(coin: string) {
-        let obolRates = await this.getCoinRates(coin);
+        let ratesResponse = await this.getCoinRates(coin);
         let rates: CoinRates = {
-            Rates: obolRates,
+            Rates: ratesResponse,
             LastChecked: Date.now(),
         };
         await this.ratesStorageService.set(coin, rates);
@@ -108,7 +108,7 @@ export class RateService {
 
     public async getCoinRates(coin: string): Promise<any[]> {
         let res = await this.http
-            .get<any>(this.obol + "simple/" + coin)
+            .get<any>(this.rates + coin.toLowerCase())
             .toPromise();
         return res.data;
     }

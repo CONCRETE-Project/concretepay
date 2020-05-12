@@ -3,6 +3,7 @@ import {
     ModalController,
     NavController,
     ToastController,
+    ActionSheetController,
 } from "@ionic/angular";
 import { PopupService } from "../../services/popup/popup.service";
 import { OnGoingProcessService } from "../../services/on-going-process/on-going-process.service";
@@ -12,6 +13,7 @@ import { UserSettingsStorageService } from "src/app/services/storage/user-settin
 import { WalletService } from "../../services/wallet/wallet.service";
 import { WalletStorageService } from "../../services/storage/wallet/wallet.service";
 import { RateService } from "../../services/rate/rate.service";
+import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 
 @Component({
     selector: "app-wallet",
@@ -29,6 +31,7 @@ export class WalletComponent implements OnInit, OnChanges {
     isReloadingWallet: boolean;
     dark: boolean;
     constructor(
+        public actionSheetController: ActionSheetController,
         public walletService: WalletService,
         public walletStorage: WalletStorageService,
         public popup: PopupService,
@@ -87,5 +90,60 @@ export class WalletComponent implements OnInit, OnChanges {
             position: "bottom",
         });
         await toast.present();
+    }
+
+    public async createCredentials() {
+        await this.showCoins();
+    }
+
+    public async showCoins() {
+        let coinsAlready = this.wallet.Credentials.wallet.map(
+            (coin) => coin.Coin
+        );
+        let filteredArray = CoinFactory.CoinList().filter(
+            (coin) => !coinsAlready.includes(coin.tag)
+        );
+        let buttons = filteredArray.map((coin) => {
+            return {
+                text: coin.name,
+                handler: () => {
+                    this.askPassword().then((pass) => {
+                        this.wallet
+                            .newCoinCredentials(coin.tag, pass)
+                            .then(async (success) => {
+                                if (!success) {
+                                    this.popupError();
+                                    return;
+                                }
+                                await this.walletStorage.updateFullWallet(
+                                    this.wallet
+                                );
+                                return;
+                            });
+                    });
+                },
+            };
+        });
+
+        const actionSheet = await this.actionSheetController.create({
+            header: "Select a coin",
+            buttons: buttons,
+        });
+        await actionSheet.present();
+    }
+
+    public async askPassword(): Promise<string> {
+        let pass = await this.popup.ionicPrompt(
+            "Password",
+            "Please enter your wallet password"
+        );
+        return pass;
+    }
+
+    public async popupError() {
+        await this.popup.ionicAlert(
+            "Error",
+            "There was an error creating your wallet, please make sure you are using the correct password"
+        );
     }
 }

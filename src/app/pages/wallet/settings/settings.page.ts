@@ -61,6 +61,8 @@ export class WalletSettingsPage implements OnInit, OnDestroy {
     public async openExportMnemonic() {
         await this.modalService.exportMnemonic({
             mnemonic: this.wallet.Credentials.phrase,
+            lang: this.wallet.Credentials.language,
+            passhash: this.wallet.Credentials.passhash,
         });
     }
 
@@ -69,11 +71,7 @@ export class WalletSettingsPage implements OnInit, OnDestroy {
             mnemonic: this.wallet.Credentials.phrase,
         });
         if (success) {
-            await this.walletServiceStorage.update(
-                this.wallet,
-                "isBackup",
-                true
-            );
+            await this.walletServiceStorage.update(this.wallet, "backup", true);
             await this.init();
         }
     }

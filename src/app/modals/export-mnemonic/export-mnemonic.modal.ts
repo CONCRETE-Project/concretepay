@@ -8,17 +8,21 @@ import { OnGoingProcessService } from "../../services/on-going-process/on-going-
     templateUrl: "./export-mnemonic.modal.html",
     styleUrls: ["./export-mnemonic.modal.scss"],
 })
-export class ExportMnemonicModal {
-    @Input()
-    mnemonic;
-    @Input()
-    encrypted: boolean;
-    MnemonicPhrase;
+export class ExportMnemonicModal implements OnInit {
+    @Input() mnemonic: string
+    @Input() lang: string
+    @Input() passhash: string
+    encodedData: string;
     constructor(
         public modalCtrl: ModalController,
         public popupService: PopupService,
         public onGoingProcessService: OnGoingProcessService
     ) {}
+
+    ngOnInit() {
+        let objJsonStr = JSON.stringify({ mnemonic: this.mnemonic, lang: this.lang, passhash: this.passhash});
+        this.encodedData = Buffer.from(objJsonStr).toString("base64");
+    }
 
     async closeModal() {
         await this.modalCtrl.dismiss();

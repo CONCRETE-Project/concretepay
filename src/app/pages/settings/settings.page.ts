@@ -4,6 +4,7 @@ import { NavController } from "@ionic/angular";
 import { PopupService } from "../../services/popup/popup.service";
 import { OnGoingProcessService } from "../../services/on-going-process/on-going-process.service";
 import { RatesStorageService } from "../../services/storage/rates/rates.service";
+import { CoinsStorageService } from "src/app/services/storage/coins/coins.service";
 
 @Component({
     selector: "app-settings",
@@ -15,6 +16,7 @@ export class SettingsPage implements OnInit {
     public userSettingsState;
 
     constructor(
+        public coinsStorageService: CoinsStorageService,
         public userSettingsStorageService: UserSettingsStorageService,
         public navController: NavController,
         public popupService: PopupService,
@@ -39,6 +41,23 @@ export class SettingsPage implements OnInit {
             animationDirection: "forward",
             animated: true,
         });
+    }
+
+    public async reloadCoinsData() {
+        let confirm = await this.popupService.ionicConfirm(
+            "Warning!",
+            "Do you want to resync the coin information?"
+        );
+        if (confirm) {
+            await this.onGoingProcessService.set("Loading coins information");
+            try {
+                await this.coinsStorageService.clear();
+                await this.coinsStorageService.loadCoinsFromRemote();
+                this.onGoingProcessService.clear();
+            } catch (e) {
+                this.onGoingProcessService.clear();
+            }
+        }
     }
 
     public async clearRatesData() {

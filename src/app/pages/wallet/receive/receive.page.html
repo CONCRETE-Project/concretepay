@@ -22,10 +22,9 @@
     </ion-row>
   </ion-grid>
   <ion-grid>
-    <ion-row>
       <div *ngIf="wallet && !wallet.Properties.backup">
         <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
-          <img src="assets/img/app/backup-needed-page.svg" alt="backup-needed" />
+          <img src="assets/img/backup/backup-needed-page.svg" alt="backup-needed" />
         </ion-row>
         <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
           <span>Paper Key Unverified</span>
@@ -38,7 +37,6 @@
           <ion-button (click)="backupWallet()">Write Down Paper Key</ion-button>
         </ion-row>
       </div>
-    </ion-row>
   </ion-grid>
 </ion-content>
 

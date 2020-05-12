@@ -3,6 +3,7 @@ import { Tx } from "../wallet/wallet";
 export interface Balance {
     Confirmed: number;
     Unconfirmed: number;
+    Locked: number;
 }
 
 export interface BlockbookEndpoint {

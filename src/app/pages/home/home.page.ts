@@ -4,6 +4,8 @@ import { UserSettingsStorageService } from "../../services/storage/user-settings
 import { Wallet } from "../../models/wallet/wallet";
 import { WalletStorageService } from "../../services/storage/wallet/wallet.service";
 import { PopupService } from "../../services/popup/popup.service";
+import { OnGoingProcessService } from "src/app/services/on-going-process/on-going-process.service";
+import { CoinsStorageService } from "src/app/services/storage/coins/coins.service";
 
 @Component({
     selector: "app-home",
@@ -14,16 +16,35 @@ export class HomePage {
     public AlternativeCoin;
     public balance: number;
     public wallets: Wallet[];
+    public newCoinsChecked = false;
 
     constructor(
+        private onGoingProcessService: OnGoingProcessService,
+        private coinsStorageService: CoinsStorageService,
         private navCtrl: NavController,
         public userSettingsStorageService: UserSettingsStorageService,
         public walletStorageService: WalletStorageService,
         public popupService: PopupService
     ) {}
 
+    ngOnInit() {
+        this.onGoingProcessService
+            .set("Looking for new coins")
+            .then(async () => {
+                this.coinsStorageService.loadCoinsInfo().then(async () => {
+                    this.newCoinsChecked = true;
+                    await this.loadWallets();
+                });
+            })
+            .catch()
+            .finally(() => {
+                this.onGoingProcessService.clear();
+            });
+    }
     ionViewWillEnter() {
-        this.loadWallets();
+        if (this.newCoinsChecked) {
+            this.loadWallets();
+        }
     }
 
     private async loadWallets() {

@@ -9,7 +9,13 @@
             <ion-note *ngIf="selectedAlternative" slot="end">{{ selectedAlternative.name }}</ion-note>
             <ion-ripple-effect></ion-ripple-effect>
         </ion-item>
-
+        <br/>
+        <ion-item class="settings-element ion-activatable" (click)="reloadCoinsData()">
+            <ion-icon slot="start" color="black" name="refresh"></ion-icon>
+            <span>  Reload coins data</span>
+            <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+        <br/>
         <ion-item class="settings-element ion-activatable" (click)="clearRatesData()">
             <ion-icon slot="start" color="black" name="refresh"></ion-icon>
             <span>  Clear rates data</span>

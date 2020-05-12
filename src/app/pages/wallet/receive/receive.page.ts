@@ -65,7 +65,7 @@ export class WalletReceivePage implements OnInit, OnDestroy {
     private async setAddress(): Promise<void> {
         await this.onGoingProcessService.set("Loading address");
         try {
-            let address = await this.walletService.getAddress(
+            let address = await this.walletService.createAddress(
                 this.credentials,
                 this.derivation,
                 "Direct"

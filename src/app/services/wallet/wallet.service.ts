@@ -3,47 +3,86 @@ import { BlockbookService } from "../blockbook/blockbook.service";
 import {
     CoinCredentials,
     CoinCredentialsDerivations,
+    Wallet,
+    FullInfoWallet,
 } from "../../models/wallet/wallet";
-import { mnemonicToSeed } from "bip39";
 import * as uuid from "uuid";
 import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
+import { WalletStorageService } from "../storage/wallet/wallet.service";
+import * as sha from "sha.js";
 
 @Injectable({
     providedIn: "root",
 })
 export class WalletService {
-    constructor(public blockbook: BlockbookService) {}
+    constructor(
+        public blockbook: BlockbookService,
+        public walletStorageService: WalletStorageService
+    ) {}
 
-    public async getWalletCredentials(MnemonicPhrase, coin: string) {
-        let coinInfo = CoinFactory.getCoin(coin);
-        let CoinCredentials: CoinCredentials = {
-            Coin: coinInfo.tag,
-            CoinName: coinInfo.name,
-            isSegwit: coinInfo.segwit,
-            Derivations: {},
-            Balance: {
-                Confirmed: 0,
-                Unconfirmed: 0,
+    public async getInfo(wallet: Wallet, coin: string) {
+        let credentials = wallet.Credentials.wallet.find(
+            (coinCredentials) => coinCredentials.Coin === coin
+        );
+        let coinInfo = await this.blockbook.getInfo(credentials);
+        if (coinInfo) {
+            credentials.Balance = coinInfo.balance;
+            if (credentials.isSegwit) {
+                credentials.Derivations.P2WPKH.LastDerivationPathChange =
+                    coinInfo.derivations.P2WPKH.lastChangeAddress;
+                credentials.Derivations.P2WPKH.LastDerivationPathDirect =
+                    coinInfo.derivations.P2WPKH.lastDirectAddress;
+                credentials.Derivations.P2SHInP2WPKH.LastDerivationPathChange =
+                    coinInfo.derivations.P2SHInP2WPKH.lastChangeAddress;
+                credentials.Derivations.P2SHInP2WPKH.LastDerivationPathDirect =
+                    coinInfo.derivations.P2SHInP2WPKH.lastDirectAddress;
+            } else {
+                credentials.Derivations.P2PKH.LastDerivationPathChange =
+                    coinInfo.derivations.P2PKH.lastChangeAddress;
+                credentials.Derivations.P2PKH.LastDerivationPathDirect =
+                    coinInfo.derivations.P2PKH.lastDirectAddress;
+            }
+            credentials.Transactions = coinInfo.transactions;
+            let index = wallet.Credentials.wallet
+                .map((coin) => coin.Coin)
+                .indexOf(credentials.Coin);
+            let txHistory = coinInfo.transactions;
+            wallet.Credentials[index] = credentials;
+            let info: FullInfoWallet = { Wallet: wallet, TxHistory: txHistory };
+            await this.walletStorageService.updateFullWallet(wallet);
+            return info;
+        }
+    }
+
+    public async newWallet(
+        name: string,
+        backup: boolean,
+        mnemonic: string,
+        password: string,
+        language: string
+    ): Promise<boolean> {
+        // Here we create a sha256 hash of the password to prevent using a wrong password to derivate wrong keys
+        let passwordHash = sha("sha256").update(password);
+        let walletInfo = {
+            Properties: {
+                id: uuid.v4(),
+                name: name,
+                color: "#019477",
+                backup: backup,
             },
-            Blockbook: coinInfo.blockbook,
-            Transactions: [],
+            Credentials: {
+                phrase: mnemonic,
+                passhash: passwordHash.digest("hex"),
+                language: language,
+                wallet: [],
+            },
         };
-        let seed = await mnemonicToSeed(MnemonicPhrase);
-        if (coinInfo.segwit) {
-            CoinCredentials.Derivations["P2WPKH"] = coinInfo.createCredentials(
-                seed,
-                "P2WPKH"
-            );
-            CoinCredentials.Derivations[
-                "P2SHInP2WPKH"
-            ] = coinInfo.createCredentials(seed, "P2SHInP2WPKH");
-            return CoinCredentials;
-        } else {
-            CoinCredentials.Derivations["P2PKH"] = coinInfo.createCredentials(
-                seed,
-                "P2PKH"
-            );
-            return CoinCredentials;
+        let wallet = new Wallet(walletInfo);
+        let succes = await wallet.newCoinCredentials("BTC", password);
+        if (!succes) return false;
+        if (succes) {
+            await this.walletStorageService.updateFullWallet(wallet);
+            return true;
         }
     }
 
@@ -67,14 +106,6 @@ export class WalletService {
             LastDerivation,
             type === "Change"
         );
-    }
-
-    public async getAddress(
-        CoinCredentials: CoinCredentials,
-        DerivationCredentials: CoinCredentialsDerivations,
-        type
-    ): Promise<string> {
-        return this.createAddress(CoinCredentials, DerivationCredentials, type);
     }
 
     public async getAddressFromIndex(

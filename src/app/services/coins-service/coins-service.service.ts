@@ -12,7 +12,7 @@ import { CoinData } from "src/app/models/coin/coin";
     providedIn: "root",
 })
 export class CoinsService {
-    public url = "https://concretepay-coins.herokuapp.com/";
+    public url = "http://localhost:8080/";
 
     constructor(
         private http: HttpClient,

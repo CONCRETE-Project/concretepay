@@ -25,6 +25,8 @@ import {
 import { ImportModal } from "../../modals/import/import.modal";
 import { TxDetailsModal } from "../../modals/tx-details/tx-details.modal";
 import { TxDetailsModalInput } from "../../models/modals/tx-details";
+import { MnemonicSelectResponse } from "src/app/models/modals/mnemonic-select";
+import { MnemonicSelectModal } from "src/app/modals/mnemonic-select/mnemonic-select.modal";
 
 @Injectable({
     providedIn: "root",
@@ -109,5 +111,14 @@ export class ModalService {
             componentProps: input,
         });
         await txmodal.present();
+    }
+
+    public async mnemonicSelectModal(): Promise<MnemonicSelectResponse> {
+        let mnemonic = await this.modalController.create({
+            component: MnemonicSelectModal,
+        });
+        await mnemonic.present();
+        let resp = await mnemonic.onDidDismiss();
+        return resp.data;
     }
 }

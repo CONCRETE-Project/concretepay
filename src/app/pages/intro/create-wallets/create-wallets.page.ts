@@ -19,21 +19,13 @@ export class CreateWalletsPage {
     ) {
         this.accepted = {
             first: false,
-            second: false,
         };
     }
 
     public async createDefaultWallets() {
-        await this.navController.navigateForward("/home");
-    }
-
-    async openTos() {
-        let url = "";
-        await this.externalLinkService.open(url);
-    }
-
-    async openPp() {
-        let url = "";
-        await this.externalLinkService.open(url);
+        await this.navController.navigateForward("/home", {
+            animated: true,
+            animationDirection: "forward",
+        });
     }
 }

@@ -72,6 +72,7 @@ export class BlockbookService {
                 Unconfirmed:
                     parseInt(p2wpkhAccountInfo.unconfirmedBalance, 10) +
                     parseInt(p2shAccountInfo.unconfirmedBalance, 10),
+                Locked: 0,
             };
             if (p2wpkhAccountInfo.tokens) {
                 AddrArray = p2wpkhAccountInfo.tokens.map((addr) => ({
@@ -123,6 +124,7 @@ export class BlockbookService {
             totalBalance = {
                 Confirmed: parseInt(p2pkhAccountInfo.balance, 10),
                 Unconfirmed: parseInt(p2pkhAccountInfo.unconfirmedBalance, 10),
+                Locked: 0,
             };
             if (p2pkhAccountInfo.tokens) {
                 AddrArray = p2pkhAccountInfo.tokens.map((addr) => ({

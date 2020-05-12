@@ -2,7 +2,10 @@
   <ion-item [ngStyle]="{'background': wallet.Properties.color}" class="wallet-element-header">
     <span class="span-white wallet-element-header"> {{ wallet.Properties.name }}</span>
     <div slot="end">
-      <button *ngIf="!wallet.Properties.encrypted" [style.background-color]="wallet.Properties.color" style="font-size: 16px;color: #fff" (click)="encryptWallet()"><i class="i-white fas fa-unlock"></i>&nbsp;</button>
+      <button [style.background-color]="wallet.Properties.color" style="font-size: 16px;color: #fff" class="ion-activatable" (click)="createCredentials()">
+        <i class="i-white fas fa-plus-circle"></i>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
       <button [style.background-color]="wallet.Properties.color" style="font-size: 16px;color: #fff" (click)="reloadWallet()" *ngIf="!isReloadingWallet"><i class="i-white fas fa-sync"></i></button>
       <button [style.background-color]="wallet.Properties.color" style="font-size: 16px;color: #fff" (click)="reloadWallet()" *ngIf="isReloadingWallet"><i class="i-white fas fa-sync fa-spin"></i></button>
       <button [style.background-color]="wallet.Properties.color" style="font-size: 16px;color: #fff" (click)="goToSettings()"><i class="i-white fas fa-cog"></i></button>
@@ -18,7 +21,6 @@
             <br/>
             <span class="info-icons settings-element" (click)="displayInfo('Your mnemonic is backed up. You are able to recover your wallet.')" *ngIf="wallet.Properties.backup"><i class="fas fa-user-shield icon-home-green icon-home-green" ></i></span>
             <span class="info-icons settings-element" (click)="displayInfo('Your mnemonic is not backed up. You will not be able to recover your wallet.')" *ngIf="!wallet.Properties.backup"><i class="fas fa-user-shield icon-home-red"></i></span>
-            <span class="info-icons settings-element" (click)="displayInfo('Your wallet is encrypted.')" *ngIf="wallet.Properties.encrypted"><i class="fas fa-lock icon-home-green"></i></span>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -27,7 +29,7 @@
 
   <div>
     <ion-list lines="none">
-        <app-coin-info class="coin-item ion-padding" [Coin]="wallet.Credentials.wallet.Coin" [wallet]="wallet" [AlternativeCoin]="AlternativeCoin"></app-coin-info>
+        <app-coin-info class="coin-item ion-padding" *ngFor="let coinCredential of wallet.Credentials.wallet" [Coin]="coinCredential.Coin" [wallet]="wallet" [AlternativeCoin]="AlternativeCoin"></app-coin-info>
     </ion-list>
   </div>
 </ion-card>

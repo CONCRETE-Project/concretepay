@@ -37,10 +37,4 @@ export class WalletInfoPage implements OnInit, OnDestroy {
         });
     }
 
-    async goToCoinInfo(coin) {
-        await this.navController.navigateForward(
-            "/wallet/" + this.wallet.Properties.id + "/" + coin + "/settings",
-            { animated: true, animationDirection: "forward" }
-        );
-    }
 }

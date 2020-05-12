@@ -1,0 +1,37 @@
+<ion-header class="modal-fullscreen " color="secondary">
+  <ion-item  class="card-header " color="secondary">
+    <ion-icon class="settings-element fas fa-times" (click)="closeModal(false)" slot="start"></ion-icon>
+    <ion-grid class="grid-adjust " color="secondary">
+      <ion-row class="ion-justify-content-center ion-align-items-center " color="secondary">
+        <span class="span-white">Generate a Mnemonic Phrase</span>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-header>
+<ion-content class="page-content-with-slim-header ion-padding modal-background" *ngIf="!unsafe">
+  <ion-card class="card">
+    <ion-grid *ngIf="!mnemonicSize">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <h4>Select your mnemonic size</h4>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-button size="small" shape="round" (click)="selectSize(128)">12 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(160)">15 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(192)">18 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(224)">21 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(256)">24 Words</ion-button>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="mnemonicSize && !mnemonicLanguage">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <h4>Select your prefered language</h4>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center modal-background">
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')">English</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')">Spanish</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')">French</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')">Italian</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

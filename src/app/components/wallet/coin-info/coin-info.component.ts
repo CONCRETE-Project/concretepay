@@ -15,18 +15,16 @@ import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 })
 export class CoinInfoComponent implements OnInit {
     constructor(
+        private toastController: ToastController,
         private walletStorage: WalletStorageService,
         private navCtrl: NavController,
         public popup: PopupService,
         private walletService: WalletService,
         private userSettingsStorage: UserSettingsStorageService
     ) {}
-    @Input()
-    Coin: string;
-    @Input()
-    wallet: Wallet;
-    @Input()
-    AlternativeCoin;
+    @Input() Coin: string;
+    @Input() wallet: Wallet;
+    @Input() AlternativeCoin;
     credentials: CoinCredentials;
     coinData: CoinData;
 
@@ -44,11 +42,25 @@ export class CoinInfoComponent implements OnInit {
     }
 
     async getInfo() {
-        //let walletInfo = await this.walletService.getInfo(this.wallet);
-        //if (walletInfo) {
-        //    this.wallet = walletInfo.Wallet;
-        //    await this.walletStorage.updateFullWallet(this.wallet);
-        //}
+        await this.walletService.getInfo(this.wallet, this.Coin);
+    }
+
+    async deleteCoin() {
+        let confirm = await this.popup.ionicConfirm(
+            "Confirm",
+            "Are you sure you want to hide this coin?"
+        );
+        if (confirm) {
+            await this.wallet.deleteCoinCredentials(this.credentials.Coin);
+            await this.walletStorage.updateFullWallet(this.wallet);
+            await this.navCtrl.navigateRoot("/home");
+            const toast = await this.toastController.create({
+                message: "Wallet hidden successfully",
+                duration: 2000,
+            });
+            await toast.present();
+        }
+        await this.navCtrl.navigateRoot("/home");
     }
 
     public async goToSend() {

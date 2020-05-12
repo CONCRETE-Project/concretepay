@@ -37,7 +37,6 @@
         "@zxing/ngx-scanner": "3.0.0",
         "angularx-qrcode": "2.1.1",
         "bip32": "2.0.5",
-        "bip38": "^3.1.0",
         "bip39": "3.0.2",
         "bitcoinjs-lib": "5.1.7",
         "bs58check": "2.1.2",
@@ -48,6 +47,7 @@
         "minimist": "1.2.5",
         "phonegap-plugin-barcodescanner": "8.1.0",
         "rxjs": "6.5.5",
+        "sha.js": "^2.4.11",
         "tslib": "1.11.1",
         "zone.js": "0.10.3"
     },
