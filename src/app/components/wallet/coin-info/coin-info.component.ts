@@ -47,15 +47,15 @@ export class CoinInfoComponent implements OnInit {
 
     async deleteCoin() {
         let confirm = await this.popup.ionicConfirm(
-            "Confirm",
-            "Are you sure you want to hide this coin?"
+            "common.confirm",
+            "components.wallet.coin-info.hide-wallet"
         );
         if (confirm) {
             await this.wallet.deleteCoinCredentials(this.credentials.Coin);
             await this.walletStorage.updateFullWallet(this.wallet);
             await this.navCtrl.navigateRoot("/home");
             const toast = await this.toastController.create({
-                message: "Wallet hidden successfully",
+                message: "components.wallet.coin-info.hide-wallet-success",
                 duration: 2000,
             });
             await toast.present();

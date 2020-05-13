@@ -17,10 +17,10 @@
       <ion-grid>
         <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col class="ion-text-center">
-            <span>Wallet Status</span>
+            <span>components.wallet.status</span>
             <br/>
-            <span class="info-icons settings-element" (click)="displayInfo('Your mnemonic is backed up. You are able to recover your wallet.')" *ngIf="wallet.Properties.backup"><i class="fas fa-user-shield icon-home-green icon-home-green" ></i></span>
-            <span class="info-icons settings-element" (click)="displayInfo('Your mnemonic is not backed up. You will not be able to recover your wallet.')" *ngIf="!wallet.Properties.backup"><i class="fas fa-user-shield icon-home-red"></i></span>
+            <span class="info-icons settings-element" (click)="displayInfo('components.wallet.info-backup')" *ngIf="wallet.Properties.backup"><i class="fas fa-user-shield icon-home-green icon-home-green" ></i></span>
+            <span class="info-icons settings-element" (click)="displayInfo('components.wallet.info-non-backup')" *ngIf="!wallet.Properties.backup"><i class="fas fa-user-shield icon-home-red"></i></span>
           </ion-col>
         </ion-row>
       </ion-grid>

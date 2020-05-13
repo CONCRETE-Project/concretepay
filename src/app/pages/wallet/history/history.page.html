@@ -1,4 +1,4 @@
-<app-tool-bar [back]="true" [titleText]="'Transaction History'"></app-tool-bar>
+<app-tool-bar [back]="true" [titleText]="'pages.wallet.tx-history.title'"></app-tool-bar>
 <ion-content class="page-content-with-slim-header ion-padding">
   <ion-list *ngIf="TxHistory && TxHistory[0]" class="tx-history">
     <app-tx-history class="settings-element" *ngFor="let txs of TxHistory" [txs]="txs" [coin]="credentials.Coin" [credentials]="credentials"></app-tx-history>

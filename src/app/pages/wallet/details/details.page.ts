@@ -44,12 +44,15 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
     }
 
     async getInfo() {
-        //let walletInfo = await this.walletService.getInfo(this.wallet);
-        //if (walletInfo) {
-        //    this.wallet = walletInfo.Wallet;
-        //    this.TxHistory = walletInfo.TxHistory;
-        //    await this.walletStorageService.updateFullWallet(this.wallet);
-        //}
+        let walletInfo = await this.walletService.getInfo(
+            this.wallet,
+            this.credentials.Coin
+        );
+        if (walletInfo) {
+            this.wallet = walletInfo.Wallet;
+            this.TxHistory = walletInfo.TxHistory;
+            await this.walletStorageService.updateFullWallet(this.wallet);
+        }
     }
 
     public async goToSend() {

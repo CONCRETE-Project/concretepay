@@ -22,7 +22,7 @@ export class CopyToClipboardDirective {
         }
         await this.clipboardService.copy(this.value);
         const toast = await this.toastController.create({
-            message: "Copied to clipboard",
+            message: "common.copy",
             duration: 2000,
             position: "bottom",
         });

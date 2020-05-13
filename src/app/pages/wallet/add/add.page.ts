@@ -5,8 +5,6 @@ import { WalletService } from "../../../services/wallet/wallet.service";
 import { NavController } from "@ionic/angular";
 import { PlatformService } from "../../../services/platform/platform.service";
 import { Wallet } from "../../../models/wallet/wallet";
-import { UserSettingsStorageService } from "../../../services/storage/user-settings/user-settings.service";
-import { OnGoingProcessService } from "../../../services/on-going-process/on-going-process.service";
 import { ModalService } from "../../../services/modal/modal.service";
 import * as sha from "sha.js";
 
@@ -33,9 +31,7 @@ export class AddWalletPage implements OnInit {
         public platformProv: PlatformService,
         public modalService: ModalService,
         public walletService: WalletService,
-        private navController: NavController,
-        private onGoingProcessService: OnGoingProcessService,
-        private userSettingsStorage: UserSettingsStorageService
+        private navController: NavController
     ) {
         this.isElectron = this.platformProv.isElectron;
         this.isAndroid = this.platformProv.isAndroid;
@@ -73,7 +69,7 @@ export class AddWalletPage implements OnInit {
             this.isRandomSeed = false;
             this.isScan = false;
         } else {
-            await this.popupProvider.ionicAlert("Error", "Invalid Seed");
+            await this.popupProvider.ionicAlert("common.error", "Invalid Seed");
         }
     }
 
@@ -154,20 +150,20 @@ export class AddWalletPage implements OnInit {
 
     public async askPassword(): Promise<string> {
         let pass = await this.popupProvider.ionicPrompt(
-            "Password encryption",
-            "Please set up a password to your wallet."
+            "common.password",
+            "pages.wallet.add.create-password"
         );
         if (pass) {
             let pass2 = await this.popupProvider.ionicPrompt(
-                "Password encryption",
-                "Confirm your password to generate your wallet."
+                "common.password",
+                "pages.wallet.add.create-password-confirm"
             );
             if (pass === pass2) {
                 return pass;
             } else {
                 await this.popupProvider.ionicAlert(
-                    "Error",
-                    "Password doesn't match, please try again."
+                    "common.error",
+                    "common.error-password"
                 );
                 return null;
             }
@@ -177,8 +173,8 @@ export class AddWalletPage implements OnInit {
 
     public async popupError() {
         await this.popupProvider.ionicAlert(
-            "Error",
-            "There was an error creating your wallet, please try again."
+            "common.error",
+            "common.error-wallet"
         );
     }
 }

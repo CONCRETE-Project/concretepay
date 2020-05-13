@@ -1,83 +1,83 @@
-<app-tool-bar [back]="true" titleText="Coin Information"></app-tool-bar>
+<app-tool-bar [back]="true" titleText="pages.wallet.settings.coin-settings.title"></app-tool-bar>
 <ion-content class="page-content-with-slim-header">
   <ion-list style="background: none" lines="none" *ngIf="wallet && credentials">
-    <ion-list-header>Main Coin Information</ion-list-header>
+    <ion-list-header>pages.wallet.settings.coin-settings.subtitle</ion-list-header>
     <ion-item>
-      <span slot="start">Coin</span>
+      <span slot="start">pages.wallet.settings.coin-settings.coin</span>
       <ion-note slot="end">{{ credentials.Coin }}</ion-note>
     </ion-item>
     <ion-item>
-      <span slot="start">Segwit Enabled</span>
+      <span slot="start">pages.wallet.settings.coin-settings.segwit</span>
       <ion-note slot="end">{{ credentials.isSegwit }}</ion-note>
     </ion-item>
     <ion-item (click)="changeBlockbookEndpoint()">
-      <span slot="start">Blockbook (URL)</span>
+      <span slot="start">pages.wallet.settings.coin-settings.blockbook</span>
       <ion-note class="info-wrap" slot="end">
         {{ credentials.Blockbook }}
       </ion-note>
     </ion-item>
 
     <br/>
-    <ion-list-header> Advanced Information </ion-list-header>
+    <ion-list-header></ion-list-header>
 
     <br/>
-    <ion-list-header *ngIf="credentials.Derivations.P2PKH">Legacy (P2PKH) Information</ion-list-header>
+    <ion-list-header *ngIf="credentials.Derivations.P2PKH">pages.wallet.settings.coin-settings.p2pkh-title</ion-list-header>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2PKH" copyToClipboard="{{credentials.Derivations.P2PKH.AccountPublicKey}}">
-      <span slot="start">Public Key</span>
+      <span slot="start">pages.wallet.settings.coin-settings.pubkey</span>
       <ion-note class="info-wrap" slot="end">
         {{credentials.Derivations.P2PKH.AccountPublicKey}}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2PKH" copyToClipboard="{{credentials.Derivations.P2PKH.LastDerivationPathDirect}}">
-      <span slot="start">Last Direct Derivation Path</span>
+      <span slot="start">pages.wallet.settings.coin-settings.last-path-direct</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2PKH.LastDerivationPathDirect }}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2PKH" copyToClipboard="{{credentials.Derivations.P2PKH.LastDerivationPathChange}}">
-      <span slot="start">Last Change Derivation Path</span>
+      <span slot="start">pages.wallet.settings.coin-settings.last-path-change</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2PKH.LastDerivationPathChange }}
       </ion-note>
     </ion-item>
 
     <br/>
-    <ion-list-header *ngIf="credentials.Derivations.P2SHInP2WPKH">Segwit (P2SHInP2WPKH) Information</ion-list-header>
+    <ion-list-header *ngIf="credentials.Derivations.P2SHInP2WPKH">pages.wallet.settings.coin-settings.p2shinp2wpkh-title</ion-list-header>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2SHInP2WPKH" copyToClipboard="{{credentials.Derivations.P2SHInP2WPKH.AccountPublicKey}}">
-      <span slot="start">Public Key</span>
+      <span slot="start">pages.wallet.settings.coin-settings.pubkey</span>
       <ion-note class="info-wrap" slot="end">
         {{credentials.Derivations.P2SHInP2WPKH.AccountPublicKey}}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2SHInP2WPKH" copyToClipboard="{{credentials.Derivations.P2SHInP2WPKH.LastDerivationPathDirect}}">
-      <span slot="start">Last Direct Derivation Path</span>
+      <span slot="start">pages.wallet.settings.coin-settings.last-path-direct</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2SHInP2WPKH.LastDerivationPathDirect }}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2SHInP2WPKH" copyToClipboard="{{credentials.Derivations.P2SHInP2WPKH.LastDerivationPathChange}}">
-      <span slot="start">Last Change Derivation Path</span>
+      <span slot="start">pages.wallet.settings.coin-settings.last-path-change</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2SHInP2WPKH.LastDerivationPathChange }}
       </ion-note>
     </ion-item>
 
     <br/>
-    <ion-list-header *ngIf="credentials.Derivations.P2WPKH">Bech32 (P2WPKH) Information</ion-list-header>
+    <ion-list-header *ngIf="credentials.Derivations.P2WPKH">pages.wallet.settings.coin-settings.p2wpkh-title</ion-list-header>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2WPKH" copyToClipboard="{{credentials.Derivations.P2WPKH.AccountPublicKey}}">
-      <span slot="start">Public Key</span>
+      <span slot="start">pages.wallet.settings.coin-settings.pubkey</span>
       <ion-note class="info-wrap" slot="end">
         {{credentials.Derivations.P2WPKH.AccountPublicKey}}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2WPKH" copyToClipboard="{{credentials.Derivations.P2WPKH.LastDerivationPathDirect}}">
-      <span slot="start">Last Direct Derivation Path</span>
+      <span slot="start">pages.wallet.settings.coin-settings.last-path-direct</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2WPKH.LastDerivationPathDirect }}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2WPKH" copyToClipboard="{{credentials.Derivations.P2WPKH.LastDerivationPathChange}}">
-      <span slot="start">Last Change Derivation Path</span>
+      <span slot="start">pages.wallet.settings.coin-settings.last-path-change</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2WPKH.LastDerivationPathChange }}
       </ion-note>

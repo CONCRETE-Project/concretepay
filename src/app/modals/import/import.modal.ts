@@ -138,8 +138,8 @@ export class ImportModal implements OnInit {
         );
         if (!valid) {
             await this.popupService.ionicAlert(
-                "Error",
-                "The mnemonic phrase is not valid, please try again."
+                "common.error",
+                "modals.import.invalid-mnemonic"
             );
         } else {
             this.mnemonicPhrase = mnemonic;

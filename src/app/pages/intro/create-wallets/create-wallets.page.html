@@ -1,21 +1,21 @@
 <ion-content>
   <div class="logo-tagline">
     <img src="../../../assets/img/logo.png" />
-    <h1 style="color: #fff">ConcretePay</h1>
+    <h1 style="color: #fff">pages.intro.title</h1>
   </div>
-  <p class="top-description" *ngIf="accepted.first && accepted.second">You can import your wallet using a mnemonic or create a new one!</p>
-  <p *ngIf="!accepted.first" class="middle-description">Wallets are created using the top standards, so they are compatible with other crypto tools.</p>
-  <p *ngIf="!accepted.first" class="middle-description">Wallets are secured on your own device, which means no one can access it.</p>
+  <p class="top-description" *ngIf="accepted.first && accepted.second">pages.intro.description-2</p>
+  <p *ngIf="!accepted.first" class="middle-description">pages.intro.description-3</p>
+  <p *ngIf="!accepted.first" class="middle-description">pages.intro.description-4</p>
   <div class="bottom-absolute">
     <ion-list style="background: none; margin: 20px;" *ngIf="!accepted.first">
       <ion-item style="--background: none">
-        <ion-label class="agree-to-terms" text-wrap>I understand that my funds are held securely on the device and the company doesn't have access to my funds.</ion-label>
+        <ion-label class="agree-to-terms" text-wrap>pages.intro.tos</ion-label>
         <ion-checkbox  [(ngModel)]="accepted.first" class=" checkBoxCreate"></ion-checkbox>
       </ion-item>
     </ion-list>
     <ion-button *ngIf="accepted.first"  class="button-standard introButtons" color="secondary" [disabled]="!accepted.first" (click)="createDefaultWallets()">
       <ion-icon slot="start" name="wallet"></ion-icon>
-      Get started
+      pages.intro.start
     </ion-button>
   </div>
 </ion-content>

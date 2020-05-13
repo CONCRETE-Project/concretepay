@@ -1,40 +1,40 @@
-<app-tool-bar [back]="true" [titleText]="'Settings'"></app-tool-bar>
+<app-tool-bar [back]="true" [titleText]="'pages.wallet.settings.settings.title'"></app-tool-bar>
 <ion-content>
     <ion-list style="background: none" lines="none" *ngIf="wallet">
-        <ion-list-header>Information</ion-list-header>
+        <ion-list-header>pages.wallet.settings.settings.information</ion-list-header>
         <ion-item  (click)="openWalletName()" class="settings-element">
             <ion-icon slot="start" color="black" name="pricetag"></ion-icon>
-            <span>Name</span>
+            <span>pages.wallet.settings.settings.name</span>
             <ion-note slot="end">{{wallet && wallet.Properties.name}}</ion-note>
         </ion-item>
         <ion-item (click)="openWalletColor()" class="settings-element">
             <ion-icon slot="start" color="black" name="color-palette"></ion-icon>
-            <span slot="start">Color</span>
+            <span slot="start">pages.wallet.settings.settings.color</span>
             <ion-note slot="end" [ngStyle]="{'background-color': wallet?.Properties.color}" class="settings-color-block"></ion-note>
         </ion-item>
         <br/>
 
-        <ion-list-header>Security</ion-list-header>
+        <ion-list-header>pages.wallet.settings.settings.security</ion-list-header>
         <ion-item class="settings-element" (click)="openBackupSettings()">
             <ion-icon slot="start" color="black" name="key"></ion-icon>
-            <span slot="start">Paper/Master Key</span>
+            <span slot="start">pages.wallet.settings.settings.paper-key</span>
             <ion-note slot="end" *ngIf="!wallet.Properties.backup" class="wallet-warning">
-                Unverified
+                pages.wallet.settings.settings.unverified
             </ion-note>
         </ion-item>
         <ion-item class="settings-element" (click)="openExportMnemonic()">
             <ion-icon slot="start" color="black" name="download"></ion-icon>
-            <span slot="start">Export Mnemonic</span>
+            <span slot="start">pages.wallet.settings.settings.export-mnemonic</span>
         </ion-item>
         <br/>
-        <ion-list-header>Advanced</ion-list-header>
+        <ion-list-header>pages.wallet.settings.settings.advanced</ion-list-header>
         <ion-item class="settings-element" (click)="openWalletInformation()">
             <ion-icon slot="start" color="black" name="information-circle"></ion-icon>
-            <span slot="start">Information</span>
+            <span slot="start">pages.wallet.settings.settings.information</span>
         </ion-item>
         <ion-item class="settings-element" (click)="openDeleteWallet()">
             <ion-icon slot="start" color="black" name="trash"></ion-icon>
-            <span slot="start">Delete</span>
+            <span slot="start">pages.wallet.settings.settings.delete</span>
         </ion-item>
     </ion-list>
 </ion-content>

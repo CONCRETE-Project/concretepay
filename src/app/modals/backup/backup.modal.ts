@@ -86,8 +86,8 @@ export class BackupModal implements OnInit {
             await this.closeModal(true);
         } else {
             await this.popupService.ionicAlert(
-                "Error",
-                "Your mnemonic doesn't match. Please try again and make sure you are importing on the correct order."
+                "common.error",
+                "modals.backup.error-backup"
             );
             this.clear();
         }

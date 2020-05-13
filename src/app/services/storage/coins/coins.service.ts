@@ -58,8 +58,8 @@ export class CoinsStorageService {
         } catch (e) {
             // If it fails, means there is no access for coin data on remote or local, crash the app with a popup.
             await this.popupService.ionicAlert(
-                "Error",
-                "Unable to reload coins information"
+                "common.error",
+                "services.load-coins-error"
             );
         }
     }

@@ -1,3 +1,238 @@
 {
-    "pa": {}
+    "services": {
+        "load-coins-error": "Unable to reload coins information"
+    },
+    "common": {
+        "scan-qr": "Scan QR Code",
+        "copy": "Copied to clipboard",
+        "warning": "Warning!",
+        "error": "Error",
+        "confirm": "Confirm",
+        "clear": "Clear",
+        "concirmations": "Confirmations",
+        "sent": "Sent",
+        "received": "Received",
+        "tx-id": "Transaction ID",
+        "view-on-blockchain": "View on Blockchain",
+        "moved": "Moved",
+        "success": "Success",
+        "date": "Date",
+        "sent-to": "Sent to",
+        "submit": "Submit",
+        "scan": "Scan",
+        "close": "Close",
+        "mnemonic-phrase": "Mnemonic Phrase",
+        "cancel": "Canceled",
+        "error-wallet": "There was an error creating your wallet, please try again.",
+        "error-password": "Password doesn't match, please try again.",
+        "password": "Password encryption",
+        "loading": "Loading...",
+        "amount": "Amount",
+        "bech32": "Bech32",
+        "segwit": "Segwit",
+        "miner-fee": "Miner fee",
+        "non-backup-title": "Paper Key Unverified",
+        "non-backup-subtitle": "Before retrieving your wallet address, we recommended that you first write down your paper key and store it securely so that your wallet can be recovered in the case your device was lost or stolen.",
+        "non-backup-action": "Write Down Paper Key",
+        "fast": "Fast",
+        "medium": "Medium",
+        "slow": "Slow",
+        "confirmed": "Confirmed",
+        "unconfirmed": "Unconfirmed",
+        "languages": {
+            "english": "English",
+            "spanish": "Spanish",
+            "french": "French",
+            "italian": "Italian"
+        },
+        "mnemonic-size": "Select your mnemonic size",
+        "sizes": {
+            "12": "12 Words",
+            "15": "15 Words",
+            "18": "18 Words",
+            "21": "21 Words",
+            "24": "24 Words"
+        },
+        "select-language": "Select your prefered language"
+    },
+    "pages": {
+        "home": {
+            "no-wallets-title": "You  have created no wallets yet.",
+            "no-wallets-subtitle-1": "To start, please create a wallet by tapping over the",
+            "no-wallets-subtitle-2": "button in the bottom right, select either the scan or create wallet option and follow the shown steps."
+        },
+        "intro": {
+            "title": "ConcretePay",
+            "start": "Get started",
+            "description-1": "Store your coins on the safest lightweight wallet",
+            "description-2": "You can import your wallet using a mnemonic or create a new one!",
+            "description-3": "Wallets are created using the top standards, so they are compatible with other crypto tools.",
+            "description-4": "Wallets are secured on your own device, which means no one can access it.",
+            "tos": "I understand that my funds are held securely on the device and the company doesn't have access to my funds."
+        },
+        "pin": {
+            "send-max": "Send Max"
+        },
+        "settings": {
+            "title": "Settings",
+            "subtitle": "Preferences",
+            "alt-coin": "Alternative currency",
+            "reload-coins": "Reload coins data",
+            "reload-rates": "Reload rates data",
+            "warning-resync-coins": "Do you want to resync the coin information?",
+            "warning-resync-rates": "Do you want to resync the rates information?",
+            "select-language": "Select a language"
+        },
+        "wallet": {
+            "add": {
+                "title": "Create Wallet",
+                "wallet-name": "Wallet Name",
+                "wallet-name-placeholder": "Your wallet name",
+                "wallet-key": "Wallet Key",
+                "wallet-key-placeholder": "Select a seed option",
+                "create-password": "Please set up a password to your wallet.",
+                "create-password-confirm": "Confirm your password to generate your wallet.",
+                "seeds": {
+                    "random": "Random",
+                    "scan": "Scan",
+                    "safe-import": "Safe Import",
+                    "unsafe-import": "Unsafe Import"
+                },
+                "create-wallet": "Create Wallet"
+            },
+            "tx-history": {
+                "title": "Transaction History"
+            },
+            "receive": {
+                "title": "Receive coins",
+                "set-amount": "Set Amount"
+            },
+            "send": {
+                "title": "Send",
+                "recipient": "Recipient"
+            },
+            "settings": {
+                "coin-settings": {
+                    "title": "Coin Information",
+                    "subtitle": "Main Coin Information",
+                    "coin": "Coin",
+                    "segwit": "Segwit Enabled",
+                    "blockbook": "Blockbook (URL)",
+                    "advanced": "Advanced Information",
+                    "p2pkh-title": "Legacy (P2PKH) Information",
+                    "p2wpkh-title": "Bech32 (P2WPKH) Information",
+                    "p2shinp2wpkh-title": "Segwit (P2SHInP2WPKH) Information",
+                    "last-path-direct": "Last Direct Derivation Path",
+                    "last-path-change": "Last Change Derivation Path",
+                    "pubkey": "Public Key"
+                },
+                "color": {
+                    "title": "Wallet Color"
+                },
+                "delete": {
+                    "title": "Delete Wallet",
+                    "warning": "Warning, removing your wallet without having the backup seed can result on funds lost",
+                    "delete-wallet": "Delete Wallet"
+                },
+                "info": {
+                    "title": "Wallet Information",
+                    "subtitle": "Main Wallet Information",
+                    "wallet-id": "Wallet ID",
+                    "backup": "Backup"
+                },
+                "name": {
+                    "title": "Wallet Name",
+                    "subtitle": "What do you call this wallet?",
+                    "name": "Name",
+                    "save": "Save"
+                },
+                "settings": {
+                    "title": "Settings",
+                    "information": "Information",
+                    "name": "Name",
+                    "color": "Color",
+                    "security": "Security",
+                    "paper-key": "Paper Key",
+                    "unverified": "Unverified",
+                    "export-mnemonic": "Export Mnemonic",
+                    "advanced": "Advanced",
+                    "delete": "Delete"
+                }
+            }
+        }
+    },
+    "modals": {
+        "amount": {
+            "title": "Select an Amount"
+        },
+        "backup": {
+            "title": "Backup Wallet",
+            "info-text-1": "Are you being watched?",
+            "info-text-2": "Now is a perfect time to assess your surroundings. Nearby windows? Hidden cameras? Shoulder-spies?",
+            "info-text-3": "Anyone with your backup phrase can access or spend your coins.",
+            "info-confirm": "Got it",
+            "backup-mnemonic": "Mnemonic phrase",
+            "instructions-1": "Please write this words somewhere safe.",
+            "backup-start": "Start Backup",
+            "backup-words": "Selected words",
+            "backup-instructions": "Click on the words to add them on the correct order",
+            "error-backup": "Your mnemonic doesn't match. Please try again and make sure you are importing on the correct order."
+        },
+        "confirm": {
+            "title": "Confirm Payment",
+            "sending": "Sending",
+            "sending-max": "Sending Maximum Amount",
+            "building-transaction": "Building Transaction...",
+            "broacasting": "Broadcasting Transaction",
+            "confirm-send": "Are you sure you want to send ",
+            "error-build": "Unable to build transactiom",
+            "error-balance": "You don't have enough balance to perform the transaction",
+            "receiver-info": "Receiver Information"
+        },
+        "export-mnemonic": {
+            "title": "Export Mnemonic"
+        },
+        "import": {
+            "title": "Import Wallet",
+            "invalid-mnemonic": "The mnemonic phrase is not valid, please try again.",
+            "build-mnemonic": "Build your mnemonic phrase",
+            "select-words": "Selected words",
+            "instructions-1": "Click on the buttons to add the",
+            "instructions-2": "word",
+            "warning-1": "Using your mnemonic with clipboard (copy/paste) or plain text could leak your coins. Please use it only if you know what you are doing.",
+            "warning-2": "For importing your mnemonic securely, use the Encrypted QR or the Safe Import",
+            "mnemonic-placeholder": "Your mnemonic phrase"
+        },
+        "tx-details": {
+            "title": "Transaction Details"
+        }
+    },
+    "components": {
+        "confirm": {},
+        "tool-bar": {
+            "title": "ConcretePay"
+        },
+        "tx-history": {
+            "received-on": "Received on",
+            "sent-on": "Sent on",
+            "moved-on": "Moved on",
+            "confirming": "Confirming..."
+        },
+        "receiver-info": {
+            "label": "Label",
+            "message": "Message"
+        },
+        "wallet": {
+            "status": "Wallet Status",
+            "info-backup": "Your mnemonic is backed up. You are able to recover your wallet.",
+            "info-non-backup": "Your mnemonic is not backed up. You will not be able to recover your wallet.",
+            "ask-password": "Please enter your wallet password",
+            "select-coin": "Please select a coin",
+            "coin-info": {
+                "hide-wallet": "Are you sure you want to hide this coin?",
+                "hide-wallet-success": "Wallet hidden successfully",
+                "balance": "Balance"
+            }
+        }
+    }
 }

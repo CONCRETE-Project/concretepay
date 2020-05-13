@@ -1,10 +1,10 @@
-<app-tool-bar [back]="true" [titleText]="'Send'"></app-tool-bar>
+<app-tool-bar [back]="true" [titleText]="'pages.wallet.send.title'"></app-tool-bar>
 <ion-content class="page-content-with-slim-header ion-padding">
     <ion-card class="card">
         <ion-card-content>
             <ion-list lines="none">
                 <ion-item>
-                    <ion-label>Recipient</ion-label>
+                    <ion-label>pages.wallet.send.recipient</ion-label>
                 </ion-item>
                 <ion-item [ngClass]="{'invalid': invalidAddress && search !== ''}">
                     <ion-input placeholder="recipient address" [(ngModel)]="search" (ngModelChange)="processInput()"></ion-input>

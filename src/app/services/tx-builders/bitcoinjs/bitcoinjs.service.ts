@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { CoinCredentials } from "../../../models/wallet/wallet";
 import * as bitcoin from "bitcoinjs-lib";
 import { Utxo } from "../../../models/blockbook/blockbook";
-import { ModalController } from "@ionic/angular";
 import { PlatformService } from "../../platform/platform.service";
 import { HttpClient } from "@angular/common/http";
 import { HTTP } from "@ionic-native/http/ngx";

@@ -48,11 +48,11 @@ export class SettingsPage implements OnInit {
 
     public async reloadCoinsData() {
         let confirm = await this.popupService.ionicConfirm(
-            "Warning!",
-            "Do you want to resync the coin information?"
+            "common.warning",
+            "pages.settings.warning-resync-coins"
         );
         if (confirm) {
-            await this.onGoingProcessService.set("Loading coins information");
+            await this.onGoingProcessService.set("common.loading");
             try {
                 await this.coinsStorageService.clear();
                 await this.coinsStorageService.loadCoinsFromRemote();
@@ -65,11 +65,11 @@ export class SettingsPage implements OnInit {
 
     public async clearRatesData() {
         let confirm = await this.popupService.ionicConfirm(
-            "Warning!",
-            "Do you want to clear the rates information?"
+            "common.warning",
+            "pages.settings.warning-resync-rates"
         );
         if (confirm) {
-            await this.onGoingProcessService.set("Clearing information");
+            await this.onGoingProcessService.set("common.loading");
             await this.ratesStorageService.clear();
             this.onGoingProcessService.clear();
         }
@@ -77,17 +77,17 @@ export class SettingsPage implements OnInit {
 
     public async changeLanguage() {
         const actionSheet = await this.actionSheetController.create({
-            header: "Select a language",
+            header: "pages.settings.select-language",
             buttons: [
                 {
-                    text: "English",
+                    text: "common.languages.english",
                     handler: () => {
                         this.translate.setDefaultLang("en");
                         this.userSettingsStorageService.set("lang", "en");
                     },
                 },
                 {
-                    text: "Spanish",
+                    text: "common.languages.spanish",
                     handler: () => {
                         this.translate.setDefaultLang("en");
                         this.userSettingsStorageService.set("lang", "en");

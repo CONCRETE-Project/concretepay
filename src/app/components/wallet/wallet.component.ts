@@ -126,7 +126,7 @@ export class WalletComponent implements OnInit, OnChanges {
         });
 
         const actionSheet = await this.actionSheetController.create({
-            header: "Select a coin",
+            header: "components.wallet.select-coin",
             buttons: buttons,
         });
         await actionSheet.present();
@@ -134,16 +134,13 @@ export class WalletComponent implements OnInit, OnChanges {
 
     public async askPassword(): Promise<string> {
         let pass = await this.popup.ionicPrompt(
-            "Password",
-            "Please enter your wallet password"
+            "common.password",
+            "components.wallet.ask-password"
         );
         return pass;
     }
 
     public async popupError() {
-        await this.popup.ionicAlert(
-            "Error",
-            "There was an error creating your wallet, please make sure you are using the correct password"
-        );
+        await this.popup.ionicAlert("common.error", "common.error-wallet");
     }
 }

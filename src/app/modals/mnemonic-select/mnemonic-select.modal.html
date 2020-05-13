@@ -8,29 +8,29 @@
     </ion-grid>
   </ion-item>
 </ion-header>
-<ion-content class="page-content-with-slim-header ion-padding modal-background" *ngIf="!unsafe">
+<ion-content class="page-content-with-slim-header ion-padding modal-background">
   <ion-card class="card">
     <ion-grid *ngIf="!mnemonicSize">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <h4>Select your mnemonic size</h4>
+        <h4>common.mnemonic-size</h4>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-button size="small" shape="round" (click)="selectSize(128)">12 Words</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(160)">15 Words</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(192)">18 Words</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(224)">21 Words</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(256)">24 Words</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(128)">common.size.12</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(160)">common.size.15</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(192)">common.size.18</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(224)">common.size.21</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(256)">common.size.24</ion-button>
       </ion-row>
     </ion-grid>
     <ion-grid *ngIf="mnemonicSize && !mnemonicLanguage">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <h4>Select your prefered language</h4>
+        <h4>common.select-language</h4>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center modal-background">
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')">English</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')">Spanish</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')">French</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')">Italian</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')">common.language.english</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')">common.language.spanish</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')">common.language.french</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')">common.language.italian</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card>

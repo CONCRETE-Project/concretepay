@@ -55,7 +55,7 @@ export class ConfirmModal implements OnInit {
     }
 
     public async init() {
-        await this.onGoingProcess.set("Loading balances");
+        await this.onGoingProcess.set("common.loading");
         this.Utxos = await this.getUtxos();
         await this.onGoingProcess.clear();
         let availableBalance = this.Utxos.map((utxo) =>
@@ -63,13 +63,13 @@ export class ConfirmModal implements OnInit {
         ).reduce((a, b) => a + b, 0);
         if (availableBalance < this.payment.amount) {
             await this.popupProvider.ionicAlert(
-                "Error",
-                "You don't have enough balance to perform the transaction"
+                "common.error",
+                "modals.confirm.error-balance"
             );
             await this.closeModal(false, false);
             return;
         }
-        await this.onGoingProcess.set("Loading fees");
+        await this.onGoingProcess.set("common.loading");
         this.TxSize = await this.getTxSize();
         this.TotalAvailable = 0;
         for (let utxo of this.Utxos) {
@@ -148,7 +148,7 @@ export class ConfirmModal implements OnInit {
     public async feeSelected(e) {
         this.FeeSatoshis = this.FeeRates[e];
         try {
-            await this.onGoingProcess.set("Building Transaction...");
+            await this.onGoingProcess.set("modal.confirm.building-transaction");
             let serializedTx = await this.buildTx(this.credentials);
             if (serializedTx) {
                 this.SerializedTx = serializedTx;
@@ -156,16 +156,16 @@ export class ConfirmModal implements OnInit {
             } else {
                 this.onGoingProcess.clear();
                 await this.popupProvider.ionicAlert(
-                    "Error",
-                    "Unable to build transaction"
+                    "common.error",
+                    "modals.confirm.error-build"
                 );
                 await this.closeModal(false, false);
             }
         } catch (e) {
             this.onGoingProcess.clear();
             await this.popupProvider.ionicAlert(
-                "Error",
-                "Unable to build transactiom"
+                "common.error",
+                "modals.confirm.error-build"
             );
             await this.closeModal(false, false);
         }
@@ -176,14 +176,14 @@ export class ConfirmModal implements OnInit {
             ? (this.TotalAvailable - this.FeeSatoshis) * (1 / 1e8)
             : this.payment.amount * (1 / 1e8);
         let confirm = await this.popupProvider.ionicConfirm(
-            "Confirm",
-            "Are you sure you want to send " +
+            "common.confirm",
+            "modals.confirm.confirm-send" +
                 sendAmount.toFixed(8) +
                 " " +
                 this.credentials.Coin.toUpperCase()
         );
         if (confirm) {
-            await this.onGoingProcess.set("Broadcasting Transaction");
+            await this.onGoingProcess.set("modals.confirm.broadcasting");
             try {
                 await this.blockbookProvider.sendTx(
                     this.credentials,
@@ -194,7 +194,7 @@ export class ConfirmModal implements OnInit {
             } catch (e) {
                 this.onGoingProcess.clear();
                 await this.popupProvider.ionicConfirm(
-                    "Error Broadcasting Tx",
+                    "common.error",
                     JSON.stringify(e)
                 );
                 await this.closeModal(false, false);

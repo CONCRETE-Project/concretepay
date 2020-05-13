@@ -3,7 +3,7 @@
     <ion-icon class="settings-element fas fa-times" (click)="closeModal()" slot="start"></ion-icon>
     <ion-grid class="grid-adjust">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <span class="span-white">Transaction Details</span>
+        <span class="span-white">modals.tx-details.title</span>
       </ion-row>
     </ion-grid>
   </ion-item>
@@ -24,14 +24,9 @@
       <ion-grid class="ion-padding">
         <ion-row>
           <div *ngIf="confirmed && !type || type === 'normal-tx'">
-            <span *ngIf="sent && !received">Sent</span>
-            <span *ngIf="received && !sent">Received</span>
-            <span *ngIf="sent && received">Moved</span>
-          </div>
-          <div *ngIf="type && type !== 'normal-tx'">
-            <span *ngIf="type === 'token-transfer-received'">Received tokens</span>
-            <span *ngIf="type === 'token-transfer-send'">Send tokens</span>
-            <span *ngIf="type === 'contract-interaction'">Contract interaction</span>
+            <span *ngIf="sent && !received">common.sent</span>
+            <span *ngIf="received && !sent">common.received</span>
+            <span *ngIf="sent && received">common.moved</span>
           </div>
         </ion-row>
         <ion-row *ngIf="confirmed && !type || type === 'normal-tx'">
@@ -49,40 +44,40 @@
     </ion-item>
 
     <ion-item *ngIf="fee">
-      <span slot="start">Miner fee</span>
+      <span slot="start">common.miner-fee</span>
       <ion-note slot="end">
         {{ fee | satToUnit: coin}} {{ fee | satToFiat: coin:this.alternative | async }}
       </ion-note>
     </ion-item>
 
     <ion-item *ngIf="sent && !received" copyToClipboard="{{ address }}" class="settings-element">
-      <span slot="start">Sent to</span>
+      <span slot="start">common.sent-to</span>
       <ion-note slot="end" class="truncate-string">{{address}}</ion-note>
     </ion-item>
 
     <ion-item *ngIf="btx.blocktime">
-      <ion-label slot="start">Date</ion-label>
+      <ion-label slot="start">common.date</ion-label>
       <ion-note slot="end">
         <time>{{ btx.blocktime * 1000 | date: 'medium' }}</time>
       </ion-note>
     </ion-item>
 
     <ion-item >
-      <span slot="start">Confirmations</span>
+      <span slot="start">common.confirmations</span>
       <ion-note slot="end">
-        <span *ngIf="!confirmed">Unconfirmed</span>
+        <span *ngIf="!confirmed">common.unconfirmed</span>
         <span *ngIf="confirmed">{{ btx.confirmations }}</span>
       </ion-note>
     </ion-item>
 
     <ion-item copyToClipboard="{{ btx.txid }}" class="settings-element">
-      <span slot="start">Transaction ID</span>
+      <span slot="start">common.tx-id</span>
       <ion-note slot="end" class="truncate-string">{{ btx.txid }}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
 <ion-footer class="page-content-with-slim-header">
   <ion-button style="margin: 0px" expand="full" size="large" color="secondary" (click)="viewOnBlockchain()"
-              >View on Blockchain
+              >common.view-on-blockchain
   </ion-button>
 </ion-footer>
