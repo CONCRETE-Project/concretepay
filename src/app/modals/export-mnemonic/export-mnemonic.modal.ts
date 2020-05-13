@@ -9,9 +9,9 @@ import { OnGoingProcessService } from "../../services/on-going-process/on-going-
     styleUrls: ["./export-mnemonic.modal.scss"],
 })
 export class ExportMnemonicModal implements OnInit {
-    @Input() mnemonic: string
-    @Input() lang: string
-    @Input() passhash: string
+    @Input() mnemonic: string;
+    @Input() lang: string;
+    @Input() passhash: string;
     encodedData: string;
     constructor(
         public modalCtrl: ModalController,
@@ -20,7 +20,11 @@ export class ExportMnemonicModal implements OnInit {
     ) {}
 
     ngOnInit() {
-        let objJsonStr = JSON.stringify({ mnemonic: this.mnemonic, lang: this.lang, passhash: this.passhash});
+        let objJsonStr = JSON.stringify({
+            mnemonic: this.mnemonic,
+            lang: this.lang,
+            passhash: this.passhash,
+        });
         this.encodedData = Buffer.from(objJsonStr).toString("base64");
     }
 

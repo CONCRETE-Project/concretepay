@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { UserSettingsStorageService } from "../../services/storage/user-settings/user-settings.service";
-import { NavController } from "@ionic/angular";
+import { NavController, ActionSheetController } from "@ionic/angular";
 import { PopupService } from "../../services/popup/popup.service";
 import { OnGoingProcessService } from "../../services/on-going-process/on-going-process.service";
 import { RatesStorageService } from "../../services/storage/rates/rates.service";
 import { CoinsStorageService } from "src/app/services/storage/coins/coins.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: "app-settings",
@@ -16,6 +17,8 @@ export class SettingsPage implements OnInit {
     public userSettingsState;
 
     constructor(
+        public translate: TranslateService,
+        public actionSheetController: ActionSheetController,
         public coinsStorageService: CoinsStorageService,
         public userSettingsStorageService: UserSettingsStorageService,
         public navController: NavController,
@@ -70,5 +73,28 @@ export class SettingsPage implements OnInit {
             await this.ratesStorageService.clear();
             this.onGoingProcessService.clear();
         }
+    }
+
+    public async changeLanguage() {
+        const actionSheet = await this.actionSheetController.create({
+            header: "Select a language",
+            buttons: [
+                {
+                    text: "English",
+                    handler: () => {
+                        this.translate.setDefaultLang("en");
+                        this.userSettingsStorageService.set("lang", "en");
+                    },
+                },
+                {
+                    text: "Spanish",
+                    handler: () => {
+                        this.translate.setDefaultLang("en");
+                        this.userSettingsStorageService.set("lang", "en");
+                    },
+                },
+            ],
+        });
+        await actionSheet.present();
     }
 }

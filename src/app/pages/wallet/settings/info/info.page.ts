@@ -36,5 +36,4 @@ export class WalletInfoPage implements OnInit, OnDestroy {
             );
         });
     }
-
 }

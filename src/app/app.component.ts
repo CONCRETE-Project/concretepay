@@ -3,7 +3,9 @@ import { NavController, Platform } from "@ionic/angular";
 import { UserSettingsStorageService } from "./services/storage/user-settings/user-settings.service";
 import { Plugins } from "@capacitor/core";
 import { UserSettingsModel } from "./models/user-settings/user-settings";
+import { PlatformService } from "./services/platform/platform.service";
 const { SplashScreen } = Plugins;
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: "app-root",
@@ -13,8 +15,10 @@ const { SplashScreen } = Plugins;
 export class AppComponent {
     constructor(
         private platform: Platform,
+        private platformService: PlatformService,
         public userSettingsStorage: UserSettingsStorageService,
-        public navCtrl: NavController
+        public navCtrl: NavController,
+        public translate: TranslateService
     ) {
         this.initializeApp().then();
     }
@@ -32,32 +36,23 @@ export class AppComponent {
                 alt_coin: {
                     code: "USD",
                 },
+                lang: await this.platformService.getLangCode(),
                 first_time: true,
             };
+            this.translate.setDefaultLang("en");
             this.userSettingsStorage.setAll(DefaultSettings).then(async () => {
                 await this.navCtrl.navigateRoot("/intro");
             });
         } else {
             let firstTime = await this.userSettingsStorage.get("first_times");
             if (firstTime) {
+                this.translate.setDefaultLang("en");
                 await this.navCtrl.navigateRoot("/intro");
             } else {
+                let lang = await this.userSettingsStorage.get("lang");
+                this.translate.setDefaultLang(lang);
                 await this.navCtrl.navigateRoot("/home");
             }
-        }
-    }
-
-    public async goToPage(page) {
-        if (page.title !== "Home") {
-            await this.navCtrl.navigateForward(page.url, {
-                animated: true,
-                animationDirection: "forward",
-            });
-        } else {
-            await this.navCtrl.navigateRoot(page.url, {
-                animated: true,
-                animationDirection: "forward",
-            });
         }
     }
 }

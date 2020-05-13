@@ -94,7 +94,7 @@ export class AddWalletPage implements OnInit {
                 );
                 if (!success) {
                     this.popupError();
-                    return
+                    return;
                 }
                 await this.navController.navigateRoot("/home");
                 return;
@@ -115,7 +115,7 @@ export class AddWalletPage implements OnInit {
                 );
                 if (!success) {
                     this.popupError();
-                    return
+                    return;
                 }
                 await this.navController.navigateRoot("/home");
                 return;
@@ -125,14 +125,14 @@ export class AddWalletPage implements OnInit {
         if (this.isScan) {
             let scanData = await this.modalService.scanModal();
             if (scanData.success) {
-                let buff = new Buffer(scanData.data, 'base64');
-                let mnemonicInfo = JSON.parse(buff.toString())
+                let buff = new Buffer(scanData.data, "base64");
+                let mnemonicInfo = JSON.parse(buff.toString());
                 let pass = await this.askPassword();
                 if (!pass) return;
-                let hash = sha("sha256").update(pass).digest("hex")
+                let hash = sha("sha256").update(pass).digest("hex");
                 if (hash !== mnemonicInfo.passhash) {
-                    this.popupError()
-                    return
+                    this.popupError();
+                    return;
                 }
                 let success = await this.walletService.newWallet(
                     this.createForm.value.walletName,
@@ -143,7 +143,7 @@ export class AddWalletPage implements OnInit {
                 );
                 if (!success) {
                     this.popupError();
-                    return
+                    return;
                 }
                 await this.navController.navigateRoot("/home");
                 return;

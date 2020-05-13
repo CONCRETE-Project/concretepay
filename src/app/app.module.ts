@@ -5,7 +5,7 @@ import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { ClipboardPluginWeb, StoragePluginWeb } from "@capacitor/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { PAGES } from "./pages/pages";
 import { COMPONENTS } from "./components/components";
 import { PIPES } from "./pipes/pipes";
@@ -17,6 +17,8 @@ import { QRCodeModule } from "angularx-qrcode";
 import { MODALS } from "./modals/modals";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { createTranslateLoader } from "src/translate-loader";
 
 @NgModule({
     declarations: [
@@ -30,6 +32,13 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            },
+        }),
         HttpClientModule,
         AppRoutingModule,
         ReactiveFormsModule,

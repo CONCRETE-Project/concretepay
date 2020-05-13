@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Platform } from "@ionic/angular";
-
+import { Plugins } from "@capacitor/core";
+const { Device } = Plugins;
 @Injectable({
     providedIn: "root",
 })
@@ -25,5 +26,10 @@ export class PlatformService {
         this.isElectron = this.platform.is("electron");
         this.isCordova = this.platform.is("cordova");
         this.ua = ua;
+    }
+
+    async getLangCode(): Promise<string> {
+        let info = await Device.getLanguageCode();
+        return info.value;
     }
 }
