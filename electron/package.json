@@ -44,5 +44,6 @@
       "electron": "8.3.0",
       "electron-builder": "22.6.0"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "author": {"name": "", "email": "dev@concretepay.com"}
   }
