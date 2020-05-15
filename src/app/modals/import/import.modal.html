@@ -8,73 +8,17 @@
     </ion-grid>
   </ion-item>
 </ion-header>
-<ion-content class="page-content-with-slim-header ion-padding modal-background" *ngIf="!unsafe">
-  <ion-card class="card">
-    <ion-grid *ngIf="!mnemonicSize">
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <h4 translate>common.mnemonic-size</h4>
-      </ion-row>
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-button size="small" shape="round" (click)="selectSize(12)" translate>common.sizes.12</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(15)" translate>common.sizes.15</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(18)" translate>common.sizes.18</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(21)" translate>common.sizes.21</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(24)" translate>common.sizes.24</ion-button>
-      </ion-row>
-    </ion-grid>
-    <ion-grid *ngIf="mnemonicSize && !mnemonicLanguage">
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <h4 translate>common.select-language</h4>
-      </ion-row>
-      <ion-row class="ion-justify-content-center ion-align-items-center modal-background">
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')" translate>common.language.english</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')" translate>common.language.spanish</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')" translate> common.language.french</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')" translate>common.language.italian</ion-button>
-      </ion-row>
-    </ion-grid>
-    <ion-grid *ngIf="mnemonicSize && mnemonicLanguage">
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <h4 translate>modals.import.build-mnemonic</h4>
-      </ion-row>
-      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
-        <span></span>&nbsp;&nbsp;<ion-button (click)="clear()" size="small" shape="round" translate>common.clear</ion-button>
-      </ion-row>
-      <ion-row class="word-container ion-padding ion-justify-content-center ion-align-items-center">
-        <ion-button *ngFor="let word of selectedWords; index as i" size="small" shape="round" (click)="removeWord(i)">{{ word }}</ion-button>
-      </ion-row>
-      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
-        <ion-button (click)="addWord()">{{ this.currentSelectionWord }}</ion-button>
-      </ion-row>
-      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
-        <span translate>modals.import.instructions-1 {{this.selectedWords.length + 1}} modals.import.instructions-2</span>
-      </ion-row>
-      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
-        <ion-button  *ngFor="let char of selectionChars" size="small" shape="round" (click)="addCharToWord(char)">{{char}}</ion-button>
-      </ion-row>
-      <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
-        <ion-button (click)="clearWord()" translate>common.clear</ion-button>
-        <ion-button (click)="removeLastChar()" translate>common.delete </ion-button>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-</ion-content>
-<ion-footer class="page-content-with-slim-header" *ngIf="!unsafe">
-  <ion-button style="margin: 0px" expand="full" size="large" (click)="closeModal(true)"
-              [disabled]="(!this.mnemonicPhrase || !this.mnemonicLanguage)" translate>common.confirm
-  </ion-button>
-</ion-footer>
 
-<ion-content class="page-content-with-slim-header ion-padding modal-background" *ngIf="unsafe">
+<ion-content class="page-content-with-slim-header ion-padding modal-background">
   <ion-grid *ngIf="!mnemonicLanguage">
     <ion-row class="ion-justify-content-center ion-align-items-center">
       <h4 translate>common.select-language</h4>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-align-items-center">
-      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')" translate>common.language.english</ion-button>
-      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')" translate>common.language.spanish</ion-button>
-      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')" translate> common.language.french</ion-button>
-      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')" translate>common.language.italian</ion-button>
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')" translate>common.languages.english</ion-button>
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')" translate>common.languages.spanish</ion-button>
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')" translate> common.languages.french</ion-button>
+      <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')" translate>common.languages.italian</ion-button>
     </ion-row>
   </ion-grid>
   <ion-card class="card" *ngIf="mnemonicLanguage">
@@ -83,10 +27,7 @@
         <h2 style="color: var(--ion-color-danger)" translate>common.warning</h2>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center ion-padding ion-text-center">
-        <span style="color: var(--ion-color-danger)" translate>modals.import.wanring-1</span>
-      </ion-row>
-      <ion-row class="ion-justify-content-center ion-align-items-center ion-padding ion-text-center">
-        <span style="color: var(--ion-color-danger)" translate>modals.import.wanring-2</span>
+        <span style="color: var(--ion-color-danger)" translate>modals.import.warning-1</span>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center ion-padding">
         <span translate>common.mnemonic-phrase</span>

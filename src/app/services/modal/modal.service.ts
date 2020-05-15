@@ -18,10 +18,7 @@ import { BackupModal } from "../../modals/backup/backup.modal";
 import { BackupModalInput } from "../../models/modals/backup";
 import { ExportMnemonicModal } from "../../modals/export-mnemonic/export-mnemonic.modal";
 import { ExportMnemonicModalInput } from "../../models/modals/export-mnemonic";
-import {
-    ImportModalInput,
-    ImportModalResponse,
-} from "../../models/modals/import";
+import { ImportModalResponse } from "../../models/modals/import";
 import { ImportModal } from "../../modals/import/import.modal";
 import { TxDetailsModal } from "../../modals/tx-details/tx-details.modal";
 import { TxDetailsModalInput } from "../../models/modals/tx-details";
@@ -93,12 +90,9 @@ export class ModalService {
         await exportModal.present();
     }
 
-    public async importModal(
-        input: ImportModalInput
-    ): Promise<ImportModalResponse> {
+    public async importModal(): Promise<ImportModalResponse> {
         let modal = await this.modalController.create({
             component: ImportModal,
-            componentProps: input,
         });
         await modal.present();
         let resp = await modal.onDidDismiss();

@@ -38,7 +38,7 @@
       </div>
       <ion-item-divider translate>common.miner-fee</ion-item-divider>
       <app-fee-label *ngIf="alternative" [coin]="credentials.Coin" [fee]="FeeRates" [alternative]="alternative" (feeSelected)="feeSelected($event)"></app-fee-label>
-      <ion-item-divider>modals.confirm.receiver-info</ion-item-divider>
+      <ion-item-divider translate>modals.confirm.receiver-info</ion-item-divider>
       <app-receiver-info [address]="payment.address" [label]="payment.label" [message]="payment.message"></app-receiver-info>
     </ion-grid>
   </ion-card>

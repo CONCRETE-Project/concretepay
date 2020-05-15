@@ -14,6 +14,7 @@
         "received": "Received",
         "tx-id": "Transaction ID",
         "view-on-blockchain": "View on Blockchain",
+        "error-decrypt": "There was an error decrypting your wallet",
         "moved": "Moved",
         "success": "Success",
         "date": "Date",
@@ -98,8 +99,7 @@
                 "seeds": {
                     "random": "Random",
                     "scan": "Scan",
-                    "safe-import": "Safe Import",
-                    "unsafe-import": "Unsafe Import"
+                    "import": "Import"
                 },
                 "create-wallet": "Create Wallet"
             },
@@ -188,7 +188,7 @@
             "sending": "Sending",
             "sending-max": "Sending Maximum Amount",
             "building-transaction": "Building Transaction...",
-            "broacasting": "Broadcasting Transaction",
+            "broadcasting": "Broadcasting Transaction",
             "confirm-send": "Are you sure you want to send ",
             "error-build": "Unable to build transactiom",
             "error-balance": "You don't have enough balance to perform the transaction",
@@ -205,7 +205,6 @@
             "instructions-1": "Click on the buttons to add the",
             "instructions-2": "word",
             "warning-1": "Using your mnemonic with clipboard (copy/paste) or plain text could leak your coins. Please use it only if you know what you are doing.",
-            "warning-2": "For importing your mnemonic securely, use the Encrypted QR or the Safe Import",
             "mnemonic-placeholder": "Your mnemonic phrase"
         },
         "generate": {

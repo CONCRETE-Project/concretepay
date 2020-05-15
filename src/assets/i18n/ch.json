@@ -14,6 +14,7 @@
         "received": "接收",
         "tx-id": "交易ID",
         "view-on-blockchain": "在区块链上查看",
+        "error-decrypt": "解密您的钱包时出错",
         "moved": "转移中",
         "success": "成功",
         "date": "日期",
@@ -98,8 +99,7 @@
                 "seeds": {
                     "random": "随机",
                     "scan": "扫描",
-                    "safe-import": "安全导入",
-                    "unsafe-import": "不安全的导入"
+                    "import": "安全导入"
                 },
                 "create-wallet": "创建钱包"
             },
@@ -188,7 +188,7 @@
             "sending": "正在发送",
             "sending-max": "发送最大金额",
             "building-transaction": "建立交易...",
-            "broacasting": "广播交易",
+            "broadcasting": "广播交易",
             "confirm-send": "您确定要发送吗",
             "error-build": "无法建立交易",
             "error-balance": "您的余额不足，无法执行交易",

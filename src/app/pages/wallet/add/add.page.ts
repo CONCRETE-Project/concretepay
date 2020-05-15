@@ -17,7 +17,6 @@ export class AddWalletPage implements OnInit {
     public createForm: FormGroup;
     public isRandomSeed: boolean;
     public isMnemonicSeed: boolean;
-    public isUnsafeMnemonicSeed: boolean;
     public isScan: boolean;
     public Wallet: Wallet;
     public wallets: Wallet[];
@@ -49,35 +48,25 @@ export class AddWalletPage implements OnInit {
 
     public async SetSeed(Seed) {
         if (Seed === "Random") {
-            this.isUnsafeMnemonicSeed = false;
             this.isMnemonicSeed = false;
             this.isRandomSeed = true;
             this.isScan = false;
         } else if (Seed === "MnemonicPhrase") {
-            this.isUnsafeMnemonicSeed = false;
             this.isMnemonicSeed = true;
             this.isRandomSeed = false;
             this.isScan = false;
         } else if (Seed === "Scan") {
-            this.isUnsafeMnemonicSeed = false;
             this.isMnemonicSeed = false;
             this.isRandomSeed = false;
             this.isScan = true;
-        } else if (Seed === "UnsafeMnemonicPhrase") {
-            this.isUnsafeMnemonicSeed = true;
-            this.isMnemonicSeed = false;
-            this.isRandomSeed = false;
-            this.isScan = false;
         } else {
             await this.popupProvider.ionicAlert("common.error", "Invalid Seed");
         }
     }
 
     public async createWallets() {
-        if (this.isUnsafeMnemonicSeed || this.isMnemonicSeed) {
-            let mnemonicData = await this.modalService.importModal({
-                unsafe: this.isUnsafeMnemonicSeed,
-            });
+        if (this.isMnemonicSeed) {
+            let mnemonicData = await this.modalService.importModal();
             if (mnemonicData.success) {
                 let pass = await this.askPassword();
                 if (!pass) return;

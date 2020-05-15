@@ -21,14 +21,16 @@ export class BitcoinjsService {
     ) {}
 
     async createTx(
-        Utxos: any,
+        utxos: any,
         toAddress: string,
         coinCredentials: CoinCredentials,
         satoshiAmount: number,
         satoshiFee: number,
         sendMax: boolean,
-        ChangeAddress: string,
-        TotalAmount: number
+        changeAddress: string,
+        totalAmount: number,
+        pass: string,
+        mnemonic: string
     ): Promise<string> {
         let coinConfig = CoinFactory.getCoin(coinCredentials.Coin);
         let network = coinConfig.getNetwork();
@@ -36,15 +38,17 @@ export class BitcoinjsService {
         txb.setVersion(coinConfig.tx_version);
         // Add Inputs
         // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < Utxos.length; i++) {
-            let utxo = Utxos[i];
+        for (let i = 0; i < utxos.length; i++) {
+            let utxo = utxos[i];
             let addrPathDeconstructed = utxo.path.split("/");
             let addressType =
                 addrPathDeconstructed[4] === "1" ? "Change" : "Direct";
             let addressIndex = parseInt(addrPathDeconstructed[5], 10);
             if (utxo.scheme === "P2WPKH") {
-                let privateKey = coinConfig.getAddressPrivKey(
+                let privateKey = await coinConfig.getAddressPrivKey(
                     addressIndex,
+                    mnemonic,
+                    pass,
                     utxo.scheme,
                     addressType === "Change"
                 );
@@ -63,29 +67,31 @@ export class BitcoinjsService {
         let scriptPubkey = bitcoin.address.toOutputScript(toAddress, network);
         // If sending max we don't need a change address
         if (sendMax) {
-            txb.addOutput(scriptPubkey, TotalAmount - satoshiFee);
+            txb.addOutput(scriptPubkey, totalAmount - satoshiFee);
         } else {
             // Add Outputs.
             txb.addOutput(scriptPubkey, satoshiAmount);
-            if (TotalAmount - satoshiFee - satoshiAmount < 0) {
+            if (totalAmount - satoshiFee - satoshiAmount < 0) {
                 // TODO error
             }
             txb.addOutput(
-                ChangeAddress,
-                TotalAmount - satoshiFee - satoshiAmount
+                changeAddress,
+                totalAmount - satoshiFee - satoshiAmount
             );
         }
 
         // Sign Inputs
-        for (let i = 0; i < Utxos.length; i++) {
-            let utxo: Utxo = Utxos[i];
-            let addrPathDeconstructed = Utxos[i].path.split("/");
+        for (let i = 0; i < utxos.length; i++) {
+            let utxo: Utxo = utxos[i];
+            let addrPathDeconstructed = utxos[i].path.split("/");
             let addressType =
                 addrPathDeconstructed[4] === "1" ? "Change" : "Direct";
             let addressIndex = parseInt(addrPathDeconstructed[5], 10);
             if (utxo.scheme === "P2WPKH") {
-                let privateKey = coinConfig.getAddressPrivKey(
+                let privateKey = await coinConfig.getAddressPrivKey(
                     addressIndex,
+                    mnemonic,
+                    pass,
                     utxo.scheme,
                     addressType === "Change"
                 );
@@ -93,8 +99,10 @@ export class BitcoinjsService {
                 txb.sign(i, key, null, null, parseInt(utxo.value, 10));
             }
             if (utxo.scheme === "P2SHInP2WPKH") {
-                let privateKey = coinConfig.getAddressPrivKey(
+                let privateKey = await coinConfig.getAddressPrivKey(
                     addressIndex,
+                    mnemonic,
+                    pass,
                     utxo.scheme,
                     addressType === "Change"
                 );
@@ -113,8 +121,10 @@ export class BitcoinjsService {
                 );
             }
             if (utxo.scheme === "P2PKH") {
-                let privateKey = coinConfig.getAddressPrivKey(
+                let privateKey = await coinConfig.getAddressPrivKey(
                     addressIndex,
+                    mnemonic,
+                    pass,
                     utxo.scheme,
                     addressType === "Change"
                 );

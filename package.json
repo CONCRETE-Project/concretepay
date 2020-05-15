@@ -2,8 +2,8 @@
     "name": "concrete-pay",
     "version": "1.0.0",
     "author": "ConcretePay Developers",
-    "homepage": "https://kindynos.mx",
-    "description": "Coin Wallet - Secure white labeled cryptocurrency wallet",
+    "homepage": "",
+    "description": "ConcretePay - Secure cryptocurrency wallet",
     "license": "MIT",
     "scripts": {
         "clean-all": "git clean -dfx",

@@ -7,6 +7,8 @@ import { BitcoinjsService } from "../../services/tx-builders/bitcoinjs/bitcoinjs
 import { BlockbookService } from "../../services/blockbook/blockbook.service";
 import { OnGoingProcessService } from "../../services/on-going-process/on-going-process.service";
 import { FeeRates, Utxo } from "../../models/blockbook/blockbook";
+import * as sha from "sha.js";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: "app-confirm",
@@ -42,7 +44,8 @@ export class ConfirmModal implements OnInit {
         public walletProvider: WalletService,
         public onGoingProcess: OnGoingProcessService,
         public bitcoinjsBuilder: BitcoinjsService,
-        public blockbookProvider: BlockbookService
+        public blockbookProvider: BlockbookService,
+        private translateService: TranslateService
     ) {}
 
     async closeModal(success: boolean, canceled: boolean) {
@@ -125,7 +128,10 @@ export class ConfirmModal implements OnInit {
         return address;
     }
 
-    public async buildTx(walletCred: CoinCredentials): Promise<string> {
+    public async buildTx(
+        walletCred: CoinCredentials,
+        pass: string
+    ): Promise<string> {
         try {
             let serializedTx = await this.bitcoinjsBuilder.createTx(
                 this.Utxos,
@@ -135,7 +141,9 @@ export class ConfirmModal implements OnInit {
                 this.FeeSatoshis,
                 this.useSendMax,
                 this.ChangeAddress,
-                this.TotalAvailable
+                this.TotalAvailable,
+                pass,
+                this.wallet.Credentials.phrase
             );
             if (serializedTx) {
                 return serializedTx;
@@ -143,17 +151,31 @@ export class ConfirmModal implements OnInit {
                 return null;
             }
         } catch (e) {}
+        return null;
     }
 
     public async feeSelected(e) {
         this.FeeSatoshis = this.FeeRates[e];
-        try {
-            await this.onGoingProcess.set("modal.confirm.building-transaction");
-            let serializedTx = await this.buildTx(this.credentials);
-            if (serializedTx) {
-                this.SerializedTx = serializedTx;
-                this.onGoingProcess.clear();
-            } else {
+        let pass = await this.askPassword();
+        let hash = sha("sha256").update(pass);
+        if (hash.digest("hex") === this.wallet.Credentials.passhash) {
+            try {
+                await this.onGoingProcess.set(
+                    "modals.confirm.building-transaction"
+                );
+                let serializedTx = await this.buildTx(this.credentials, pass);
+                if (serializedTx) {
+                    this.SerializedTx = serializedTx;
+                    this.onGoingProcess.clear();
+                } else {
+                    this.onGoingProcess.clear();
+                    await this.popupProvider.ionicAlert(
+                        "common.error",
+                        "modals.confirm.error-build"
+                    );
+                    await this.closeModal(false, false);
+                }
+            } catch (e) {
                 this.onGoingProcess.clear();
                 await this.popupProvider.ionicAlert(
                     "common.error",
@@ -161,13 +183,8 @@ export class ConfirmModal implements OnInit {
                 );
                 await this.closeModal(false, false);
             }
-        } catch (e) {
-            this.onGoingProcess.clear();
-            await this.popupProvider.ionicAlert(
-                "common.error",
-                "modals.confirm.error-build"
-            );
-            await this.closeModal(false, false);
+        } else {
+            await this.popupError();
         }
     }
 
@@ -177,7 +194,10 @@ export class ConfirmModal implements OnInit {
             : this.payment.amount * (1 / 1e8);
         let confirm = await this.popupProvider.ionicConfirm(
             "common.confirm",
-            "modals.confirm.confirm-send" +
+            (await this.translateService
+                .get("modals.confirm.confirm-send")
+                .toPromise()) +
+                " " +
                 sendAmount.toFixed(8) +
                 " " +
                 this.credentials.Coin.toUpperCase()
@@ -200,5 +220,20 @@ export class ConfirmModal implements OnInit {
                 await this.closeModal(false, false);
             }
         }
+    }
+
+    public async askPassword(): Promise<string> {
+        let pass = await this.popupProvider.ionicPrompt(
+            "common.password",
+            "components.wallet.ask-password"
+        );
+        return pass;
+    }
+
+    public async popupError() {
+        await this.popupProvider.ionicAlert(
+            "common.error",
+            "common.error-decrypt"
+        );
     }
 }

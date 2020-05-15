@@ -1,5 +1,10 @@
 import { bip32, payments, address } from "bitcoinjs-lib";
-import { CoinCredentialsDerivations } from "../wallet/wallet";
+import {
+    CoinCredentialsDerivations,
+    CoinCredentials,
+    Wallet,
+} from "../wallet/wallet";
+import * as bip39 from "bip39";
 
 export interface Bip32 {
     public: number;
@@ -63,45 +68,41 @@ export class CoinData {
     }
 
     getAddressPubKey(
-        HDMasterPubKey: string,
-        AddressIndex: number,
-        AddressScheme: string,
-        Change: boolean
+        extPubKey: string,
+        index: number,
+        scheme: string,
+        change: boolean
     ): string {
-        let nodeBtc = bip32.fromBase58(
-            HDMasterPubKey,
-            this.getNetwork(AddressScheme)
-        );
-        let childBtc = nodeBtc.derive(Change ? 1 : 0).derive(AddressIndex);
+        let accNode = bip32.fromBase58(extPubKey, this.getNetwork(scheme));
+        let addrChild = accNode.derive(change ? 1 : 0).derive(index);
         let addr;
-        if (AddressScheme === "P2WPKH") {
+        if (scheme === "P2WPKH") {
             addr = payments.p2wpkh({
-                pubkey: childBtc.publicKey,
-                network: this.getNetwork(AddressScheme),
+                pubkey: addrChild.publicKey,
+                network: this.getNetwork(scheme),
             });
-        } else if (AddressScheme === "P2SHInP2WPKH") {
+        } else if (scheme === "P2SHInP2WPKH") {
             addr = payments.p2sh({
                 redeem: payments.p2wpkh({
-                    pubkey: childBtc.publicKey,
-                    network: this.getNetwork(AddressScheme),
+                    pubkey: addrChild.publicKey,
+                    network: this.getNetwork(scheme),
                 }),
             });
         } else {
             addr = payments.p2pkh({
-                pubkey: childBtc.publicKey,
-                network: this.getNetwork(AddressScheme),
+                pubkey: addrChild.publicKey,
+                network: this.getNetwork(scheme),
             });
         }
         return addr.address;
     }
 
-    createCredentials(seed, Scheme): CoinCredentialsDerivations {
-        let nodeBtc = bip32.fromSeed(seed, this.getNetwork(Scheme));
+    createCredentials(seed, scheme): CoinCredentialsDerivations {
+        let node = bip32.fromSeed(seed, this.getNetwork(scheme));
         let purposeBtc =
-            Scheme === "P2PKH" ? "44" : Scheme === "P2SHInP2WPKH" ? "49" : "84";
-        let accDerivationBtc =
-            "m/" + purposeBtc + "'/" + this.hd_index + "'/0'";
-        let accBtc = nodeBtc.derivePath(accDerivationBtc);
+            scheme === "P2PKH" ? "44" : scheme === "P2SHInP2WPKH" ? "49" : "84";
+        let accDerivation = "m/" + purposeBtc + "'/" + this.hd_index + "'/0'";
+        let accBtc = node.derivePath(accDerivation);
         return {
             AccountPublicKey: accBtc.neutered().toBase58(),
             LastDerivationPathChange: 0,
@@ -109,14 +110,21 @@ export class CoinData {
         };
     }
 
-    getAddressPrivKey(
-        AddressIndex: number,
-        AddressScheme: string,
-        Change: boolean
-    ): string {
+    async getAddressPrivKey(
+        index: number,
+        mnemonic: string,
+        pass: string,
+        scheme: string,
+        change: boolean
+    ): Promise<string> {
         // TODO derive root.
-        let nodeBtc = bip32.fromBase58("", this.getNetwork(AddressScheme));
-        let childBtc = nodeBtc.derive(Change ? 1 : 0).derive(AddressIndex);
-        return childBtc.toWIF();
+        let seed = await bip39.mnemonicToSeed(mnemonic, pass);
+        let rootNode = bip32.fromSeed(seed, this.getNetwork(scheme));
+        let purpose =
+            scheme === "P2PKH" ? "44" : scheme === "P2SHInP2WPKH" ? "49" : "84";
+        let accDerivation = "m/" + purpose + "'/" + this.hd_index + "'/0'";
+        let accNode = rootNode.derivePath(accDerivation);
+        let addrChild = accNode.derive(change ? 1 : 0).derive(index);
+        return addrChild.toWIF();
     }
 }

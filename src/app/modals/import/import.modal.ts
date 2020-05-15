@@ -15,9 +15,7 @@ export class ImportModal implements OnInit {
 
     selectedWords: string[] = [];
     selectionChars: string[] = [];
-    currentSelectionWord = "";
-    @Input()
-    unsafe;
+
     constructor(
         public modalController: ModalController,
         public popupService: PopupService
@@ -46,28 +44,6 @@ export class ImportModal implements OnInit {
         );
     }
 
-    addWord() {
-        this.selectedWords.push(this.currentSelectionWord);
-        this.currentSelectionWord = "";
-        this.selectionChars = _.uniq(
-            bip39.wordlists[this.mnemonicLanguage].map((word) =>
-                word.substr(0, 1)
-            )
-        );
-        if (this.selectedWords.length === this.mnemonicSize) {
-            this.mnemonicPhrase = this.selectedWords.join(" ");
-        }
-    }
-
-    clearWord() {
-        this.currentSelectionWord = "";
-        this.selectionChars = _.uniq(
-            bip39.wordlists[this.mnemonicLanguage].map((word) =>
-                word.substr(0, 1)
-            )
-        );
-    }
-
     selectSize(size: number) {
         this.mnemonicSize = size;
     }
@@ -76,58 +52,6 @@ export class ImportModal implements OnInit {
         this.mnemonicLanguage = lang;
         this.selectionChars = _.uniq(
             bip39.wordlists[lang].map((word) => word.substr(0, 1))
-        );
-    }
-
-    addCharToWord(chars: string) {
-        this.currentSelectionWord = chars;
-        this.selectionChars = _.uniq(
-            bip39.wordlists[this.mnemonicLanguage]
-                .map((word) =>
-                    word.substr(0, this.currentSelectionWord.length + 1)
-                )
-                .filter(
-                    (words) =>
-                        words.substr(0, this.currentSelectionWord.length) ===
-                        this.currentSelectionWord
-                )
-        );
-        if (
-            bip39.wordlists[this.mnemonicLanguage]
-                .map((word) =>
-                    word.substr(0, this.currentSelectionWord.length + 1)
-                )
-                .filter(
-                    (words) =>
-                        words.substr(0, this.currentSelectionWord.length) ===
-                        this.currentSelectionWord
-                ).length === 1
-        ) {
-            this.selectionChars = [
-                bip39.wordlists[this.mnemonicLanguage].find(
-                    (words) =>
-                        words.substr(0, this.currentSelectionWord.length) ===
-                        this.currentSelectionWord
-                ),
-            ];
-        }
-    }
-
-    removeLastChar() {
-        this.currentSelectionWord = this.currentSelectionWord.substr(
-            0,
-            this.currentSelectionWord.length - 1
-        );
-        this.selectionChars = _.uniq(
-            bip39.wordlists[this.mnemonicLanguage]
-                .map((word) =>
-                    word.substr(0, this.currentSelectionWord.length + 1)
-                )
-                .filter(
-                    (words) =>
-                        words.substr(0, this.currentSelectionWord.length) ===
-                        this.currentSelectionWord
-                )
         );
     }
 
