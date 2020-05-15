@@ -1,15 +1,15 @@
-<app-tool-bar [back]="true" titleText="pages.wallet.settings.info.title"></app-tool-bar>
+<app-tool-bar [back]="true" [titleText]="'pages.wallet.settings.info.title' | translate"></app-tool-bar>
 <ion-content class="page-content-with-slim-header">
   <ion-list style="background: none" *ngIf="wallet" lines="none">
-    <ion-list-header>pages.wallet.settings.info.subtitle</ion-list-header>
+    <ion-list-header translate>pages.wallet.settings.info.subtitle</ion-list-header>
     <ion-item copyToClipboard="{{wallet.Properties.id}}">
-      <span slot="start">pages.wallet.settings.info.wallet-id</span>
+      <span slot="start" translate> pages.wallet.settings.info.wallet-id</span>
       <ion-note style="white-space: nowrap;" slot="end">
         {{wallet.Properties.id}}
       </ion-note>
     </ion-item>
     <ion-item copyToClipboard="{{wallet.Properties.backup}}">
-      <span slot="start">pages.wallet.settings.info.backup</span>
+      <span slot="start" translate>pages.wallet.settings.info.backup</span>
       <ion-note style="white-space: nowrap;" slot="end">
         {{wallet.Properties.backup}}
       </ion-note>

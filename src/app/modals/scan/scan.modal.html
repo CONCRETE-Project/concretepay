@@ -3,7 +3,7 @@
     <ion-icon class="settings-element fas fa-times" (click)="closeModal(false)" slot="start"></ion-icon>
     <ion-grid class="grid-adjust">
       <ion-row class="ion-justify-content-center ion-align-items-center  ">
-        <span class="span-white">common.scan</span>
+        <span class="span-white" translate>common.scan</span>
       </ion-row>
     </ion-grid>
   </ion-item>
@@ -12,7 +12,7 @@
 <ion-content class="page-content-with-slim-header ion-padding-top modal-background " style="--background: var(--ion-color-primary-shade)" *ngIf="!this.platformProvider.isiOS">
   <ion-grid>
     <ion-row class="ion-justify-content-center ion-align-items-center ion-padding">
-      <span class="span-white">common.scan-qr</span>
+      <span class="span-white" translate>common.scan-qr</span>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-align-items-center ion-padding" >
       <img src="assets/img/qr-scan-guides.svg" alt="scan square" style="position: absolute;max-width: 180px">
@@ -24,7 +24,7 @@
 <ion-content class="page-content-with-slim-header ion-padding-top" style="--background: var(--ion-color-primary-shade)" *ngIf="this.platformProvider.isiOS">
   <ion-grid>
     <ion-row class="ion-justify-content-center ion-align-items-center ion-padding">
-      <span class="span-white">common.scan-qr</span>
+      <span class="span-white" translate>common.scan-qr</span>
     </ion-row>
   </ion-grid>
 </ion-content>

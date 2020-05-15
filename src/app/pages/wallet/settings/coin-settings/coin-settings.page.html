@@ -1,17 +1,17 @@
-<app-tool-bar [back]="true" titleText="pages.wallet.settings.coin-settings.title"></app-tool-bar>
+<app-tool-bar [back]="true" [titleText]="'pages.wallet.settings.coin-settings.title'  | translate"></app-tool-bar>
 <ion-content class="page-content-with-slim-header">
   <ion-list style="background: none" lines="none" *ngIf="wallet && credentials">
-    <ion-list-header>pages.wallet.settings.coin-settings.subtitle</ion-list-header>
+    <ion-list-header translate>pages.wallet.settings.coin-settings.subtitle</ion-list-header>
     <ion-item>
-      <span slot="start">pages.wallet.settings.coin-settings.coin</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.coin</span>
       <ion-note slot="end">{{ credentials.Coin }}</ion-note>
     </ion-item>
     <ion-item>
-      <span slot="start">pages.wallet.settings.coin-settings.segwit</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.segwit</span>
       <ion-note slot="end">{{ credentials.isSegwit }}</ion-note>
     </ion-item>
     <ion-item (click)="changeBlockbookEndpoint()">
-      <span slot="start">pages.wallet.settings.coin-settings.blockbook</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.blockbook</span>
       <ion-note class="info-wrap" slot="end">
         {{ credentials.Blockbook }}
       </ion-note>
@@ -21,63 +21,63 @@
     <ion-list-header></ion-list-header>
 
     <br/>
-    <ion-list-header *ngIf="credentials.Derivations.P2PKH">pages.wallet.settings.coin-settings.p2pkh-title</ion-list-header>
+    <ion-list-header *ngIf="credentials.Derivations.P2PKH" translate>pages.wallet.settings.coin-settings.p2pkh-title</ion-list-header>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2PKH" copyToClipboard="{{credentials.Derivations.P2PKH.AccountPublicKey}}">
-      <span slot="start">pages.wallet.settings.coin-settings.pubkey</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.pubkey</span>
       <ion-note class="info-wrap" slot="end">
         {{credentials.Derivations.P2PKH.AccountPublicKey}}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2PKH" copyToClipboard="{{credentials.Derivations.P2PKH.LastDerivationPathDirect}}">
-      <span slot="start">pages.wallet.settings.coin-settings.last-path-direct</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.last-path-direct</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2PKH.LastDerivationPathDirect }}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2PKH" copyToClipboard="{{credentials.Derivations.P2PKH.LastDerivationPathChange}}">
-      <span slot="start">pages.wallet.settings.coin-settings.last-path-change</span>
+      <span slot="start" translate> pages.wallet.settings.coin-settings.last-path-change</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2PKH.LastDerivationPathChange }}
       </ion-note>
     </ion-item>
 
     <br/>
-    <ion-list-header *ngIf="credentials.Derivations.P2SHInP2WPKH">pages.wallet.settings.coin-settings.p2shinp2wpkh-title</ion-list-header>
+    <ion-list-header *ngIf="credentials.Derivations.P2SHInP2WPKH" translate>pages.wallet.settings.coin-settings.p2shinp2wpkh-title</ion-list-header>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2SHInP2WPKH" copyToClipboard="{{credentials.Derivations.P2SHInP2WPKH.AccountPublicKey}}">
-      <span slot="start">pages.wallet.settings.coin-settings.pubkey</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.pubkey</span>
       <ion-note class="info-wrap" slot="end">
         {{credentials.Derivations.P2SHInP2WPKH.AccountPublicKey}}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2SHInP2WPKH" copyToClipboard="{{credentials.Derivations.P2SHInP2WPKH.LastDerivationPathDirect}}">
-      <span slot="start">pages.wallet.settings.coin-settings.last-path-direct</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.last-path-direct</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2SHInP2WPKH.LastDerivationPathDirect }}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2SHInP2WPKH" copyToClipboard="{{credentials.Derivations.P2SHInP2WPKH.LastDerivationPathChange}}">
-      <span slot="start">pages.wallet.settings.coin-settings.last-path-change</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.last-path-change</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2SHInP2WPKH.LastDerivationPathChange }}
       </ion-note>
     </ion-item>
 
     <br/>
-    <ion-list-header *ngIf="credentials.Derivations.P2WPKH">pages.wallet.settings.coin-settings.p2wpkh-title</ion-list-header>
+    <ion-list-header *ngIf="credentials.Derivations.P2WPKH" translate>pages.wallet.settings.coin-settings.p2wpkh-title</ion-list-header>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2WPKH" copyToClipboard="{{credentials.Derivations.P2WPKH.AccountPublicKey}}">
-      <span slot="start">pages.wallet.settings.coin-settings.pubkey</span>
+      <span slot="start"> translatepages.wallet.settings.coin-settings.pubkey</span>
       <ion-note class="info-wrap" slot="end">
         {{credentials.Derivations.P2WPKH.AccountPublicKey}}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2WPKH" copyToClipboard="{{credentials.Derivations.P2WPKH.LastDerivationPathDirect}}">
-      <span slot="start">pages.wallet.settings.coin-settings.last-path-direct</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.last-path-direct</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2WPKH.LastDerivationPathDirect }}
       </ion-note>
     </ion-item>
     <ion-item class="settings-element" *ngIf="credentials.Derivations.P2WPKH" copyToClipboard="{{credentials.Derivations.P2WPKH.LastDerivationPathChange}}">
-      <span slot="start">pages.wallet.settings.coin-settings.last-path-change</span>
+      <span slot="start" translate>pages.wallet.settings.coin-settings.last-path-change</span>
       <ion-note slot="end">
         {{ credentials.Derivations.P2WPKH.LastDerivationPathChange }}
       </ion-note>

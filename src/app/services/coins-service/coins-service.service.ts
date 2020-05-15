@@ -12,7 +12,7 @@ import { CoinData } from "src/app/models/coin/coin";
     providedIn: "root",
 })
 export class CoinsService {
-    public url = "http://localhost:8080/";
+    public url = "http://114.67.97.142:8081/";
 
     constructor(
         private http: HttpClient,

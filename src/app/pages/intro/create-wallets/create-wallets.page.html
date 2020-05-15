@@ -1,21 +1,21 @@
 <ion-content>
   <div class="logo-tagline">
     <img src="../../../assets/img/logo.png" />
-    <h1 style="color: #fff">pages.intro.title</h1>
+    <h1 style="color: #fff" translate>pages.intro.title</h1>
   </div>
-  <p class="top-description" *ngIf="accepted.first && accepted.second">pages.intro.description-2</p>
-  <p *ngIf="!accepted.first" class="middle-description">pages.intro.description-3</p>
-  <p *ngIf="!accepted.first" class="middle-description">pages.intro.description-4</p>
+  <p class="top-description" *ngIf="accepted.first && accepted.second" translate>pages.intro.description-2</p>
+  <p *ngIf="!accepted.first" class="middle-description" translate>pages.intro.description-3</p>
+  <p *ngIf="!accepted.first" class="middle-description" translate>pages.intro.description-4</p>
   <div class="bottom-absolute">
     <ion-list style="background: none; margin: 20px;" *ngIf="!accepted.first">
       <ion-item style="--background: none">
-        <ion-label class="agree-to-terms" text-wrap>pages.intro.tos</ion-label>
+        <ion-label class="agree-to-terms" text-wrap translate>pages.intro.tos</ion-label>
         <ion-checkbox  [(ngModel)]="accepted.first" class=" checkBoxCreate"></ion-checkbox>
       </ion-item>
     </ion-list>
     <ion-button *ngIf="accepted.first"  class="button-standard introButtons" color="secondary" [disabled]="!accepted.first" (click)="createDefaultWallets()">
-      <ion-icon slot="start" name="wallet"></ion-icon>
-      pages.intro.start
+      <ion-icon slot="start" name="wallet"></ion-icon >
+      <span translate style="color: #ffffff">pages.intro.start</span>
     </ion-button>
   </div>
 </ion-content>

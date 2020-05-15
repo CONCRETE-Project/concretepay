@@ -109,7 +109,8 @@
             },
             "send": {
                 "title": "Send",
-                "recipient": "Recipient"
+                "recipient": "Recipient",
+                "recipient-address": "Recipient"
             },
             "settings": {
                 "coin-settings": {
@@ -203,12 +204,14 @@
             "warning-2": "For importing your mnemonic securely, use the Encrypted QR or the Safe Import",
             "mnemonic-placeholder": "Your mnemonic phrase"
         },
+        "generate": {
+            "title": "Generate Mnemonic Phrase"
+        },
         "tx-details": {
             "title": "Transaction Details"
         }
     },
     "components": {
-        "confirm": {},
         "tool-bar": {
             "title": "ConcretePay"
         },
@@ -228,11 +231,9 @@
             "info-non-backup": "Your mnemonic is not backed up. You will not be able to recover your wallet.",
             "ask-password": "Please enter your wallet password",
             "select-coin": "Please select a coin",
-            "coin-info": {
-                "hide-wallet": "Are you sure you want to hide this coin?",
-                "hide-wallet-success": "Wallet hidden successfully",
-                "balance": "Balance"
-            }
+            "hide-wallet": "Are you sure you want to hide this coin?",
+            "hide-wallet-success": "Wallet hidden successfully",
+            "balance": "Balance"
         }
     }
 }

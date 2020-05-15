@@ -5,13 +5,13 @@
       </ion-avatar>
       <ion-grid>
           <ion-row class="ion-align-items-center">
-              <span class="info-header-text">components.wallet.coin-info.balance {{ credentials.Balance.Confirmed | satToFiat:credentials.Coin:AlternativeCoin | async }}</span>
+              <span class="info-header-text" ><span translate>components.wallet.balance</span> {{ credentials.Balance.Confirmed | satToFiat:credentials.Coin:AlternativeCoin | async }}</span>
           </ion-row>
           <ion-row>
-              <span class="info-sub-text" *ngIf="credentials.Balance.Confirmed !== 0.0">common.confirmed {{ credentials.Balance.Confirmed | satToUnit:credentials.Coin }}</span>
+              <span class="info-sub-text" *ngIf="credentials.Balance.Confirmed !== 0.0" translate><span translate>common.confirmed</span> {{ credentials.Balance.Confirmed | satToUnit:credentials.Coin }}</span>
           </ion-row>
           <ion-row>
-              <span class="info-sub-text" *ngIf="credentials.Balance.Unconfirmed !== 0.0">common.unconfirmed {{ credentials.Balance.Unconfirmed | satToUnit:credentials.Coin }}</span>
+              <span class="info-sub-text" *ngIf="credentials.Balance.Unconfirmed !== 0.0" translate><span translate>common.unconfirmed</span>{{ credentials.Balance.Unconfirmed | satToUnit:credentials.Coin }}</span>
           </ion-row>
           <ion-ripple-effect></ion-ripple-effect>
       </ion-grid>

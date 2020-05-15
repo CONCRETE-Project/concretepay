@@ -1,0 +1,242 @@
+{
+    "services": {
+        "load-coins-error": "无法重新加载硬币信息"
+    },
+    "common": {
+        "scan-qr": "扫描二维码",
+        "copy": "复制",
+        "warning": "警告!",
+        "error": "错误",
+        "confirm": "确认",
+        "clear": "确认",
+        "concirmations": "确认",
+        "sent": "发送",
+        "received": "接收",
+        "tx-id": "交易ID",
+        "view-on-blockchain": "在区块链上查看",
+        "moved": "转移中",
+        "success": "成功",
+        "date": "日期",
+        "sent-to": "发送给",
+        "submit": "提交",
+        "scan": "扫描",
+        "close": "关闭",
+        "mnemonic-phrase": "助记词",
+        "cancel": "取消",
+        "error-wallet": "创建您的钱包时出错，请重试.",
+        "error-password": "密码不匹配，请重试.",
+        "password": "密码",
+        "loading": "载入中...",
+        "amount": "数量",
+        "bech32": "Bech32",
+        "segwit": "Segwit",
+        "miner-fee": "矿工费",
+        "non-backup-title": "备份未验证",
+        "non-backup-subtitle": "在设置您的钱包​​地址之前，我们建议您首先记录您的密钥并安全地进行存储，以防万一您的设备丢失或被盗，可以找回钱包。.",
+        "non-backup-action": "记录密钥",
+        "fast": "快",
+        "medium": "普通",
+        "slow": "慢",
+        "confirmed": "已确认",
+        "unconfirmed": "未确认",
+        "languages": {
+            "english": "英语",
+            "spanish": "西班牙语",
+            "french": "法语",
+            "italian": "意大利语"
+        },
+        "mnemonic-size": "选择助记符大小",
+        "sizes": {
+            "12": "12 个字",
+            "15": "15 个字",
+            "18": "18 个字",
+            "21": "21 个字",
+            "24": "24 个字"
+        },
+        "select-language": "选择您喜欢的语言"
+    },
+    "pages": {
+        "home": {
+            "no-wallets-title": "您尚未创建钱包.",
+            "no-wallets-subtitle-1": "首先，请通过点击",
+            "no-wallets-subtitle-2": "右下角的按钮，选择“扫描”或“创建钱包”选项，然后按照显示的步骤进行操作."
+        },
+        "intro": {
+            "title": "Concrete支付",
+            "start": "开始吧",
+            "description-1": "将硬币存放在最安全的手机钱包中",
+            "description-2": "您可以使用助记词导入您的钱包或创建一个新的钱包！",
+            "description-3": "钱包是使用顶级标准创建的，与其他加密工具兼容.",
+            "description-4": "钱包是在您自己的设备上，这意味着没有人可以访问它.",
+            "tos": "我了解我的资金已经安全地存放在设备上，并且任何人无法使用我的资金."
+        },
+        "pin": {
+            "send-max": "发送最大值"
+        },
+        "settings": {
+            "title": "设置",
+            "subtitle": "选项",
+            "alt-coin": "代币",
+            "reload-coins": "重新加载硬币数据",
+            "reload-rates": "重新加载费率数据",
+            "warning-resync-coins": "您要重新同步硬币信息吗？",
+            "warning-resync-rates": "您要重新同步费率信息吗？",
+            "select-language": "选择语言"
+        },
+        "wallet": {
+            "add": {
+                "title": "创建钱包",
+                "wallet-name": "钱包名称",
+                "wallet-name-placeholder": "您的用户名",
+                "wallet-key": "钱包密码",
+                "wallet-key-placeholder": "设置密码选项",
+                "create-password": "输入密码.",
+                "create-password-confirm": "再次输入密码.",
+                "seeds": {
+                    "random": "随机",
+                    "scan": "扫描",
+                    "safe-import": "安全导入",
+                    "unsafe-import": "不安全的导入"
+                },
+                "create-wallet": "创建钱包"
+            },
+            "tx-history": {
+                "title": "交易记录"
+            },
+            "receive": {
+                "title": "接收硬币",
+                "set-amount": "输入金额"
+            },
+            "send": {
+                "title": "发送",
+                "recipient": "接收者",
+                "recipient-address": "收件人地址"
+            },
+            "settings": {
+                "coin-settings": {
+                    "title": "硬币信息",
+                    "subtitle": "主要硬币信息",
+                    "coin": "硬币",
+                    "segwit": "Segwit 已启用",
+                    "blockbook": "Blockbook (URL)",
+                    "advanced": "高级",
+                    "p2pkh-title": "Legacy (P2PKH) 信息",
+                    "p2wpkh-title": "Bech32 (P2WPKH) 信息",
+                    "p2shinp2wpkh-title": "Segwit (P2SHInP2WPKH) 信息",
+                    "last-path-direct": "直接导出路径",
+                    "last-path-change": "更改导出路径",
+                    "pubkey": "公钥"
+                },
+                "color": {
+                    "title": "钱包颜色"
+                },
+                "delete": {
+                    "title": "删除钱包",
+                    "warning": "警告，在没有备份的情况下删除钱包会导致资金损失",
+                    "delete-wallet": "删除钱包"
+                },
+                "info": {
+                    "title": "钱包信息",
+                    "subtitle": "主钱包信息",
+                    "wallet-id": "钱包ID",
+                    "backup": "备份"
+                },
+                "name": {
+                    "title": "钱包名称",
+                    "subtitle": "你怎么称呼这个钱包？",
+                    "name": "名称",
+                    "save": "修复"
+                },
+                "settings": {
+                    "title": "设置",
+                    "information": "信息",
+                    "name": "名称",
+                    "color": "颜色",
+                    "security": "安全",
+                    "paper-key": "密钥",
+                    "unverified": "未验证",
+                    "export-mnemonic": "导出助记词",
+                    "advanced": "高级",
+                    "delete": "删除"
+                }
+            }
+        }
+    },
+    "modals": {
+        "amount": {
+            "title": "选择金额"
+        },
+        "backup": {
+            "title": "备份钱包",
+            "info-text-1": "在安全的环境下进行",
+            "info-text-2": "确保安全情况下设置，以免泄露",
+            "info-text-3": "使用助记词任何人都可以访问或花费您的硬币.",
+            "info-confirm": "我已经了解",
+            "backup-mnemonic": "助记词",
+            "instructions-1": "请把这个词记录在安全的地方.",
+            "backup-start": "开始备份",
+            "backup-words": "选词",
+            "backup-instructions": "单击单词以按正确顺序添加它们",
+            "error-backup": "您的助记符不匹配。请重试，确保您以正确的顺序导入."
+        },
+        "confirm": {
+            "title": "确认付款",
+            "sending": "正在发送",
+            "sending-max": "发送最大金额",
+            "building-transaction": "建立交易...",
+            "broacasting": "广播交易",
+            "confirm-send": "您确定要发送吗",
+            "error-build": "无法建立交易",
+            "error-balance": "您的余额不足，无法执行交易",
+            "receiver-info": "接收者信息"
+        },
+        "export-mnemonic": {
+            "title": "导出助记词"
+        },
+        "import": {
+            "title": "导入钱包",
+            "invalid-mnemonic": "助记词无效，请重试",
+            "build-mnemonic": "建立助记词",
+            "select-words": "选词",
+            "instructions-1": "点击按钮添加",
+            "instructions-2": "词",
+            "warning-1": "使用剪贴板(复制/粘贴)或纯文本的助记符可能会泄漏您的硬币。仅当您知道自己在做什么时，才使用它",
+            "warning-2": "为了安全地导入助记词，请使用加密的QR或安全导入",
+            "mnemonic-placeholder": "您的助记词"
+        },
+        "generate": {
+            "title": "生成助记词"
+        },
+        "tx-details": {
+            "title": "交易明细"
+        }
+    },
+    "components": {
+        "confirm": {},
+        "tool-bar": {
+            "title": "Concrete支付"
+        },
+        "tx-history": {
+            "received-on": "收到",
+            "sent-on": "在发送",
+            "moved-on": "正在转移",
+            "confirming": "确认中..."
+        },
+        "receiver-info": {
+            "label": "标签",
+            "message": "信息"
+        },
+        "wallet": {
+            "status": "钱包状态",
+            "info-backup": "您的助记词已备份。您可以找回钱包.",
+            "info-non-backup": "您的助记词未备份。您将无法找回钱包.",
+            "ask-password": "请输入您的钱包密码",
+            "select-coin": "请选择一个硬币",
+            "coin-info": {
+                "hide-wallet": "您确定要隐藏此硬币吗？",
+                "hide-wallet-success": "钱包成功隐藏",
+                "balance": "余额"
+            }
+        }
+    }
+}

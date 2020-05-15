@@ -1,24 +1,24 @@
-<app-tool-bar [back]="true" titleText="pages.settings.tittle"></app-tool-bar>
+<app-tool-bar [back]="true" [titleText]="'pages.settings.title' | translate"></app-tool-bar>
 <ion-content class="page-content-with-slim-header">
     <ion-list style="background: none" lines="none">
-        <ion-list-header>pages.settings.subtitle</ion-list-header>
+        <ion-list-header translate>pages.settings.subtitle</ion-list-header>
 
         <ion-item class="settings-element ion-activatable" (click)="goToAltCoinPage()">
             <ion-icon slot="start" color="black" name="logo-bitcoin"></ion-icon>
-            <span>pages.settings.alt-coin</span>
+            <span translate>pages.settings.alt-coin</span>
             <ion-note *ngIf="selectedAlternative" slot="end">{{ selectedAlternative.name }}</ion-note>
             <ion-ripple-effect></ion-ripple-effect>
         </ion-item>
         <br/>
         <ion-item class="settings-element ion-activatable" (click)="reloadCoinsData()">
             <ion-icon slot="start" color="black" name="refresh"></ion-icon>
-            <span>pages.settings.reload-coins</span>
+            <span translate>pages.settings.reload-coins</span>
             <ion-ripple-effect></ion-ripple-effect>
         </ion-item>
         <br/>
         <ion-item class="settings-element ion-activatable" (click)="clearRatesData()">
             <ion-icon slot="start" color="black" name="refresh"></ion-icon>
-            <span>pages.settings.reload-rates</span>
+            <span translate>pages.settings.reload-rates</span>
             <ion-ripple-effect></ion-ripple-effect>
         </ion-item>
         <br/>

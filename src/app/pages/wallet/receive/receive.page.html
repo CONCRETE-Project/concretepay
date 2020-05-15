@@ -1,4 +1,4 @@
-<app-tool-bar [back]="true" [titleText]="'pages.wallet.receive.title'"></app-tool-bar>
+<app-tool-bar [back]="true" [titleText]="'pages.wallet.receive.title' | translate"></app-tool-bar>
 <ion-content class="page-content-with-slim-header ">
   <ion-grid class="ion-padding">
     <ion-row class="ion-align-items-center ion-justify-content-center" *ngIf="wallet && wallet.Properties.backup">
@@ -6,9 +6,9 @@
     </ion-row>
     <ion-row class="ion-align-items-center ion-justify-content-center ion-text-center" *ngIf="wallet && wallet.Properties.backup">
       <ion-item class="ion-padding">
-        <ion-label>common.amount</ion-label>
+        <ion-label translate>common.amount</ion-label>
         <ion-input type="digit" placeholder="10.00" #amount></ion-input>
-        <ion-button color="secondary" (click)="setAmount(amount.value)">pages.wallet.recive.set-amount</ion-button>
+        <ion-button color="secondary" (click)="setAmount(amount.value)" translate>pages.wallet.receive.set-amount</ion-button>
       </ion-item>
     </ion-row>
     <ion-row class="ion-align-items-center ion-justify-content-center ion-text-center" *ngIf="wallet && wallet.Properties.backup">
@@ -18,7 +18,7 @@
       <ion-button
               *ngIf="credentials.isSegwit"
               (click)="getAddress('P2WPKH')"
-      ><span class="span-white" style="font-size: 16px">common.bech32</span></ion-button>
+      ><span class="span-white" style="font-size: 16px" translate>common.bech32</span></ion-button>
     </ion-row>
   </ion-grid>
   <ion-grid>
@@ -27,13 +27,13 @@
           <img src="assets/img/backup/backup-needed-page.svg" alt="backup-needed" />
         </ion-row>
         <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
-          <span>common.non-backup-title</span>
+          <span translate>common.non-backup-title</span>
         </ion-row>
         <ion-row class="ion-padding ion-align-items-center ion-justify-content-center" style="text-align: center">
-          <span>common.non-backup-subtitle</span>
+          <span translate>common.non-backup-subtitle</span>
         </ion-row>
         <ion-row class="ion-padding ion-align-items-center ion-justify-content-center">
-          <ion-button (click)="backupWallet()">common.non-backup-action</ion-button>
+          <ion-button (click)="backupWallet()" translate>common.non-backup-action</ion-button>
         </ion-row>
       </div>
   </ion-grid>

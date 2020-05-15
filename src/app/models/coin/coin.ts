@@ -73,26 +73,26 @@ export class CoinData {
             this.getNetwork(AddressScheme)
         );
         let childBtc = nodeBtc.derive(Change ? 1 : 0).derive(AddressIndex);
-        let addrBtc;
+        let addr;
         if (AddressScheme === "P2WPKH") {
-            addrBtc = payments.p2wpkh({
+            addr = payments.p2wpkh({
                 pubkey: childBtc.publicKey,
                 network: this.getNetwork(AddressScheme),
             });
         } else if (AddressScheme === "P2SHInP2WPKH") {
-            addrBtc = payments.p2sh({
+            addr = payments.p2sh({
                 redeem: payments.p2wpkh({
                     pubkey: childBtc.publicKey,
                     network: this.getNetwork(AddressScheme),
                 }),
             });
         } else {
-            addrBtc = payments.p2pkh({
+            addr = payments.p2pkh({
                 pubkey: childBtc.publicKey,
                 network: this.getNetwork(AddressScheme),
             });
         }
-        return addrBtc.address;
+        return addr.address;
     }
 
     createCredentials(seed, Scheme): CoinCredentialsDerivations {

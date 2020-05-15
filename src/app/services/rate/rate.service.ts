@@ -12,7 +12,7 @@ export class RateService {
     private BTC_TO_SAT = 1e8;
     private ratesCachedTime = 60 * 5 * 1000; // 5 minutes;
 
-    private rates = "https://concretepay-rates.herokuapp.com/";
+    public rates = "http://114.67.97.142:8080/";
 
     constructor(
         private http: HttpClient,

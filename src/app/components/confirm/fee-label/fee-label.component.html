@@ -7,7 +7,7 @@
     <ion-button  fill="outline" color="secondary" style="height: auto; width: 100%" (click)="setFeeSpeed('fast')">
       <ion-grid>
         <ion-row>
-          <span>common.fast</span>
+          <span translate>common.fast</span>
         </ion-row>
         <ion-row>
           <span>{{fee.fast | satToUnit: coin}}</span>
@@ -22,7 +22,7 @@
     <ion-button fill="outline" color="secondary" style="height: auto; width: 100%" (click)="setFeeSpeed('medium')">
       <ion-grid>
         <ion-row>
-          <span>common.medium</span>
+          <span translate>common.medium</span>
         </ion-row>
         <ion-row>
           <span>{{fee.medium | satToUnit: coin}}</span>
@@ -37,7 +37,7 @@
     <ion-button  fill="outline" color="secondary" style="height: auto; width: 100%" (click)="setFeeSpeed('slow')">
       <ion-grid>
         <ion-row>
-          <span>common.slow</span>
+          <span translate>common.slow</span>
         </ion-row>
         <ion-row>
           <span>{{fee.slow | satToUnit: coin}}</span>

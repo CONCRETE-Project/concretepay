@@ -50,7 +50,11 @@ export class AppComponent {
                 await this.navCtrl.navigateRoot("/intro");
             } else {
                 let lang = await this.userSettingsStorage.get("lang");
-                this.translate.setDefaultLang(lang);
+                if (!lang) {
+                    await this.userSettingsStorage.set("lang", "en")
+                    lang = "en"
+                }
+                this.translate.setDefaultLang("ch");
                 await this.navCtrl.navigateRoot("/home");
             }
         }

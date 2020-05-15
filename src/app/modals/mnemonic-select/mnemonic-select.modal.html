@@ -3,7 +3,7 @@
     <ion-icon class="settings-element fas fa-times" (click)="closeModal(false)" slot="start"></ion-icon>
     <ion-grid class="grid-adjust " color="secondary">
       <ion-row class="ion-justify-content-center ion-align-items-center " color="secondary">
-        <span class="span-white">Generate a Mnemonic Phrase</span>
+        <span class="span-white" translate>modals.generate.title</span>
       </ion-row>
     </ion-grid>
   </ion-item>
@@ -12,25 +12,25 @@
   <ion-card class="card">
     <ion-grid *ngIf="!mnemonicSize">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <h4>common.mnemonic-size</h4>
+        <h4 translate>common.mnemonic-size</h4>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-button size="small" shape="round" (click)="selectSize(128)">common.size.12</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(160)">common.size.15</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(192)">common.size.18</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(224)">common.size.21</ion-button>
-        <ion-button size="small" shape="round" (click)="selectSize(256)">common.size.24</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(128)" translate>common.sizes.12</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(160)" translate>common.sizes.15</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(192)" translate>common.sizes.18</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(224)" translate>common.sizes.21</ion-button>
+        <ion-button size="small" shape="round" (click)="selectSize(256)" translate>common.sizes.24</ion-button>
       </ion-row>
     </ion-grid>
     <ion-grid *ngIf="mnemonicSize && !mnemonicLanguage">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <h4>common.select-language</h4>
+        <h4 translate >common.select-language</h4>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center modal-background">
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')">common.language.english</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')">common.language.spanish</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')">common.language.french</ion-button>
-        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')">common.language.italian</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('english')" translate>common.languages.english</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('spanish')" translate>common.languages.spanish</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('french')" translate>common.languages.french</ion-button>
+        <ion-button size="small" shape="round" color="secondary" (click)="selectLanguage('italian')" translate>common.languages.italian</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card>

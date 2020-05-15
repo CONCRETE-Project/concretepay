@@ -77,7 +77,7 @@ export class WalletReceivePage implements OnInit, OnDestroy {
             this.loading = false;
             this.onGoingProcessService.clear();
             await this.popupService.ionicAlert(
-                "Error",
+                "common.error",
                 "Unable to load address"
             );
         }
