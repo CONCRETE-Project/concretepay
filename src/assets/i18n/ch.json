@@ -232,11 +232,9 @@
             "info-non-backup": "您的助记词未备份。您将无法找回钱包.",
             "ask-password": "请输入您的钱包密码",
             "select-coin": "请选择一个硬币",
-            "coin-info": {
-                "hide-wallet": "您确定要隐藏此硬币吗？",
-                "hide-wallet-success": "钱包成功隐藏",
-                "balance": "余额"
-            }
+            "hide-wallet": "您确定要隐藏此硬币吗？",
+            "hide-wallet-success": "钱包成功隐藏",
+            "balance": "余额"
         }
     }
 }

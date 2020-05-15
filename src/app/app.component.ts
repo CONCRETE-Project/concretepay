@@ -51,8 +51,8 @@ export class AppComponent {
             } else {
                 let lang = await this.userSettingsStorage.get("lang");
                 if (!lang) {
-                    await this.userSettingsStorage.set("lang", "en")
-                    lang = "en"
+                    await this.userSettingsStorage.set("lang", "en");
+                    lang = "en";
                 }
                 this.translate.setDefaultLang("ch");
                 await this.navCtrl.navigateRoot("/home");

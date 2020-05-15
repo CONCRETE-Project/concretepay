@@ -41,15 +41,4 @@ export class CoinSettingsPage implements OnInit, OnDestroy {
             );
         });
     }
-
-    async changeBlockbookEndpoint() {
-        await this.navController.navigateForward(
-            "wallet/" +
-                this.wallet.Properties.id +
-                "/" +
-                this.credentials.Coin +
-                "/settings/blockbook",
-            { animated: true, animationDirection: "forward" }
-        );
-    }
 }

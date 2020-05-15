@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="background" [ngStyle]="{'background': wallet.Properties.color}" *ngIf="wallet">
-    <ion-row class="ion-justify-content-center ion-align-items-center balance-title">Balance</ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center"><span translate class="balance-title">components.wallet.balance</span></ion-row>
     <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 65%">
         <div style="color:white;text-align: center;">
             <div *ngIf="credentials.Balance">
