@@ -1,11 +1,15 @@
 import { Injectable } from "@angular/core";
 import { AlertController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: "root",
 })
 export class PopupService {
-    constructor(private alertCtrl: AlertController) {}
+    constructor(
+        private alertCtrl: AlertController,
+        private translateService: TranslateService
+    ) {}
 
     public ionicAlert(
         title: string,
@@ -14,12 +18,18 @@ export class PopupService {
     ): Promise<any> {
         return new Promise(async (resolve) => {
             let alert = await this.alertCtrl.create({
-                header: title,
-                subHeader: subTitle,
+                header: await this.translateService.get(title).toPromise(),
+                subHeader: await this.translateService
+                    .get(subTitle)
+                    .toPromise(),
                 backdropDismiss: false,
                 buttons: [
                     {
-                        text: okText ? okText : "Ok",
+                        text: okText
+                            ? okText
+                            : await this.translateService
+                                  .get("common.ok")
+                                  .toPromise(),
                         handler: () => {
                             resolve();
                         },
@@ -38,17 +48,25 @@ export class PopupService {
     ): Promise<any> {
         return new Promise(async (resolve) => {
             let confirm = await this.alertCtrl.create({
-                header: title,
-                message,
+                header: await this.translateService.get(title).toPromise(),
+                message: await this.translateService.get(message).toPromise(),
                 buttons: [
                     {
-                        text: cancelText ? cancelText : "Cancel",
+                        text: cancelText
+                            ? cancelText
+                            : await this.translateService
+                                  .get("common.cancel")
+                                  .toPromise(),
                         handler: () => {
                             resolve(false);
                         },
                     },
                     {
-                        text: okText ? okText : "Ok",
+                        text: okText
+                            ? okText
+                            : await this.translateService
+                                  .get("common.ok")
+                                  .toPromise(),
                         handler: () => {
                             resolve(true);
                         },
@@ -75,8 +93,8 @@ export class PopupService {
             let inputType = opts && opts.type ? opts.type : "text";
             let enableBackdropDismiss = !!(opts && opts.enableBackdropDismiss);
             let prompt = await this.alertCtrl.create({
-                header: title,
-                message,
+                header: await this.translateService.get(title).toPromise(),
+                message: await this.translateService.get(message).toPromise(),
                 backdropDismiss: enableBackdropDismiss,
                 inputs: [
                     {
@@ -87,13 +105,21 @@ export class PopupService {
                 ],
                 buttons: [
                     {
-                        text: cancelText ? cancelText : "Cancel",
+                        text: cancelText
+                            ? cancelText
+                            : await this.translateService
+                                  .get("common.cancel")
+                                  .toPromise(),
                         handler: () => {
                             resolve(null);
                         },
                     },
                     {
-                        text: okText ? okText : "Ok",
+                        text: okText
+                            ? okText
+                            : await this.translateService
+                                  .get("common.ok")
+                                  .toPromise(),
                         handler: (data) => {
                             resolve(data[0]);
                         },
@@ -121,13 +147,21 @@ export class PopupService {
                 inputs,
                 buttons: [
                     {
-                        text: cancelText ? cancelText : "Cancel",
+                        text: cancelText
+                            ? cancelText
+                            : await this.translateService
+                                  .get("common.cancel")
+                                  .toPromise(),
                         handler: () => {
                             resolve(null);
                         },
                     },
                     {
-                        text: okText ? okText : "Ok",
+                        text: okText
+                            ? okText
+                            : await this.translateService
+                                  .get("common.ok")
+                                  .toPromise(),
                         handler: (data) => {
                             resolve(data);
                         },

@@ -29,7 +29,7 @@ export class HomePage {
 
     ngOnInit() {
         this.onGoingProcessService
-            .set("Looking for new coins")
+            .set("common.loading")
             .then(async () => {
                 this.coinsStorageService.loadCoinsInfo().then(async () => {
                     this.newCoinsChecked = true;

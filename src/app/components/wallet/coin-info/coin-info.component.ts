@@ -7,6 +7,7 @@ import { WalletService } from "../../../services/wallet/wallet.service";
 import { UserSettingsStorageService } from "../../../services/storage/user-settings/user-settings.service";
 import { CoinData } from "../../../models/coin/coin";
 import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: "app-coin-info",
@@ -20,7 +21,8 @@ export class CoinInfoComponent implements OnInit {
         private navCtrl: NavController,
         public popup: PopupService,
         private walletService: WalletService,
-        private userSettingsStorage: UserSettingsStorageService
+        private userSettingsStorage: UserSettingsStorageService,
+        private translateService: TranslateService
     ) {}
     @Input() Coin: string;
     @Input() wallet: Wallet;
@@ -48,14 +50,16 @@ export class CoinInfoComponent implements OnInit {
     async deleteCoin() {
         let confirm = await this.popup.ionicConfirm(
             "common.confirm",
-            "components.wallet.coin-info.hide-wallet"
+            "components.wallet.hide-wallet"
         );
         if (confirm) {
             await this.wallet.deleteCoinCredentials(this.credentials.Coin);
             await this.walletStorage.updateFullWallet(this.wallet);
             await this.navCtrl.navigateRoot("/home");
             const toast = await this.toastController.create({
-                message: "components.wallet.coin-info.hide-wallet-success",
+                message: await this.translateService
+                    .get("components.wallet.hide-wallet-success")
+                    .toPromise(),
                 duration: 2000,
             });
             await toast.present();

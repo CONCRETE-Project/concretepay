@@ -82,17 +82,10 @@ export class AlternativePage implements OnInit {
         this.altCurrencyList = _.filter(
             this.completeAlternativeList,
             (item) => {
-                let val = item.name;
-                let val2 = item.code;
-                return (
-                    _.includes(
-                        val.toLowerCase(),
-                        searchedAltCurrency.toLowerCase()
-                    ) ||
-                    _.includes(
-                        val2.toLowerCase(),
-                        searchedAltCurrency.toLowerCase()
-                    )
+                let val = item.code;
+                return _.includes(
+                    val.toLowerCase(),
+                    searchedAltCurrency.toLowerCase()
                 );
             }
         );

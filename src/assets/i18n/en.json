@@ -22,7 +22,7 @@
         "scan": "Scan",
         "close": "Close",
         "mnemonic-phrase": "Mnemonic Phrase",
-        "cancel": "Canceled",
+        "canceled": "Canceled",
         "error-wallet": "There was an error creating your wallet, please try again.",
         "error-password": "Password doesn't match, please try again.",
         "password": "Password encryption",
@@ -43,8 +43,11 @@
             "english": "English",
             "spanish": "Spanish",
             "french": "French",
-            "italian": "Italian"
+            "italian": "Italian",
+            "chinese": "Chinese"
         },
+        "ok": "Ok",
+        "cancel": "Cancel",
         "mnemonic-size": "Select your mnemonic size",
         "sizes": {
             "12": "12 Words",
@@ -105,7 +108,8 @@
             },
             "receive": {
                 "title": "Receive coins",
-                "set-amount": "Set Amount"
+                "set-amount": "Set Amount",
+                "error-load-address": "Unable to load address"
             },
             "send": {
                 "title": "Send",

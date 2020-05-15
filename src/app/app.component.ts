@@ -36,27 +36,43 @@ export class AppComponent {
                 alt_coin: {
                     code: "USD",
                 },
-                lang: await this.platformService.getLangCode(),
+                lang: await this.getLang(),
                 first_time: true,
             };
-            this.translate.setDefaultLang("en");
+            this.translate.setDefaultLang(DefaultSettings.lang);
             this.userSettingsStorage.setAll(DefaultSettings).then(async () => {
                 await this.navCtrl.navigateRoot("/intro");
             });
         } else {
             let firstTime = await this.userSettingsStorage.get("first_times");
             if (firstTime) {
-                this.translate.setDefaultLang("en");
+                this.translate.setDefaultLang(await this.getLang());
                 await this.navCtrl.navigateRoot("/intro");
             } else {
                 let lang = await this.userSettingsStorage.get("lang");
                 if (!lang) {
-                    await this.userSettingsStorage.set("lang", "en");
-                    lang = "en";
+                    await this.userSettingsStorage.set(
+                        "lang",
+                        await this.getLang()
+                    );
+                    lang = await this.getLang();
                 }
-                this.translate.setDefaultLang("ch");
+                this.translate.setDefaultLang(lang);
                 await this.navCtrl.navigateRoot("/home");
             }
+        }
+    }
+
+    async getLang() {
+        let langCode = await this.platformService.getLangCode();
+        let first = langCode.split("-");
+        switch (first[0]) {
+            case "en":
+                return "en";
+            case "ch":
+                return "ch";
+            default:
+                return "en";
         }
     }
 }

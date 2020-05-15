@@ -14,6 +14,7 @@ import { WalletService } from "../../services/wallet/wallet.service";
 import { WalletStorageService } from "../../services/storage/wallet/wallet.service";
 import { RateService } from "../../services/rate/rate.service";
 import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: "app-wallet",
@@ -36,6 +37,7 @@ export class WalletComponent implements OnInit, OnChanges {
         public walletStorage: WalletStorageService,
         public popup: PopupService,
         public toastCtrl: ToastController,
+        public translateService: TranslateService,
         public rateService: RateService,
         public navCtrl: NavController,
         public userSettings: UserSettingsStorageService
@@ -85,7 +87,7 @@ export class WalletComponent implements OnInit, OnChanges {
 
     public async displayInfo(m: string) {
         const toast = await this.toastCtrl.create({
-            message: m,
+            message: await this.translateService.get(m).toPromise(),
             duration: 5000,
             position: "bottom",
         });
@@ -126,7 +128,9 @@ export class WalletComponent implements OnInit, OnChanges {
         });
 
         const actionSheet = await this.actionSheetController.create({
-            header: "components.wallet.select-coin",
+            header: await this.translateService
+                .get("components.wallet.select-coin")
+                .toPromise(),
             buttons: buttons,
         });
         await actionSheet.present();

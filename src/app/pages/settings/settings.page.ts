@@ -77,20 +77,26 @@ export class SettingsPage implements OnInit {
 
     public async changeLanguage() {
         const actionSheet = await this.actionSheetController.create({
-            header: "pages.settings.select-language",
+            header: await this.translate
+                .get("pages.settings.select-language")
+                .toPromise(),
             buttons: [
                 {
-                    text: "common.languages.english",
+                    text: await this.translate
+                        .get("common.languages.english")
+                        .toPromise(),
                     handler: () => {
-                        this.translate.setDefaultLang("en");
                         this.userSettingsStorageService.set("lang", "en");
+                        this.translate.setDefaultLang("en");
                     },
                 },
                 {
-                    text: "common.languages.spanish",
+                    text: await this.translate
+                        .get("common.languages.chinese")
+                        .toPromise(),
                     handler: () => {
-                        this.translate.setDefaultLang("en");
-                        this.userSettingsStorageService.set("lang", "en");
+                        this.userSettingsStorageService.set("lang", "ch");
+                        this.translate.setDefaultLang("ch");
                     },
                 },
             ],

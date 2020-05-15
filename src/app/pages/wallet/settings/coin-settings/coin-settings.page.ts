@@ -3,7 +3,7 @@ import { CoinCredentials, Wallet } from "../../../../models/wallet/wallet";
 import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { WalletStorageService } from "../../../../services/storage/wallet/wallet.service";
-import { NavController, ToastController } from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 
 @Component({
     selector: "app-coin-settings",
@@ -17,8 +17,7 @@ export class CoinSettingsPage implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         public walletServiceStorage: WalletStorageService,
-        public navController: NavController,
-        public toastController: ToastController
+        public navController: NavController
     ) {}
 
     ngOnInit() {

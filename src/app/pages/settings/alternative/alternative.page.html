@@ -3,14 +3,12 @@
   <ion-searchbar placeholder="Search your currency" [(ngModel)]="searchedAltCurrency" (ngModelChange)="findCurrency(searchedAltCurrency)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let lastUsedAltCurrency of lastUsedAltCurrencyList" (click)="save(lastUsedAltCurrency)">
-      {{ lastUsedAltCurrency.name }}
-      <span slot="end">{{lastUsedAltCurrency.code}}</span>
+      {{lastUsedAltCurrency.code}}
     </ion-item>
   </ion-list>
   <ion-list>
     <ion-item *ngFor="let alt of altCurrencyList" (click)="save(alt)" class="settings-element">
-      {{ alt.name }}
-      <ion-note slot="end">{{alt.code}}</ion-note>
+      {{alt.code}}
     </ion-item>
   </ion-list>
   <ion-grid>

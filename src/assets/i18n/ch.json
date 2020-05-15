@@ -22,7 +22,7 @@
         "scan": "扫描",
         "close": "关闭",
         "mnemonic-phrase": "助记词",
-        "cancel": "取消",
+        "canceled": "取消",
         "error-wallet": "创建您的钱包时出错，请重试.",
         "error-password": "密码不匹配，请重试.",
         "password": "密码",
@@ -39,11 +39,14 @@
         "slow": "慢",
         "confirmed": "已确认",
         "unconfirmed": "未确认",
+        "ok": "好",
+        "cancel": "取消",
         "languages": {
             "english": "英语",
             "spanish": "西班牙语",
             "french": "法语",
-            "italian": "意大利语"
+            "italian": "意大利语",
+            "chinese": "中文"
         },
         "mnemonic-size": "选择助记符大小",
         "sizes": {
@@ -105,7 +108,8 @@
             },
             "receive": {
                 "title": "接收硬币",
-                "set-amount": "输入金额"
+                "set-amount": "输入金额",
+                "error-load-address": "无法加载地址"
             },
             "send": {
                 "title": "发送",
