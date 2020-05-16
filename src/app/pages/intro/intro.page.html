@@ -3,10 +3,17 @@
     <img src="./assets/img/logo.png" />
     <h1 style="color: #fff" translate>pages.intro.title</h1>
   </div>
-  <br/>
-  <br/>
   <p class="top-description" translate>pages.intro.description-1<p>
+  <p class="lang-select">
+    <ion-item>
+      <ion-label translate>common.select-language</ion-label>
+      <ion-select (ionChange)="selectLanguage(langSelect.value)" placeholder="English" #langSelect>
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="ch">Chinese</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </p>
   <div class="bottom-absolute">
-    <ion-button  class="button-standard" (click)="getStarted()" translate>pages.intro.start</ion-button>
+    <ion-button  class="button-standard" (click)="getStarted()" [disabled]="!languageSelected" translate>pages.intro.start</ion-button>
   </div>
 </ion-content>
