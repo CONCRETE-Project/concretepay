@@ -10,13 +10,13 @@
     <ion-grid>
 
       <ion-row *ngIf="isConfirmed">
-        <span *ngIf="isReceived && !isSent" translate>components.tx-history.received-on {{ txs.timestamp * 1000 | date:'short' }}</span>
-        <span *ngIf="isSent && !isReceived " translate>components.tx-history.sent-on {{ txs.timestamp * 1000 | date:'short' }}</span>
-        <span *ngIf="isSent && isReceived " translate> translatecomponents.tx-history.moved-on {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isReceived && !isSent"><span translate>components.tx-history.received-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && !isReceived"><span translate>components.tx-history.sent-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && isReceived"><span translate>components.tx-history.moved-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
       </ion-row>
 
       <ion-row *ngIf="!isConfirmed">
-        <span>components.tx-history.confirming</span>
+        <span translate>components.tx-history.confirming</span>
       </ion-row>
 
       <ion-row>
@@ -25,7 +25,7 @@
         <div *ngIf="isSent && !isReceived  && isConfirmed" class="sent" style="color: #cd4b5c">
           <span style="color: #cd4b5c">{{  Amount| satToUnit:coin }}</span>
           <br/>
-          <span style="font-size: 12px;" translate> (common.miner-fee {{  fee| satToUnit:coin }})</span>
+          <span style="font-size: 12px;">(<span translate>common.miner-fee</span> {{  fee| satToUnit:coin }})</span>
         </div>
       </ion-row>
 

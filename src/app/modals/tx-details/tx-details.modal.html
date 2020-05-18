@@ -11,14 +11,14 @@
     <ion-item>
       <ion-avatar>
         <span *ngIf="confirmed && !type || type === 'normal-tx'">
-          <img src="assets/img/app/tx-action/icon-sent.svg" width="40" *ngIf="sent && !received"/>
-          <img src="assets/img/app/tx-action/icon-received.svg" width="40" *ngIf="received && !sent"/>
-          <img src="assets/img/app/tx-action/icon-moved.svg" width="40" *ngIf="sent && received"/>
+          <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="sent && !received"/>
+          <img src="assets/img/tx-action/icon-received.svg" width="40" *ngIf="received && !sent"/>
+          <img src="assets/img/tx-action/icon-moved.svg" width="40" *ngIf="sent && received"/>
         </span>
         <span *ngIf="type && type !== 'normal-tx'">
-          <img src="assets/img/app/tx-action/icon-sent.svg" width="40" *ngIf="type === 'token-transfer-send'"/>
-          <img src="assets/img/app/tx-action/icon-received.svg" width="40" *ngIf="type === 'token-transfer-received'"/>
-          <img src="assets/img/app/tx-action/icon-sent.svg" width="40" *ngIf="type === 'contract-interaction'"/>
+          <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="type === 'token-transfer-send'"/>
+          <img src="assets/img/tx-action/icon-received.svg" width="40" *ngIf="type === 'token-transfer-received'"/>
+          <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="type === 'contract-interaction'"/>
         </span>
       </ion-avatar>
       <ion-grid class="ion-padding">
@@ -63,7 +63,7 @@
     </ion-item>
 
     <ion-item >
-      <span slot="start" translate>common.confirmations</span>
+      <span slot="start" translate>common.confirmed</span>
       <ion-note slot="end">
         <span *ngIf="!confirmed" translate>common.unconfirmed</span>
         <span *ngIf="confirmed">{{ btx.confirmations }}</span>
