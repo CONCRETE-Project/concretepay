@@ -41,7 +41,7 @@ export class HomePage {
                 this.onGoingProcessService.clear();
             });
     }
-    
+
     ionViewWillEnter() {
         if (this.newCoinsChecked) {
             this.loadWallets();

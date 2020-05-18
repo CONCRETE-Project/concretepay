@@ -145,6 +145,7 @@ export class ConfirmModal implements OnInit {
                 pass,
                 this.wallet.Credentials.phrase
             );
+            console.log(serializedTx);
             if (serializedTx) {
                 return serializedTx;
             } else {

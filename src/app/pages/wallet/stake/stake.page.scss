@@ -1,0 +1,11 @@
+.send-heading {
+    font-size: 15px;
+    padding: 0 0 16px 0;
+    border: none;
+    font-weight: 500;
+}
+.invalid {
+    border: 1px solid var(--ion-color-danger);
+    color: var(--ion-color-danger);
+    background-color: #fff6f7;
+}

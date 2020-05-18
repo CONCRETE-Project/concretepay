@@ -15,6 +15,7 @@ import { WalletColorPage } from "./wallet/settings/color/color.page";
 import { WalletDeletePage } from "./wallet/settings/delete/delete.page";
 import { AddWalletPage } from "./wallet/add/add.page";
 import { PIN_PAGES } from "./pin/pin";
+import { WalletStakePage } from "./wallet/stake/stake.page";
 
 export const PAGES = [
     ...PIN_PAGES,
@@ -34,4 +35,5 @@ export const PAGES = [
     WalletColorPage,
     WalletDeletePage,
     AddWalletPage,
+    WalletStakePage,
 ];

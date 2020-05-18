@@ -16,6 +16,7 @@ import { WalletDeletePage } from "./pages/wallet/settings/delete/delete.page";
 import { AddWalletPage } from "./pages/wallet/add/add.page";
 import { SettingsPage } from "./pages/settings/settings.page";
 import { AlternativePage } from "./pages/settings/alternative/alternative.page";
+import { WalletStakePage } from "./pages/wallet/stake/stake.page";
 
 const routes: Routes = [
     { path: "home", component: HomePage },
@@ -35,6 +36,8 @@ const routes: Routes = [
     // Coin Information related paths
     { path: "wallet/:walletid/:coin/settings", component: CoinSettingsPage },
     { path: "wallet/:walletid/:coin/history", component: WalletHistoryPage },
+    { path: "wallet/:walletid/:coin/stake", component: WalletStakePage },
+
     { path: "settings", component: SettingsPage },
     { path: "settings/alt", component: AlternativePage },
 ];
