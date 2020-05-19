@@ -36,7 +36,7 @@ export class ConfirmModal implements OnInit {
     SerializedTx: string;
     TotalAvailable: number;
     @ViewChild("serviceFee") serviceFee;
-
+    spendLocked: boolean = false;
     constructor(
         public modalCtrl: ModalController,
         public navCtrl: NavController,
@@ -59,7 +59,7 @@ export class ConfirmModal implements OnInit {
 
     public async init() {
         await this.onGoingProcess.set("common.loading");
-        this.Utxos = await this.getUtxos();
+        await this.getUtxos();
         await this.onGoingProcess.clear();
         let availableBalance = this.Utxos.map((utxo) =>
             parseInt(utxo.value, 10)
@@ -89,7 +89,17 @@ export class ConfirmModal implements OnInit {
     }
 
     public async getUtxos() {
-        return this.blockbookProvider.getUtxos(this.credentials);
+        let utxos = await this.blockbookProvider.getUtxos(this.credentials);
+        if (!this.spendLocked) {
+            this.Utxos = utxos.filter((utxo) => !utxo.stake_contract);
+        } else {
+            this.Utxos = utxos;
+        }
+        return;
+    }
+
+    public async selectLocked(e) {
+        this.init();
     }
 
     public async getTxSize() {
@@ -145,7 +155,6 @@ export class ConfirmModal implements OnInit {
                 pass,
                 this.wallet.Credentials.phrase
             );
-            console.log(serializedTx);
             if (serializedTx) {
                 return serializedTx;
             } else {
