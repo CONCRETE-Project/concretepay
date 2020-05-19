@@ -101,6 +101,7 @@ export interface Utxo {
     path: string;
     scheme: string;
     stake_contract: boolean;
+    stake_address: string;
 }
 
 export interface FeeRates {

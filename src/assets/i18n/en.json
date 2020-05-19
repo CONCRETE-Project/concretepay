@@ -163,6 +163,13 @@
                     "advanced": "Advanced",
                     "delete": "Delete"
                 }
+            },
+            "stake": {
+                "title": "Cold Staking",
+                "description-1": "Cold Staking is an advanced function to help the consensus system delegating your coins.",
+                "description-2": "This method is secure since you only delegate your stake power and not your coins",
+                "stake-amount": "Select an amount to stake",
+                "stake-confirm": "Start staking"
             }
         }
     },

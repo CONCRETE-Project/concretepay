@@ -1,4 +1,25 @@
 <app-tool-bar [back]="true" [titleText]="'pages.wallet.stake.title' | translate"></app-tool-bar>
 <ion-content class="page-content-with-slim-header ion-padding">
-   
+   <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <span translate>pages.wallet.stake.description-1</span>
+        </ion-row>
+        <br/>
+        <ion-row class="ion-justify-content-center">
+            <span translate>pages.wallet.stake.description-2</span>
+        </ion-row>
+        <br/>
+        <ion-row class="ion-justify-content-center">
+            <ion-item>
+                <ion-label class="ion-justify-content-center">
+                    <span translate>pages.wallet.stake.stake-amount</span>
+                </ion-label>
+                <ion-input type="number" placeholder="500" (ionChange)="amountSelection($event)"></ion-input>
+            </ion-item>
+        </ion-row>
+        <br/>
+        <ion-row class="ion-justify-content-center">
+            <ion-button (onClick)="startStake()" [disabled]="!selectedAmount" color="primary"><span translate style="color: #fff">pages.wallet.stake.stake-confirm</span></ion-button>
+        </ion-row>
+   </ion-grid>
 </ion-content>
