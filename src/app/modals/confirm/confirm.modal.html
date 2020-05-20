@@ -27,11 +27,11 @@
       <ion-row>
         <ion-list>
           <ion-item>
-            <ion-checkbox slot="start" [(ngModel)]="spendLocked" (ionChange)="selectLocked($event)"></ion-checkbox>&nbsp;<ion-label>Spend locked balance</ion-label>
+            <ion-checkbox slot="start" [(ngModel)]="spendLocked" (ionChange)="selectLocked($event)"></ion-checkbox>&nbsp;<ion-label><span translate>modals.confirm.spend-locked</span></ion-label>
           </ion-item>
         </ion-list>
       </ion-row>
-      <ion-item-divider>Payment Information</ion-item-divider>
+      <ion-item-divider translate>modals.confirm.payment-information</ion-item-divider>
       <div class="ion-padding">
         <ion-row>
           <span *ngIf="useSendMax && TotalAvailable && FeeSatoshis">{{TotalAvailable - FeeSatoshis | satToUnit:credentials.Coin}}</span>

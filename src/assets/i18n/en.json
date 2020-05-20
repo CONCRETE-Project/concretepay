@@ -40,6 +40,7 @@
         "slow": "Slow",
         "confirmed": "Confirmed",
         "unconfirmed": "Unconfirmed",
+        "stake-contract": "Stake Contract",
         "languages": {
             "english": "English",
             "spanish": "Spanish",
@@ -169,7 +170,9 @@
                 "description-1": "Cold Staking is an advanced function to help the consensus system delegating your coins.",
                 "description-2": "This method is secure since you only delegate your stake power and not your coins",
                 "stake-amount": "Select an amount to stake",
-                "stake-confirm": "Start staking"
+                "stake-confirm": "Start staking",
+                "success": "Your stake is setup successfully",
+                "error": "There was an error submitting your stake transaction"
             }
         }
     },
@@ -199,7 +202,9 @@
             "confirm-send": "Are you sure you want to send ",
             "error-build": "Unable to build transactiom",
             "error-balance": "You don't have enough balance to perform the transaction",
-            "receiver-info": "Receiver Information"
+            "receiver-info": "Receiver Information",
+            "payment-information": "Payment Information",
+            "spend-locked": "Spend locked balance"
         },
         "export-mnemonic": {
             "title": "Export Mnemonic"
