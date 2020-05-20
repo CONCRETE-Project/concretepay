@@ -1,14 +1,8 @@
 # ConcretePay Documentation
 
-* [Backend](#backend)
-* [Rates API](#rates-api)
 * [Build Desktop](#build-desktop)
 * [Build Android](#build-android)
 * [Build iOS](#build-ios)
-
-## Backend
-
-## Rates API
 
 ## Building Desktop
 
