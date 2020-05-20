@@ -40,6 +40,7 @@
         "slow": "Slow",
         "confirmed": "Confirmed",
         "unconfirmed": "Unconfirmed",
+        "locked": "Locked",
         "stake-contract": "Stake Contract",
         "languages": {
             "english": "English",
@@ -171,6 +172,7 @@
                 "description-2": "This method is secure since you only delegate your stake power and not your coins",
                 "stake-amount": "Select an amount to stake",
                 "stake-confirm": "Start staking",
+                "confirm-stake": "Are you sure you want to put this coins to stake?",
                 "success": "Your stake is setup successfully",
                 "error": "There was an error submitting your stake transaction"
             }

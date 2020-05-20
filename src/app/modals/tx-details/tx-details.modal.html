@@ -26,16 +26,16 @@
             <span *ngIf="contract" translate>common.stake-contract</span>
           </div>
         </ion-row>
-        <ion-row *ngIf="confirmed && !contract">
+        <ion-row *ngIf="confirmed">
            <span>
             {{ amount | satToUnit: coin }}
           </span>
         </ion-row>
-        <ion-row *ngIf="confirmed && !contract">
+        <!-- <ion-row *ngIf="confirmed && !contract">
           <span>
             {{ amount | satToFiat: coin:this.alternative | async }}
           </span>
-        </ion-row>
+        </ion-row> -->
 
       </ion-grid>
     </ion-item>
@@ -43,7 +43,8 @@
     <ion-item *ngIf="fee">
       <span slot="start" translate>common.miner-fee</span>
       <ion-note slot="end">
-        {{ fee | satToUnit: coin}} {{ fee | satToFiat: coin:this.alternative | async }}
+        {{ fee | satToUnit: coin}}
+        <!--  {{ fee | satToFiat: coin:this.alternative | async }} -->
       </ion-note>
     </ion-item>
 

@@ -8,11 +8,14 @@
               <span class="info-header-text" ><span translate>components.wallet.balance</span> {{ credentials.Balance.Confirmed | satToFiat:credentials.Coin:AlternativeCoin | async }}</span>
           </ion-row> -->
           <ion-row>
-              <span class="info-header-text" *ngIf="credentials.Balance.Confirmed !== 0.0" translate><span translate style="font-weight: bold;">common.confirmed</span>: {{ credentials.Balance.Confirmed | satToUnit:credentials.Coin }}</span>
+              <span class="info-header-text" *ngIf="credentials.Balance.Confirmed !== 0.0"><span translate style="font-weight: bold;">common.confirmed</span>: {{ credentials.Balance.Confirmed | satToUnit:credentials.Coin }}</span>
           </ion-row>
           <ion-row>
-              <span class="info-header-text" *ngIf="credentials.Balance.Unconfirmed !== 0.0" translate><span translate style="font-weight: bold;">common.unconfirmed</span>: {{ credentials.Balance.Unconfirmed | satToUnit:credentials.Coin }}</span>
+              <span class="info-header-text" *ngIf="credentials.Balance.Unconfirmed !== 0.0"><span translate style="font-weight: bold;">common.unconfirmed</span>: {{ credentials.Balance.Unconfirmed | satToUnit:credentials.Coin }}</span>
           </ion-row>
+          <ion-row>
+            <span class="info-header-text" *ngIf="credentials.Balance.Locked !== 0.0"><span translate style="font-weight: bold;">common.locked</span>: {{ credentials.Balance.Locked | satToUnit:credentials.Coin }}</span>
+        </ion-row>
           <ion-ripple-effect></ion-ripple-effect>
       </ion-grid>
   </ion-item>

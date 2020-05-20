@@ -121,18 +121,23 @@ export class BlockbookService {
                     : await this.getAccountInfoWeb(CoinCredentials, "P2PKH");
 
             derivationsData.P2PKH = this.getLastAddress(p2pkhAccountInfo);
+            let p2pkhAccountLockedUtxos =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getUtxos(CoinCredentials)
+                    : await this.getUtxos(CoinCredentials);
+            let lockedBalance = p2pkhAccountLockedUtxos
+                .filter((utxo) => utxo.stake_contract)
+                .map((utxo) => {
+                    return parseInt(utxo.value);
+                })
+                .reduce((a, b) => {
+                    return a + b;
+                });
             totalBalance = {
                 Confirmed: parseInt(p2pkhAccountInfo.balance, 10),
                 Unconfirmed: parseInt(p2pkhAccountInfo.unconfirmedBalance, 10),
-                Locked: 0,
+                Locked: lockedBalance,
             };
-            if (p2pkhAccountInfo.tokens) {
-                AddrArray = p2pkhAccountInfo.tokens.map((addr) => ({
-                    address: addr.name,
-                    scheme: "P2PKH",
-                    type: addr.path.split("/")[4] === "0" ? "direct" : "change",
-                }));
-            }
             TxArray = this.parseTransactions(
                 AddrArray,
                 p2pkhAccountInfo.transactions
@@ -225,6 +230,7 @@ export class BlockbookService {
                     if (vout.addresses.length > 1) {
                         out.push({
                             value: parseInt(vout.value, 10),
+                            stakedvalue: parseInt(vout.value, 10),
                             ischange: false,
                             isstake: true,
                         });

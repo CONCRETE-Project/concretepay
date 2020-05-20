@@ -12,18 +12,25 @@
         <div style="color:white;text-align: center;">
             <div *ngIf="credentials.Balance">
                 <div class="balance-str">{{ credentials.Balance.Confirmed | satToUnit: credentials.Coin }}</div>
-                <div  class="balance-alt-str">{{ credentials.Balance.Confirmed | satToFiat: credentials.Coin:AlternativeCoin | async }}</div>
+                <!-- <div  class="balance-alt-str">{{ credentials.Balance.Confirmed | satToFiat: credentials.Coin:AlternativeCoin | async }}</div> -->
             </div>
 
+            <div class="balance-spendable" *ngIf="credentials.Balance && credentials.Balance.Locked !== 0">
+                <strong>
+                    <span translate style="color: #fff">common.locked</span> {{ credentials.Balance.Locked | satToUnit: credentials.Coin }}
+                </strong>
+                <ion-icon name="lock-closed"></ion-icon>
+                </div>
             <div class="balance-spendable" *ngIf="credentials.Balance && credentials.Balance.Unconfirmed !== 0">
                 <ion-icon name="timer-outline"></ion-icon>
                 <strong>
                     {{ credentials.Balance.Unconfirmed | satToUnit: credentials.Coin }}
                 </strong>
-                &nbsp;
+                <!-- 
+                &nbsp;    
                 <strong>
-              {{ credentials.Balance.Unconfirmed | satToFiat: credentials.Coin:AlternativeCoin | async }}
-                </strong>
+                {{ credentials.Balance.Unconfirmed | satToFiat: credentials.Coin:AlternativeCoin | async }}
+                </strong> -->
             </div>
             <div>
             </div>

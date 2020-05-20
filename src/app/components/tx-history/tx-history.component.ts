@@ -24,6 +24,7 @@ export class TxHistoryComponent implements OnInit {
     public Inputs = [];
     public Outputs = [];
     public Amount: number;
+    public StakeAmount: number;
     public fee: number;
     constructor(
         public externalLinkService: ExternalLinkService,
@@ -34,6 +35,7 @@ export class TxHistoryComponent implements OnInit {
 
     ngOnInit() {
         this.Amount = 0;
+        this.StakeAmount = 0;
         this.isConfirmed = this.txs.confirmations > 0;
         this.Inputs = this.txs.inputs;
         this.Outputs = this.txs.outputs;
@@ -48,9 +50,10 @@ export class TxHistoryComponent implements OnInit {
     parseInputs() {
         if (this.Inputs.length > 0) {
             this.isSent = true;
-            this.Inputs.forEach((input) => {
-                this.Amount -= input.value;
-            });
+            for (let i = 0; i < this.Inputs.length; i++) {
+                let input = this.Inputs[i];
+                this.Amount += input.value;
+            }
         }
     }
 
@@ -62,9 +65,14 @@ export class TxHistoryComponent implements OnInit {
             let stakeAddr = this.Outputs.filter((outputs) => outputs.isstake);
             this.isReceived = notChangeAddr.length > 0;
             this.isContract = stakeAddr.length > 0;
-            this.Outputs.forEach((output) => {
-                this.Amount += output.value;
-            });
+            for (let i = 0; i < this.Outputs.length; i++) {
+                let output = this.Outputs[i];
+                if (output.isstake) {
+                    this.StakeAmount += output.stakedvalue;
+                } else {
+                    this.Amount += output.value;
+                }
+            }
         }
     }
 

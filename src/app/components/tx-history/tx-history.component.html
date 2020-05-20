@@ -22,8 +22,9 @@
       </ion-row>
 
       <ion-row>
-        <span *ngIf="isReceived  && !isSent && isConfirmed && !isContract" class="received"><span>{{ Amount | satToUnit:coin }}</span></span>
-        <span *ngIf="isSent && isReceived  && isConfirmed && !isContract" class="moved"><span>{{ Amount| satToUnit:coin }}</span></span>
+        <span *ngIf="isContract" class="received">{{ StakeAmount | satToUnit:coin }}</span>
+        <span *ngIf="isReceived  && !isSent && isConfirmed && !isContract" class="received">{{ Amount | satToUnit:coin }}</span>
+        <span *ngIf="isSent && isReceived  && isConfirmed && !isContract" class="moved">{{ Amount| satToUnit:coin }}</span>
         <div *ngIf="isSent && !isReceived  && isConfirmed && !isContract" class="sent" style="color: #cd4b5c">
           <span style="color: #cd4b5c">{{  Amount| satToUnit:coin }}</span>
           <br/>

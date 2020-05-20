@@ -40,6 +40,7 @@
         "slow": "慢",
         "confirmed": "已确认",
         "unconfirmed": "未确认",
+        "locked": "Locked",
         "stake-contract": "权益合同",
         "ok": "好",
         "cancel": "取消",
@@ -170,6 +171,7 @@
                     "description-2": "这种方法是安全的，因为您仅委派您的抵押权而不是代币",
                     "stake-amount": "选择要投注的金额",
                     "stake-confirm": "开始放样",
+                    "confirm-stake": "Are you sure you want to put this coins to stake?",
                     "success": "您的股份已成功设置",
                     "error": "提交您的股份交易时出错"
                 }

@@ -37,11 +37,11 @@
           <span *ngIf="useSendMax && TotalAvailable && FeeSatoshis">{{TotalAvailable - FeeSatoshis | satToUnit:credentials.Coin}}</span>
           <span *ngIf="!useSendMax">{{payment.amount | satToUnit:credentials.Coin}}</span>
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
           <span style="font-size: 14px" *ngIf="alternative">
           {{ payment.amount | satToFiat: credentials.Coin:alternative | async }}
-        </span>
-        </ion-row>
+          </span>
+        </ion-row> -->
       </div>
       <ion-item-divider translate>common.miner-fee</ion-item-divider>
       <app-fee-label *ngIf="alternative" [coin]="credentials.Coin" [fee]="FeeRates" [alternative]="alternative" (feeSelected)="feeSelected($event)"></app-fee-label>

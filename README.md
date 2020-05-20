@@ -4,10 +4,10 @@
 
 # Dependencies
 
-* Node >= 11 (haven't tested compatibility with lower versions)
-* npm (or yarn)
-* electron
-* Ionic (with capacitor)
+-   Node >= 11 (haven't tested compatibility with lower versions)
+-   npm (or yarn)
+-   electron
+-   Ionic (with capacitor)
 
 # Build
 

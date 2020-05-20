@@ -105,7 +105,6 @@ export class WalletStakePage implements OnInit, OnDestroy {
                         satoshiFee,
                         this.credentials
                     );
-                    console.log(serializedTx);
                     await this.blockbookService.sendTx(
                         this.credentials,
                         serializedTx
@@ -116,7 +115,6 @@ export class WalletStakePage implements OnInit, OnDestroy {
                         "pages.wallet.stake.success"
                     );
                 } catch (e) {
-                    console.log(e);
                     this.onGoingProcessService.clear();
                     await this.popupService.ionicAlert(
                         "common.error",
