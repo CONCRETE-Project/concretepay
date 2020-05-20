@@ -8,6 +8,8 @@ import * as sha from "sha.js";
 import { BitcoinjsService } from "src/app/services/tx-builders/bitcoinjs/bitcoinjs.service";
 import { BlockbookService } from "src/app/services/blockbook/blockbook.service";
 import { CoinsService } from "src/app/services/coins-service/coins-service.service";
+import { OnGoingProcessService } from "src/app/services/on-going-process/on-going-process.service";
+import { WalletService } from "src/app/services/wallet/wallet.service";
 
 @Component({
     selector: "app-stake",
@@ -25,7 +27,9 @@ export class WalletStakePage implements OnInit, OnDestroy {
         public bitcoinjsService: BitcoinjsService,
         public blockbookService: BlockbookService,
         public coinsService: CoinsService,
-        private popupService: PopupService
+        private popupService: PopupService,
+        private onGoingProcessService: OnGoingProcessService,
+        private walletService: WalletService
     ) {}
 
     ngOnInit() {
@@ -60,30 +64,65 @@ export class WalletStakePage implements OnInit, OnDestroy {
         );
         if (confirm) {
             let pass = await this.askPassword();
-            let hash = sha("256").update(pass);
+            if (!pass) return;
+            let hash = sha("sha256").update(pass);
             if (this.wallet.Credentials.passhash === hash.digest("hex")) {
-                // Get Stake Addr\
-                let stakeAddr;
+                await this.onGoingProcessService.set("common.loading");
+                // Get Stake Addr
+                let stakeAddr = await this.coinsService.getStakeAddress(
+                    this.credentials.Coin
+                );
                 // Get Change Addr
-                let changeAddr;
+                let changeAddr = await this.walletService.createAddress(
+                    this.credentials,
+                    this.credentials.Derivations.P2PKH,
+                    "Change"
+                );
                 // Get Onwer Addr
-                let ownerAddr;
+                let ownerAddr = await this.walletService.createAddress(
+                    this.credentials,
+                    this.credentials.Derivations.P2PKH,
+                    "Direct"
+                );
                 // Get Utxos
-                // Get Fee
-                let satoshiFee;
-                let serializedTx = await this.bitcoinjsService.createNewP2CSTx(
-                    this.wallet.Credentials.phrase,
-                    pass,
-                    this.selectedAmount * 1e8,
-                    stakeAddr,
-                    ownerAddr,
-                    changeAddr,
-                    [],
-                    satoshiFee,
+                let utxos = await this.blockbookService.getUtxos(
                     this.credentials
                 );
-                // Broadcast transaction
-                // Popup Success
+                utxos = utxos.filter((utxo) => !utxo.stake_contract);
+                // Get Fee
+                let satoshiFee = await (
+                    await this.blockbookService.getFeeRate(this.credentials)
+                ).fast;
+                try {
+                    let serializedTx = await this.bitcoinjsService.createNewP2CSTx(
+                        this.wallet.Credentials.phrase,
+                        pass,
+                        this.selectedAmount * 1e8,
+                        stakeAddr,
+                        ownerAddr,
+                        changeAddr,
+                        utxos,
+                        satoshiFee,
+                        this.credentials
+                    );
+                    console.log(serializedTx);
+                    await this.blockbookService.sendTx(
+                        this.credentials,
+                        serializedTx
+                    );
+                    this.onGoingProcessService.clear();
+                    await this.popupService.ionicAlert(
+                        "common.success",
+                        "pages.wallet.stake.success"
+                    );
+                } catch (e) {
+                    console.log(e);
+                    this.onGoingProcessService.clear();
+                    await this.popupService.ionicAlert(
+                        "common.error",
+                        "pages.wallet.stake.error"
+                    );
+                }
             } else {
                 await this.popupError();
                 return;

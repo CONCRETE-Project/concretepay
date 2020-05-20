@@ -59,7 +59,7 @@ export class ConfirmModal implements OnInit {
 
     public async init() {
         await this.onGoingProcess.set("common.loading");
-        this.Utxos = await this.getUtxos();
+        await this.getUtxos();
         this.FeeSatoshis = null;
         this.SerializedTx = null;
         await this.onGoingProcess.clear();
@@ -91,7 +91,13 @@ export class ConfirmModal implements OnInit {
     }
 
     public async getUtxos() {
-        return await this.blockbookProvider.getUtxos(this.credentials);
+        let utxos = await this.blockbookProvider.getUtxos(this.credentials);
+        if (!this.spendLocked) {
+            this.Utxos = utxos.filter((utxo) => !utxo.stake_contract);
+        } else {
+            this.Utxos = utxos;
+        }
+        return;
     }
 
     public async selectLocked(e) {
@@ -141,7 +147,6 @@ export class ConfirmModal implements OnInit {
         try {
             let serializedTx = await this.bitcoinjsBuilder.createTx(
                 this.Utxos,
-                this.spendLocked,
                 this.payment.address,
                 walletCred,
                 this.payment.amount,

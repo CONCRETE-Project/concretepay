@@ -1110,10 +1110,10 @@
     wrap-ansi "^7.0.0"
     write-file-atomic "^3.0.0"
 
-"@ionic/cli@6.9.1":
-  version "6.9.1"
-  resolved "https://registry.yarnpkg.com/@ionic/cli/-/cli-6.9.1.tgz#33fff197926b1a39ecfc6060f69de18b249ae591"
-  integrity sha512-tbD6FCuT91OKpfsHU1upuh4jy3gbtNB9JZoReMQ+WBICBorDIy8ZZsI6llsY39hpQiNM8mobUKLKxhWB1+P9Dw==
+"@ionic/cli@6.9.2":
+  version "6.9.2"
+  resolved "https://registry.yarnpkg.com/@ionic/cli/-/cli-6.9.2.tgz#b46a09f754edede638c2a2f95b0a2fc05309cf7e"
+  integrity sha512-W8tVwmKaxr0yGEY3ffzYEy8JqAfLxT65sVBqQeKRwIVTy+QyxJJjSiF4ceYnkRZgrWNztsjrfrE39BfYny6zLQ==
   dependencies:
     "@ionic/cli-framework" "4.1.5"
     "@ionic/cli-framework-prompts" "2.1.3"
@@ -1130,7 +1130,7 @@
     elementtree "^0.1.7"
     leek "0.0.24"
     lodash "^4.17.5"
-    open "^7.0.0"
+    open "^7.0.4"
     os-name "^3.1.0"
     semver "^7.1.1"
     split2 "^3.0.0"
@@ -2028,24 +2028,21 @@ bip66@^1.1.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-bitcoin-ops@^1.3.0:
+bitcoin-ops@^1.3.0, bitcoin-ops@^1.4.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/bitcoin-ops/-/bitcoin-ops-1.4.1.tgz#e45de620398e22fd4ca6023de43974ff42240278"
   integrity sha512-pef6gxZFztEhaE9RY9HmWVmiIHqCb2OyS4HPKkpc6CIiiOa3Qmuoylxc5P2EkU3w+5eTSifI9SEZC88idAIGow==
 
-"bitcoin-ops@https://github.com/eabz/bitcoin-ops":
-  version "1.4.1"
-  resolved "https://github.com/eabz/bitcoin-ops#bb3b411c1a0beca7fa65500f714bf464b05ef3c6"
-
-"bitcoinjs-lib@https://github.com/eabz/bitcoinjs-lib":
+bitcoinjs-lib@5.1.7:
   version "5.1.7"
-  resolved "https://github.com/eabz/bitcoinjs-lib#b8ac5097be93915f58a49af1a36697ce491f978b"
+  resolved "https://registry.yarnpkg.com/bitcoinjs-lib/-/bitcoinjs-lib-5.1.7.tgz#dfa023d6ad887eaef8249513d708c9ecd2673a08"
+  integrity sha512-sNlTQuvhaoIjOdIdyENsX74Dlikv7l6AzO0/uZQscuvfBID6aMANoCz1rooCTH5upTV5rKCj4z3BXBmXJxq23g==
   dependencies:
     bech32 "^1.1.2"
     bip174 "^1.0.1"
     bip32 "^2.0.4"
     bip66 "^1.1.0"
-    bitcoin-ops "https://github.com/eabz/bitcoin-ops"
+    bitcoin-ops "^1.4.0"
     bs58check "^2.0.0"
     create-hash "^1.1.0"
     create-hmac "^1.1.3"
@@ -6116,7 +6113,7 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
-open@7.0.3, open@^7.0.0:
+open@7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/open/-/open-7.0.3.tgz#db551a1af9c7ab4c7af664139930826138531c48"
   integrity sha512-sP2ru2v0P290WFfv49Ap8MF6PkzGNnGlAwHweB4WR4mr5d2d0woiCluUeJ218w7/+PmoBy9JmYgD5A4mLcWOFA==
@@ -6130,6 +6127,14 @@ open@^6.1.0:
   integrity sha512-IFenVPgF70fSm1keSd2iDBIDIBZkroLeuffXq+wKTzTJlBpesFWojV9lb8mzOfaAzM1sr7HQHuO0vtV0zYekGg==
   dependencies:
     is-wsl "^1.1.0"
+
+open@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/open/-/open-7.0.4.tgz#c28a9d315e5c98340bf979fdcb2e58664aa10d83"
+  integrity sha512-brSA+/yq+b08Hsr4c8fsEW2CRzk1BmfN3SAK/5VCHQ9bdoZJ4qa/+AfR0xHjlbbZUyPkUHs1b8x1RqdyZdkVqQ==
+  dependencies:
+    is-docker "^2.0.0"
+    is-wsl "^2.1.1"
 
 opn@^5.5.0:
   version "5.5.0"

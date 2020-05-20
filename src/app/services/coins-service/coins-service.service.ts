@@ -39,4 +39,14 @@ export class CoinsService {
             return null;
         }
     }
+    async getStakeAddress(tag: string): Promise<string> {
+        try {
+            let res = await this.http
+                .get<BaseResponse>(this.url + "stake/" + tag)
+                .toPromise();
+            return res.data;
+        } catch (e) {
+            return null;
+        }
+    }
 }

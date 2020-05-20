@@ -9,42 +9,42 @@ import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 import { CoinData } from "src/app/models/coin/coin";
 import * as bs58 from "bs58check";
 import { Script } from "vm";
+import { BlockbookService } from "../../blockbook/blockbook.service";
 
 @Injectable({
     providedIn: "root",
 })
 export class BitcoinjsService {
     public corsAnywhere = "https://cors-anywhere-eabz.herokuapp.com/";
-
+    network;
     constructor(
         public platform: PlatformService,
+        private blockbookService: BlockbookService,
         public http: HttpClient,
         public httpnative: HTTP
     ) {}
 
-    p2csScript(network, coldStakeAddr: string, stakerAddr: string): Buffer {
+    p2csScript(coldStakeAddr: string, stakerAddr: string): Buffer {
+        let decodedAddr = bs58.decode(coldStakeAddr);
         let decodedStake = bs58.decode(stakerAddr);
-        let hash = decodedStake.slice(1).toString("hex");
-        return bitcoin.script.fromASM(
-            `
-            OP_DUP  OP_HASH160  OP_ROT
-            OP_IF
-                OP_CHECKCOLDSTAKEVERIFY ${hash}
-            OP_ELSE
-                ${bitcoin.address
-                    .toOutputScript(coldStakeAddr, network)
-                    .toString("hex")}
-            OP_ENDIF
-            OP_EQUALVERIFY  OP_CHECKSIG
-            `
-                .trim()
-                .replace(/\s+/g, " ")
-        );
+        let script = bitcoin.script.compile([
+            0x76,
+            0xa9,
+            0x7b,
+            0x63,
+            0xd1,
+            decodedStake.slice(1),
+            0x67,
+            decodedAddr.slice(1),
+            0x68,
+            0x88,
+            0xac,
+        ]);
+        return script;
     }
 
     async createTx(
         utxos: Utxo[],
-        spendLocked: boolean,
         toAddress: string,
         coinCredentials: CoinCredentials,
         satoshiAmount: number,
@@ -57,82 +57,68 @@ export class BitcoinjsService {
     ): Promise<string> {
         let coinConfig = CoinFactory.getCoin(coinCredentials.Coin);
         let network = coinConfig.getNetwork();
-        const txb = new bitcoin.TransactionBuilder(network);
-        txb.setVersion(coinConfig.tx_version);
+        const psbt = new bitcoin.Psbt({ network: network });
+        psbt.setVersion(coinConfig.tx_version);
 
         // Add Inputs
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < utxos.length; i++) {
             let utxo = utxos[i];
-            txb.addInput(utxo.txid, utxo.vout);
+            let prevTx = await this.blockbookService.getTx(
+                coinCredentials,
+                utxo.txid
+            );
+            psbt.addInput({
+                hash: utxo.txid,
+                index: utxo.vout,
+                nonWitnessUtxo: Buffer.from(prevTx.hex, "hex"),
+            });
         }
 
-        let scriptPubkey = bitcoin.address.toOutputScript(toAddress, network);
         // If sending max we don't need a change address
         if (sendMax) {
-            txb.addOutput(scriptPubkey, totalAmount - satoshiFee);
+            psbt.addOutput({
+                address: toAddress,
+                value: totalAmount - satoshiFee,
+            });
         } else {
             // Add Outputs.
-            txb.addOutput(scriptPubkey, satoshiAmount);
+            psbt.addOutput({ address: toAddress, value: satoshiAmount });
             if (totalAmount - satoshiFee - satoshiAmount < 0) {
                 // TODO error
             }
-            txb.addOutput(
-                changeAddress,
-                totalAmount - satoshiFee - satoshiAmount
-            );
+            psbt.addOutput({
+                address: changeAddress,
+                value: totalAmount - satoshiFee - satoshiAmount,
+            });
         }
 
         // Sign Inputs
         for (let i = 0; i < utxos.length; i++) {
             let utxo: Utxo = utxos[i];
-            if (!utxo.stake_contract) {
-                let addrPathDeconstructed = utxos[i].path.split("/");
-                let addressType =
-                    addrPathDeconstructed[4] === "1" ? "Change" : "Direct";
-                let addressIndex = parseInt(addrPathDeconstructed[5], 10);
-                let privateKey = await coinConfig.getAddressPrivKey(
-                    addressIndex,
-                    mnemonic,
-                    pass,
-                    utxo.scheme,
-                    addressType === "Change"
-                );
-                let key = bitcoin.ECPair.fromWIF(privateKey, network);
-                txb.sign(i, key);
-            }
+            let addrPathDeconstructed = utxos[i].path.split("/");
+            let addressType =
+                addrPathDeconstructed[4] === "1" ? "Change" : "Direct";
+            let addressIndex = parseInt(addrPathDeconstructed[5], 10);
+            let privateKey = await coinConfig.getAddressPrivKey(
+                addressIndex,
+                mnemonic,
+                pass,
+                utxo.scheme,
+                addressType === "Change"
+            );
+            let key = bitcoin.ECPair.fromWIF(privateKey, network);
+            psbt.signInput(i, key);
         }
-
-        let transaction = txb.buildIncomplete();
-
         for (let i = 0; i < utxos.length; i++) {
             let utxo = utxos[i];
             if (utxo.stake_contract) {
-                let addrPathDeconstructed = utxos[i].path.split("/");
-                let addressType =
-                    addrPathDeconstructed[4] === "1" ? "Change" : "Direct";
-                let addressIndex = parseInt(addrPathDeconstructed[5], 10);
-                let privateKey = await coinConfig.getAddressPrivKey(
-                    addressIndex,
-                    mnemonic,
-                    pass,
-                    utxo.scheme,
-                    addressType === "Change"
-                );
-                let key = bitcoin.ECPair.fromWIF(privateKey, network);
-                let script = bitcoin.script.compile([
-                    bitcoin.script.signature.encode(
-                        key.sign(transaction.ins[i].hash),
-                        bitcoin.Transaction.SIGHASH_ALL
-                    ),
-                    bitcoin.opcodes.OP_FALSE,
-                    key.publicKey,
-                ]);
-                transaction.setInputScript(i, script);
+                psbt.finalizeInput(i, this.finalizeP2CSInputs);
+            } else {
+                psbt.finalizeInput(i);
             }
         }
-
-        return transaction.toHex();
+        return psbt.extractTransaction().toHex();
     }
 
     async getUtxoFromAddress(address, coinConfig: CoinData): Promise<Utxo[]> {
@@ -163,34 +149,36 @@ export class BitcoinjsService {
     ): Promise<string> {
         let coinConfig = CoinFactory.getCoin(coinCredentials.Coin);
         let network = coinConfig.getNetwork();
-        const txb = new bitcoin.TransactionBuilder(network);
-        txb.setVersion(coinConfig.tx_version);
+        this.network = network;
+        const psbt = new bitcoin.Psbt({ network: network });
 
-        // Add all the utxos as inputs, exclude utxos that are already on a cold stake contract.
+        psbt.setVersion(coinConfig.tx_version);
         let availableAmount = 0;
+
         for (let i = 0; i < utxos.length; i++) {
             let utxo = utxos[i];
-            if (!utxo.stake_contract) {
-                availableAmount += parseInt(utxo.value);
-                txb.addInput(utxo.txid, utxo.vout);
-            }
+            availableAmount += parseInt(utxo.value);
+            let prevTx = await this.blockbookService.getTx(
+                coinCredentials,
+                utxo.txid
+            );
+            psbt.addInput({
+                hash: utxo.txid,
+                index: utxo.vout,
+                nonWitnessUtxo: Buffer.from(prevTx.hex, "hex"),
+            });
         }
 
-        // If the user is trying to create a contract with a higher amount than the available amount, we should return an error
         if (satoshiAmount + satoshiFee > availableAmount) {
             return;
         }
 
-        let changeAddressScript = bitcoin.address.toOutputScript(
-            changeAddress,
-            network
-        );
         let changeAmount = availableAmount - satoshiAmount - satoshiFee;
-        txb.addOutput(
-            this.p2csScript(network, ownerAddress, stakeAddr),
-            satoshiAmount
-        );
-        txb.addOutput(changeAddressScript, changeAmount);
+        psbt.addOutput({
+            script: this.p2csScript(ownerAddress, stakeAddr),
+            value: satoshiAmount,
+        });
+        psbt.addOutput({ address: changeAddress, value: changeAmount });
 
         for (let i = 0; i < utxos.length; i++) {
             let utxo = utxos[i];
@@ -206,10 +194,33 @@ export class BitcoinjsService {
                 addressType === "Change"
             );
             let key = bitcoin.ECPair.fromWIF(privateKey, network);
-            txb.sign(i, key);
+            psbt.signInput(i, key);
         }
 
-        let tx = txb.build();
-        return tx.toHex();
+        psbt.finalizeAllInputs();
+        return psbt.extractTransaction().toHex();
+    }
+
+    finalizeP2CSInputs(
+        inputIndex,
+        input,
+        script,
+        isSegwit,
+        isP2SH,
+        isP2WSH
+    ): {
+        finalScriptSig: Buffer | undefined;
+        finalScriptWitness: Buffer | undefined;
+    } {
+        let payment: bitcoin.Payment = {
+            network: CoinFactory.getCoin("CCT").getNetwork(),
+            output: script,
+            input: bitcoin.script.compile([
+                input.partialSig![0].signature,
+                0x00,
+                input.partialSig![0].pubkey,
+            ]),
+        };
+        return { finalScriptSig: payment.input, finalScriptWitness: null };
     }
 }
