@@ -43,4 +43,4 @@ or
 yarn run start
 ```
 
-For more information on how to build the binaries follow to (doc)[./docs/README.md]
+For more information on how to build the binaries follow to [doc](./docs/README.md)
