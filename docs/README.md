@@ -34,19 +34,47 @@ Now you can build for the OS you want:
 
 Windows
 ```
-npm run electron:win
+npm run build:win
 ```
 
 Mac
 ```
-npm run electron:mac
+npm run build:mac
 ```
 
 Linux
 ```
-npm run electron:linux
+npm run build:linux
 ```
 
 ## Building Android
 
+Before starting building for android, make sure you have your development environment ready: https://capacitor.ionicframework.com/docs/android/#getting-started
+
+To build for android, you simply need to run the initial capacitor build
+
+```
+npm run capacitor:build
+````
+
+And open the app on Android Studio to finish the build process
+
+```
+npm run capacitor:android
+````
+
 ## Building iOS
+
+Before starting building for ios, make sure you have your development environment ready: https://capacitor.ionicframework.com/docs/ios/#getting-started
+
+To build for iOS, you simply need to run the initial capacitor build
+
+```
+npm run capacitor:build
+````
+
+And open the app on Xcode to finish the build process
+
+```
+npm run capacitor:ios
+````
