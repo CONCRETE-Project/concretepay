@@ -11,30 +11,27 @@
     <ion-item>
       <ion-avatar>
         <span *ngIf="confirmed && !type || type === 'normal-tx'">
-          <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="sent && !received"/>
-          <img src="assets/img/tx-action/icon-received.svg" width="40" *ngIf="received && !sent"/>
-          <img src="assets/img/tx-action/icon-moved.svg" width="40" *ngIf="sent && received"/>
-        </span>
-        <span *ngIf="type && type !== 'normal-tx'">
-          <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="type === 'token-transfer-send'"/>
-          <img src="assets/img/tx-action/icon-received.svg" width="40" *ngIf="type === 'token-transfer-received'"/>
-          <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="type === 'contract-interaction'"/>
+          <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="sent && !received && !contract"/>
+          <img src="assets/img/tx-action/icon-received.svg" width="40" *ngIf="received && !sent  && !contract"/>
+          <img src="assets/img/tx-action/icon-moved.svg" width="40" *ngIf="sent && received  && !contract"/>
+          <img src="assets/img/tx-action/icon-moved.svg" width="40" *ngIf="contract"/>
         </span>
       </ion-avatar>
       <ion-grid class="ion-padding">
         <ion-row>
-          <div *ngIf="confirmed && !type || type === 'normal-tx'">
-            <span *ngIf="sent && !received" translate>common.sent</span>
-            <span *ngIf="received && !sent" translate>common.received</span>
-            <span *ngIf="sent && received" translate>common.moved</span>
+          <div *ngIf="confirmed">
+            <span *ngIf="sent && !received && !contract" translate>common.sent</span>
+            <span *ngIf="received && !sent && !contract" translate>common.received</span>
+            <span *ngIf="sent && received && !contract" translate>common.moved</span>
+            <span *ngIf="contract" translate>common.stake-contract</span>
           </div>
         </ion-row>
-        <ion-row *ngIf="confirmed && !type || type === 'normal-tx'">
+        <ion-row *ngIf="confirmed && !contract">
            <span>
             {{ amount | satToUnit: coin }}
           </span>
         </ion-row>
-        <ion-row *ngIf="confirmed && !type || type === 'normal-tx'">
+        <ion-row *ngIf="confirmed && !contract">
           <span>
             {{ amount | satToFiat: coin:this.alternative | async }}
           </span>

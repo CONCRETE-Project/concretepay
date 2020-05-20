@@ -1,9 +1,5 @@
 import { bip32, payments, address } from "bitcoinjs-lib";
-import {
-    CoinCredentialsDerivations,
-    CoinCredentials,
-    Wallet,
-} from "../wallet/wallet";
+import { CoinCredentialsDerivations } from "../wallet/wallet";
 import * as bip39 from "bip39";
 
 export interface Bip32 {

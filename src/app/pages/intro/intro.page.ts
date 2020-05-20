@@ -9,7 +9,7 @@ import { TranslateService } from "@ngx-translate/core";
     styleUrls: ["./intro.page.scss"],
 })
 export class IntroPage {
-    languageSelected: boolean = false;
+    languageSelected = false;
     constructor(
         public navCtrl: NavController,
         public userSettings: UserSettingsStorageService,

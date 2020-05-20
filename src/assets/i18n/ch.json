@@ -40,6 +40,7 @@
         "slow": "慢",
         "confirmed": "已确认",
         "unconfirmed": "未确认",
+        "stake-contract": "权益合同",
         "ok": "好",
         "cancel": "取消",
         "languages": {
@@ -162,6 +163,15 @@
                     "export-mnemonic": "导出助记词",
                     "advanced": "高级",
                     "delete": "删除"
+                },
+                "stake": {
+                    "title": "冷桩",
+                    "description-1": "冷桩 是一项高级功能，可帮助共识系统委派代币.",
+                    "description-2": "这种方法是安全的，因为您仅委派您的抵押权而不是代币",
+                    "stake-amount": "选择要投注的金额",
+                    "stake-confirm": "开始放样",
+                    "success": "您的股份已成功设置",
+                    "error": "提交您的股份交易时出错"
                 }
             }
         }
@@ -192,7 +202,9 @@
             "confirm-send": "您确定要发送吗",
             "error-build": "无法建立交易",
             "error-balance": "您的余额不足，无法执行交易",
-            "receiver-info": "接收者信息"
+            "receiver-info": "接收者信息",
+            "payment-information": "支付信息",
+            "spend-locked": "支出锁定余额"
         },
         "export-mnemonic": {
             "title": "导出助记词"

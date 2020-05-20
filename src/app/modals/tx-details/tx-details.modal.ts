@@ -17,6 +17,7 @@ export class TxDetailsModal implements OnInit {
     @Input() txid;
     @Input() coin;
     @Input() sent;
+    @Input() contract;
     @Input() received;
     @Input() confirmed;
     @Input() amount;

@@ -222,6 +222,14 @@ export class BlockbookService {
                     }
                 }
                 for (let vout of tx.vout) {
+                    if (vout.addresses.length > 1) {
+                        out.push({
+                            value: parseInt(vout.value, 10),
+                            ischange: false,
+                            isstake: true,
+                        });
+                        continue;
+                    }
                     if (
                         AddrArray.filter((addr) => addr.type === "direct")
                             .map((addr) => addr.address)
@@ -231,6 +239,7 @@ export class BlockbookService {
                             value: parseInt(vout.value, 10),
                             ischange: false,
                         });
+                        continue;
                     }
                     if (
                         AddrArray.filter((addr) => addr.type === "change")
@@ -241,6 +250,7 @@ export class BlockbookService {
                             value: parseInt(vout.value, 10),
                             ischange: true,
                         });
+                        continue;
                     }
                 }
                 let newTx: Tx = {

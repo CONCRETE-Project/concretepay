@@ -66,14 +66,14 @@ export class WalletService {
         let walletInfo = {
             Properties: {
                 id: uuid.v4(),
-                name: name,
+                name,
                 color: "#019477",
-                backup: backup,
+                backup,
             },
             Credentials: {
                 phrase: mnemonic,
                 passhash: passwordHash.digest("hex"),
-                language: language,
+                language,
                 wallet: [],
             },
         };

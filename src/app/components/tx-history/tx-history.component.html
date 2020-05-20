@@ -2,17 +2,19 @@
   <ion-item (click)="goToTxDetails(txs, coin)">
     <ion-avatar slot="start">
       <i *ngIf="!isConfirmed" class="fas fa-2x fa-clock" style="color: #cd4b5c"></i>
-      <i *ngIf="isSent && isConfirmed && !isReceived" class="fas fa-2x fa-arrow-circle-up" style="color: #cd4b5c"></i>
-      <i *ngIf="isReceived && isConfirmed && !isSent" class="fas fa-2x fa-arrow-circle-down" style="color: #0ed3a7"></i>
-      <i *ngIf="isSent && isConfirmed && isReceived" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
+      <i *ngIf="isSent && isConfirmed && !isReceived && !isContract" class="fas fa-2x fa-arrow-circle-up" style="color: #cd4b5c"></i>
+      <i *ngIf="isReceived && isConfirmed && !isSent && !isContract" class="fas fa-2x fa-arrow-circle-down" style="color: #0ed3a7"></i>
+      <i *ngIf="isSent && isConfirmed && isReceived && !isContract" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
+      <i *ngIf="isContract" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
     </ion-avatar>
 
     <ion-grid>
 
       <ion-row *ngIf="isConfirmed">
-        <span *ngIf="isReceived && !isSent"><span translate>components.tx-history.received-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
-        <span *ngIf="isSent && !isReceived"><span translate>components.tx-history.sent-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
-        <span *ngIf="isSent && isReceived"><span translate>components.tx-history.moved-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isReceived && !isSent && !isContract && !isContract"><span translate>components.tx-history.received-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && !isReceived  && !isContract && !isContract"><span translate>components.tx-history.sent-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && isReceived  && !isContract && !isContract"><span translate>components.tx-history.moved-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isContract" translate>common.stake-contract</span>
       </ion-row>
 
       <ion-row *ngIf="!isConfirmed">
@@ -20,9 +22,9 @@
       </ion-row>
 
       <ion-row>
-        <span *ngIf="isReceived  && !isSent && isConfirmed" class="received"><span>{{ Amount | satToUnit:coin }}</span></span>
-        <span *ngIf="isSent && isReceived  && isConfirmed" class="moved"><span>{{ Amount| satToUnit:coin }}</span></span>
-        <div *ngIf="isSent && !isReceived  && isConfirmed" class="sent" style="color: #cd4b5c">
+        <span *ngIf="isReceived  && !isSent && isConfirmed && !isContract" class="received"><span>{{ Amount | satToUnit:coin }}</span></span>
+        <span *ngIf="isSent && isReceived  && isConfirmed && !isContract" class="moved"><span>{{ Amount| satToUnit:coin }}</span></span>
+        <div *ngIf="isSent && !isReceived  && isConfirmed && !isContract" class="sent" style="color: #cd4b5c">
           <span style="color: #cd4b5c">{{  Amount| satToUnit:coin }}</span>
           <br/>
           <span style="font-size: 12px;">(<span translate>common.miner-fee</span> {{  fee| satToUnit:coin }})</span>

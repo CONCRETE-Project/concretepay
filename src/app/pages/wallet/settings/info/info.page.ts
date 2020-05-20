@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { CoinCredentials, Wallet } from "../../../../models/wallet/wallet";
+import { Wallet } from "../../../../models/wallet/wallet";
 import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { WalletStorageService } from "../../../../services/storage/wallet/wallet.service";

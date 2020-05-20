@@ -31,8 +31,8 @@
         </div>
     </ion-row>
         <ion-fab vertical="bottom">
-           <ion-row class="ion-text-center">
-               <ion-col *ngFor="let option of options">
+           <ion-row class="ion-text-center ion-justify-content-center">
+               <ion-col *ngFor="let option of options" size="2" style="margin: 2px;">
                    <ion-fab-button color="secondary" [disabled]="isLoading" (click)="option.click.call()" class="button">
                        <ion-icon [class]="option.icon"></ion-icon>
                    </ion-fab-button>

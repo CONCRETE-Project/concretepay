@@ -8,7 +8,6 @@ import { HTTP } from "@ionic-native/http/ngx";
 import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 import { CoinData } from "src/app/models/coin/coin";
 import * as bs58 from "bs58check";
-import { Script } from "vm";
 import { BlockbookService } from "../../blockbook/blockbook.service";
 
 @Injectable({
@@ -57,7 +56,7 @@ export class BitcoinjsService {
     ): Promise<string> {
         let coinConfig = CoinFactory.getCoin(coinCredentials.Coin);
         let network = coinConfig.getNetwork();
-        const psbt = new bitcoin.Psbt({ network: network });
+        const psbt = new bitcoin.Psbt({ network });
         psbt.setVersion(coinConfig.tx_version);
 
         // Add Inputs
@@ -150,7 +149,7 @@ export class BitcoinjsService {
         let coinConfig = CoinFactory.getCoin(coinCredentials.Coin);
         let network = coinConfig.getNetwork();
         this.network = network;
-        const psbt = new bitcoin.Psbt({ network: network });
+        const psbt = new bitcoin.Psbt({ network });
 
         psbt.setVersion(coinConfig.tx_version);
         let availableAmount = 0;

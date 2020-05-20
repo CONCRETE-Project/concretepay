@@ -1,9 +1,6 @@
 import { Component } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import { PopupService } from "../../../services/popup/popup.service";
-import { WalletService } from "../../../services/wallet/wallet.service";
 import { ExternalLinkService } from "../../../services/external-link/external-link.service";
-import { UserSettingsStorageService } from "../../../services/storage/user-settings/user-settings.service";
 
 @Component({
     selector: "app-create-wallets",

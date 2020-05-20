@@ -36,7 +36,7 @@ export class ConfirmModal implements OnInit {
     SerializedTx: string;
     TotalAvailable: number;
     @ViewChild("serviceFee") serviceFee;
-    spendLocked: boolean = false;
+    spendLocked = false;
     constructor(
         public modalCtrl: ModalController,
         public navCtrl: NavController,

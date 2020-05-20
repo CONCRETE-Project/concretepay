@@ -20,6 +20,7 @@ export class TxHistoryComponent implements OnInit {
     public isReceived: boolean;
     public isSent: boolean;
     public isConfirmed: boolean;
+    public isContract: boolean;
     public Inputs = [];
     public Outputs = [];
     public Amount: number;
@@ -58,7 +59,9 @@ export class TxHistoryComponent implements OnInit {
             let notChangeAddr = this.Outputs.filter(
                 (outputs) => !outputs.ischange
             );
+            let stakeAddr = this.Outputs.filter((outputs) => outputs.isstake);
             this.isReceived = notChangeAddr.length > 0;
+            this.isContract = stakeAddr.length > 0;
             this.Outputs.forEach((output) => {
                 this.Amount += output.value;
             });
@@ -71,13 +74,13 @@ export class TxHistoryComponent implements OnInit {
                 txid: txs.txid,
                 coin,
                 sent: this.isSent,
+                contract: this.isContract,
                 received: this.isReceived,
                 confirmed: this.isConfirmed,
                 amount: this.Amount,
                 credentials: this.credentials,
                 fee: this.fee,
                 type: txs.type,
-                tokenTransfers: txs.tokenTransfers,
             };
             await this.modalService.txDetailsModal(modalInput);
         } else {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { UserSettingsStorageService } from "../../services/storage/user-settings/user-settings.service";
 import { Wallet } from "../../models/wallet/wallet";

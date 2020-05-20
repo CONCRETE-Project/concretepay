@@ -1,12 +1,10 @@
 import { Component, Input, OnChanges, OnInit } from "@angular/core";
 import {
-    ModalController,
     NavController,
     ToastController,
     ActionSheetController,
 } from "@ionic/angular";
 import { PopupService } from "../../services/popup/popup.service";
-import { OnGoingProcessService } from "../../services/on-going-process/on-going-process.service";
 /** Models **/
 import { Wallet } from "../../models/wallet/wallet";
 import { UserSettingsStorageService } from "src/app/services/storage/user-settings/user-settings.service";
@@ -131,7 +129,7 @@ export class WalletComponent implements OnInit, OnChanges {
             header: await this.translateService
                 .get("components.wallet.select-coin")
                 .toPromise(),
-            buttons: buttons,
+            buttons,
         });
         await actionSheet.present();
     }
