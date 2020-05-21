@@ -27,8 +27,11 @@
           </div>
         </ion-row>
         <ion-row *ngIf="confirmed">
-           <span>
+           <span *ngIf="!contract">
             {{ amount | satToUnit: coin }}
+          </span>
+          <span *ngIf="contract">
+            {{ stakeAmount | satToUnit: coin }}
           </span>
         </ion-row>
         <!-- <ion-row *ngIf="confirmed && !contract">

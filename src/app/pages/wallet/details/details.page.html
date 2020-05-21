@@ -19,7 +19,7 @@
                 <strong>
                     <span translate style="color: #fff">common.locked</span> {{ credentials.Balance.Locked | satToUnit: credentials.Coin }}
                 </strong>
-                <ion-icon name="lock-closed"></ion-icon>
+                <ion-icon class="fas fa-snowflake"></ion-icon>
                 </div>
             <div class="balance-spendable" *ngIf="credentials.Balance && credentials.Balance.Unconfirmed !== 0">
                 <ion-icon name="timer-outline"></ion-icon>

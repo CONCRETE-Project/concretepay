@@ -40,8 +40,8 @@ export class TxHistoryComponent implements OnInit {
         this.Inputs = this.txs.inputs;
         this.Outputs = this.txs.outputs;
         this.fee = this.txs.fee;
-        this.parseInputs();
         this.parseOutputs();
+        this.parseInputs();
         this.Amount = this.isSent
             ? Math.abs(this.Amount) - this.fee
             : Math.abs(this.Amount);
@@ -52,7 +52,9 @@ export class TxHistoryComponent implements OnInit {
             this.isSent = true;
             for (let i = 0; i < this.Inputs.length; i++) {
                 let input = this.Inputs[i];
-                this.Amount += input.value;
+                if (!this.isReceived) {
+                    this.Amount -= input.value;
+                }
             }
         }
     }
@@ -89,6 +91,7 @@ export class TxHistoryComponent implements OnInit {
                 credentials: this.credentials,
                 fee: this.fee,
                 type: txs.type,
+                stakeAmount: this.StakeAmount,
             };
             await this.modalService.txDetailsModal(modalInput);
         } else {

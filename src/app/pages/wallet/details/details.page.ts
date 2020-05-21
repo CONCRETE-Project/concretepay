@@ -27,7 +27,7 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
         { icon: "fas fa-arrow-down", click: () => this.goToReceive() },
         { icon: "fas fa-history", click: () => this.goToTxHistory() },
         { icon: "fas fa-cog", click: () => this.goToPreferences() },
-        { icon: "fas fa-coins", click: () => this.goToStake() },
+        { icon: "fas fa-snowflake", click: () => this.goToStake() },
     ];
 
     constructor(

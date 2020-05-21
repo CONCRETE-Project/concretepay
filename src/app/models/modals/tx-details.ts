@@ -11,4 +11,5 @@ export interface TxDetailsModalInput {
     credentials: CoinCredentials;
     fee: number;
     type: string;
+    stakeAmount: number;
 }

@@ -138,6 +138,13 @@ export class BlockbookService {
                 Unconfirmed: parseInt(p2pkhAccountInfo.unconfirmedBalance, 10),
                 Locked: lockedBalance,
             };
+            if (p2pkhAccountInfo.tokens) {
+                AddrArray = p2pkhAccountInfo.tokens.map((addr) => ({
+                    address: addr.name,
+                    scheme: "P2PKH",
+                    type: addr.path.split("/")[4] === "0" ? "direct" : "change",
+                }));
+            }
             TxArray = this.parseTransactions(
                 AddrArray,
                 p2pkhAccountInfo.transactions
@@ -227,15 +234,6 @@ export class BlockbookService {
                     }
                 }
                 for (let vout of tx.vout) {
-                    if (vout.addresses.length > 1) {
-                        out.push({
-                            value: parseInt(vout.value, 10),
-                            stakedvalue: parseInt(vout.value, 10),
-                            ischange: false,
-                            isstake: true,
-                        });
-                        continue;
-                    }
                     if (
                         AddrArray.filter((addr) => addr.type === "direct")
                             .map((addr) => addr.address)
@@ -245,7 +243,6 @@ export class BlockbookService {
                             value: parseInt(vout.value, 10),
                             ischange: false,
                         });
-                        continue;
                     }
                     if (
                         AddrArray.filter((addr) => addr.type === "change")
@@ -256,7 +253,14 @@ export class BlockbookService {
                             value: parseInt(vout.value, 10),
                             ischange: true,
                         });
-                        continue;
+                    }
+                    if (vout.addresses.length > 1) {
+                        out.push({
+                            value: parseInt(vout.value, 10),
+                            stakedvalue: parseInt(vout.value, 10),
+                            ischange: false,
+                            isstake: true,
+                        });
                     }
                 }
                 let newTx: Tx = {

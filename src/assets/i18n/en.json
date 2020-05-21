@@ -40,7 +40,7 @@
         "slow": "Slow",
         "confirmed": "Confirmed",
         "unconfirmed": "Unconfirmed",
-        "locked": "Locked",
+        "locked": "Staking",
         "stake-contract": "Stake Contract",
         "languages": {
             "english": "English",

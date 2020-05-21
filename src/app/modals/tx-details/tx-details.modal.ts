@@ -24,6 +24,7 @@ export class TxDetailsModal implements OnInit {
     @Input() credentials;
     @Input() fee;
     @Input() type;
+    @Input() stakeAmount;
 
     btx: Transaction;
     alternative;
