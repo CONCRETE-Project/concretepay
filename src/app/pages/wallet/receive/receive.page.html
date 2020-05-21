@@ -5,13 +5,6 @@
       <qrcode class="qr-code" copyToClipboard="{{ qrAddress }}" [qrdata]="qrAddress"  *ngIf="wallet && address" [size]="256" [level]="'M'"></qrcode>
     </ion-row>
     <ion-row class="ion-align-items-center ion-justify-content-center ion-text-center" *ngIf="wallet && wallet.Properties.backup">
-      <ion-item class="ion-padding">
-        <ion-label translate>common.amount</ion-label>
-        <ion-input type="digit" placeholder="10.00" #amount></ion-input>
-        <ion-button color="secondary" (click)="setAmount(amount.value)" translate>pages.wallet.receive.set-amount</ion-button>
-      </ion-item>
-    </ion-row>
-    <ion-row class="ion-align-items-center ion-justify-content-center ion-text-center" *ngIf="wallet && wallet.Properties.backup">
       <ion-button
               *ngIf="credentials.isSegwit"
               (click)="getAddress('P2SHInP2WPKH')"><span class="span-white" style="font-size: 16px">common.segwit</span></ion-button>

@@ -10,6 +10,13 @@
         </ion-row>
         <br/>
         <ion-row class="ion-justify-content-center">
+            <span translate>components.wallet.balance</span>
+        </ion-row>
+        <ion-row class="ion-justify-content-center" *ngIf="credentials">
+            <span>{{availableBalance | satToUnit:credentials.Coin}}</span>
+        </ion-row>
+        <br/>
+        <ion-row class="ion-justify-content-center">
             <ion-item>
                 <ion-label class="ion-justify-content-center">
                     <span translate>pages.wallet.stake.stake-amount</span>

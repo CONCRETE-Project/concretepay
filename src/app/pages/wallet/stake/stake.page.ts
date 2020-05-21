@@ -21,6 +21,7 @@ export class WalletStakePage implements OnInit, OnDestroy {
     credentials: CoinCredentials;
     paramsSub: Subscription;
     selectedAmount: number;
+    availableBalance: number;
     constructor(
         private route: ActivatedRoute,
         public walletStorageService: WalletStorageService,
@@ -50,6 +51,9 @@ export class WalletStakePage implements OnInit, OnDestroy {
             this.credentials = this.wallet.Credentials.wallet.find(
                 (coinCred) => coinCred.Coin === coin
             );
+            this.availableBalance =
+                this.credentials.Balance.Confirmed -
+                this.credentials.Balance.Locked;
         });
     }
 

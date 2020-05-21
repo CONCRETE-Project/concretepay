@@ -11,7 +11,6 @@
         <ion-label position="stacked" translate>pages.wallet.add.wallet-key</ion-label>
         <ion-select formControlName="selectedSeed" [placeholder]="'pages.wallet.add.wallet-key-placeholder' | translate" #Seed (ionChange)="SetSeed(Seed.value)">
           <ion-select-option value="Random" translate>pages.wallet.add.seeds.random</ion-select-option>
-          <ion-select-option value="Scan" translate>pages.wallet.add.seeds.scan</ion-select-option>
           <ion-select-option value="MnemonicPhrase" translate>pages.wallet.add.seeds.import</ion-select-option>
         </ion-select>
       </ion-item>
