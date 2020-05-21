@@ -8,7 +8,7 @@
         "warning": "警告!",
         "error": "错误",
         "confirm": "确认",
-        "clear": "确认",
+        "clear": "清除",
         "concirmations": "确认",
         "sent": "发送",
         "received": "接收",
@@ -40,8 +40,8 @@
         "slow": "慢",
         "confirmed": "已确认",
         "unconfirmed": "未确认",
-        "locked": "Locked",
-        "stake-contract": "权益合同",
+        "locked": "Staking",
+        "stake-contract": "权益协议",
         "ok": "好",
         "cancel": "取消",
         "languages": {
@@ -164,17 +164,17 @@
                     "export-mnemonic": "导出助记词",
                     "advanced": "高级",
                     "delete": "删除"
-                },
-                "stake": {
-                    "title": "冷桩",
-                    "description-1": "冷桩 是一项高级功能，可帮助共识系统委派代币.",
-                    "description-2": "这种方法是安全的，因为您仅委派您的抵押权而不是代币",
-                    "stake-amount": "选择要投注的金额",
-                    "stake-confirm": "开始放样",
-                    "confirm-stake": "Are you sure you want to put this coins to stake?",
-                    "success": "您的股份已成功设置",
-                    "error": "提交您的股份交易时出错"
                 }
+            },
+            "stake": {
+                "title": "离线 Staking",
+                "description-1": "离线 Staking 使您安全的将硬币存储在钱包中，钱包离线仍然可以获得区块奖励。您可以随时将您的硬币提取到任何地址",
+                "description-2": "这种方法是安全的，仅通过证明您持有资",
+                "stake-amount": "选择要投注的金额",
+                "stake-confirm": "开始Staking",
+                "confirm-stake": "Are you sure you want to put this coins to stake?",
+                "success": "您的Staking已成功设置",
+                "error": "提交您的交易时出错"
             }
         }
     },
@@ -206,7 +206,7 @@
             "error-balance": "您的余额不足，无法执行交易",
             "receiver-info": "接收者信息",
             "payment-information": "支付信息",
-            "spend-locked": "支出锁定余额"
+            "spend-locked": "支出余额"
         },
         "export-mnemonic": {
             "title": "导出助记词"

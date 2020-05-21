@@ -3,13 +3,6 @@
     <ion-list style="background: none" lines="none">
         <ion-list-header translate>pages.settings.subtitle</ion-list-header>
 
-        <ion-item class="settings-element ion-activatable" (click)="goToAltCoinPage()">
-            <ion-icon slot="start" color="black" name="logo-bitcoin"></ion-icon>
-            <span translate>pages.settings.alt-coin</span>
-            <ion-note *ngIf="selectedAlternative" slot="end">{{ selectedAlternative.name }}</ion-note>
-            <ion-ripple-effect></ion-ripple-effect>
-        </ion-item>
-        <br/>
         <ion-item class="settings-element ion-activatable" (click)="reloadCoinsData()">
             <ion-icon slot="start" color="black" name="refresh"></ion-icon>
             <span translate>pages.settings.reload-coins</span>
