@@ -24,4 +24,11 @@ export class ToolBarComponent {
             this.addPaddingTop = true;
         }
     }
+
+    public async goToSettings() {
+        await this.navController.navigateForward("/settings", {
+            animated: true,
+            animationDirection: "forward",
+        });
+    }
 }

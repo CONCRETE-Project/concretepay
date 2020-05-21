@@ -125,14 +125,17 @@ export class BlockbookService {
                 this.platform.isAndroid || this.platform.isiOS
                     ? await this.getUtxos(CoinCredentials)
                     : await this.getUtxos(CoinCredentials);
-            let lockedBalance = p2pkhAccountLockedUtxos.length > 0 ? p2pkhAccountLockedUtxos
-                .filter((utxo) => utxo.stake_contract)
-                .map((utxo) => {
-                    return parseInt(utxo.value);
-                })
-                .reduce((a, b) => {
-                    return a + b;
-                }) : 0;
+            let lockedBalance =
+                p2pkhAccountLockedUtxos.length > 0
+                    ? p2pkhAccountLockedUtxos
+                          .filter((utxo) => utxo.stake_contract)
+                          .map((utxo) => {
+                              return parseInt(utxo.value);
+                          })
+                          .reduce((a, b) => {
+                              return a + b;
+                          })
+                    : 0;
             totalBalance = {
                 Confirmed: parseInt(p2pkhAccountInfo.balance, 10),
                 Unconfirmed: parseInt(p2pkhAccountInfo.unconfirmedBalance, 10),

@@ -68,13 +68,6 @@ export class HomePage {
         });
     }
 
-    public async goToSettings() {
-        await this.navCtrl.navigateForward("/settings", {
-            animated: true,
-            animationDirection: "forward",
-        });
-    }
-
     public async getWallets() {
         this.wallets = await this.walletStorageService.getAll(false);
     }
