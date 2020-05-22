@@ -22,8 +22,7 @@ export class CoinsService {
     async getCoins(): Promise<CoinsServiceResponse> {
         let res = await this.http
             .get<BaseResponse>(
-                this.corsAnywhere +
-                    this.url +
+                this.getUrl() +
                     "coins/" +
                     this.platformService.version.toString()
             )
@@ -33,7 +32,7 @@ export class CoinsService {
 
     async getCoinInfo(tag: string): Promise<CoinData> {
         let res = await this.http
-            .get<BaseResponse>(this.corsAnywhere + this.url + "coin/" + tag)
+            .get<BaseResponse>(this.getUrl() + "coin/" + tag)
             .toPromise();
         return res.data;
     }
@@ -42,12 +41,20 @@ export class CoinsService {
         try {
             let res = await this.http
                 .get<BaseResponse>(
-                    this.corsAnywhere + this.url + "stake/" + tag
+                    this.getUrl() + "stake/" + tag
                 )
                 .toPromise();
             return res.data;
         } catch (e) {
             return null;
+        }
+    }
+
+    public getUrl(): string {
+        if (this.platformService.isAndroid || this.platformService.isiOS) {
+            return this.corsAnywhere + this.url
+        } else {
+            return this.url
         }
     }
 }

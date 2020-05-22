@@ -382,6 +382,10 @@ export class BlockbookService {
     }
 
     public getUrl(coinCredentials: CoinCredentials): string {
-        return this.corsAnywhere + coinCredentials.Blockbook;
+        if (this.platform.isAndroid || this.platform.isiOS) {
+            return this.corsAnywhere + coinCredentials.Blockbook;
+        } else {
+            return coinCredentials.Blockbook
+        }
     }
 }

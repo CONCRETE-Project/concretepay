@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import * as _ from "lodash";
 import { CoinRates } from "../../models/rates/rates";
 import { RatesStorageService } from "../storage/rates/rates.service";
+import { PlatformService } from '../platform/platform.service';
 
 @Injectable({
     providedIn: "root",
@@ -17,7 +18,8 @@ export class RateService {
 
     constructor(
         private http: HttpClient,
-        private ratesStorageService: RatesStorageService
+        private ratesStorageService: RatesStorageService,
+        private platformService: PlatformService
     ) {}
 
     public async updateRates(coin: string) {
@@ -109,8 +111,16 @@ export class RateService {
 
     public async getCoinRates(coin: string): Promise<any[]> {
         let res = await this.http
-            .get<any>(this.corsAnywhere + this.rates + coin.toLowerCase())
+            .get<any>(this.getUrl() + coin.toLowerCase())
             .toPromise();
         return res.data;
+    }
+
+    public getUrl(): string {
+        if (this.platformService.isAndroid || this.platformService.isiOS) {
+            return this.corsAnywhere + this.rates
+        } else {
+            return this.rates
+        }
     }
 }
