@@ -7,6 +7,7 @@ import {
     BaseResponse,
 } from "src/app/models/coins-service/coins-service";
 import { CoinData } from "src/app/models/coin/coin";
+import { HTTP } from "@ionic-native/http/ngx";
 
 @Injectable({
     providedIn: "root",

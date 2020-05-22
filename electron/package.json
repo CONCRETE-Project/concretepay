@@ -1,6 +1,6 @@
 {
     "name": "ConcretePay",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "ConcretePay - Secure cryptocurrency wallet",
     "main": "index.js",
     "homepage": "https://polispay.com",
