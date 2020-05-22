@@ -88,6 +88,7 @@ export class ConfirmModal implements OnInit {
             slow: Math.floor((this.TxSize / 1024) * feeRate.slow),
         };
         await this.onGoingProcess.clear();
+        await this.startTx()
     }
 
     public async getUtxos() {
@@ -166,8 +167,8 @@ export class ConfirmModal implements OnInit {
         return null;
     }
 
-    public async feeSelected(e) {
-        this.FeeSatoshis = this.FeeRates[e];
+    public async startTx() {
+        this.FeeSatoshis = this.FeeRates.fast;
         let pass = await this.askPassword();
         let hash = sha("sha256").update(pass);
         if (hash.digest("hex") === this.wallet.Credentials.passhash) {

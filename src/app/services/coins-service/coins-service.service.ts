@@ -11,8 +11,7 @@ import { CoinData } from "src/app/models/coin/coin";
     providedIn: "root",
 })
 export class CoinsService {
-    public url = "http://114.67.97.142:8081/";
-    public corsAnywhere = "https://cors-anywhere-eabz.herokuapp.com/";
+    public url = "https://coins.concretecoin.org/";
 
     constructor(
         private http: HttpClient,
@@ -22,7 +21,7 @@ export class CoinsService {
     async getCoins(): Promise<CoinsServiceResponse> {
         let res = await this.http
             .get<BaseResponse>(
-                this.getUrl() +
+                this.url +
                     "coins/" +
                     this.platformService.version.toString()
             )
@@ -32,7 +31,7 @@ export class CoinsService {
 
     async getCoinInfo(tag: string): Promise<CoinData> {
         let res = await this.http
-            .get<BaseResponse>(this.getUrl() + "coin/" + tag)
+            .get<BaseResponse>(this.url + "coin/" + tag)
             .toPromise();
         return res.data;
     }
@@ -41,7 +40,7 @@ export class CoinsService {
         try {
             let res = await this.http
                 .get<BaseResponse>(
-                    this.getUrl() + "stake/" + tag
+                    this.url + "stake/" + tag
                 )
                 .toPromise();
             return res.data;
@@ -50,11 +49,4 @@ export class CoinsService {
         }
     }
 
-    public getUrl(): string {
-        if (this.platformService.isAndroid || this.platformService.isiOS) {
-            return this.corsAnywhere + this.url
-        } else {
-            return this.url
-        }
-    }
 }

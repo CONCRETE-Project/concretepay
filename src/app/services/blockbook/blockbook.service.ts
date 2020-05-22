@@ -48,14 +48,21 @@ export class BlockbookService {
             },
         };
         if (CoinCredentials.isSegwit) {
-            let p2wpkhAccountInfo: BlockbookInfo = await this.getAccountInfoWeb(
-                CoinCredentials,
-                "P2WPKH"
-            );
-            let p2shAccountInfo: BlockbookInfo = await this.getAccountInfoWeb(
-                CoinCredentials,
-                "P2SHInP2WPKH"
-            );
+            let p2wpkhAccountInfo: BlockbookInfo =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getAccountInfoMobile(CoinCredentials, "P2WPKH")
+                    : await this.getAccountInfoWeb(CoinCredentials, "P2WPKH");
+
+            let p2shAccountInfo: BlockbookInfo =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getAccountInfoMobile(
+                          CoinCredentials,
+                          "P2SHInP2WPKH"
+                      )
+                    : await this.getAccountInfoWeb(
+                          CoinCredentials,
+                          "P2SHInP2WPKH"
+                      );
             derivationsData.P2WPKH = this.getLastAddress(p2wpkhAccountInfo);
             derivationsData.P2SHInP2WPKH = this.getLastAddress(p2shAccountInfo);
             totalBalance = {
@@ -108,13 +115,16 @@ export class BlockbookService {
             }
             TxArray = [].concat(p2wpkhParsedTx, p2shParseTx);
         } else {
-            let p2pkhAccountInfo: BlockbookInfo = await this.getAccountInfoWeb(
-                CoinCredentials,
-                "P2PKH"
-            );
+            let p2pkhAccountInfo: BlockbookInfo =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getAccountInfoMobile(CoinCredentials, "P2PKH")
+                    : await this.getAccountInfoWeb(CoinCredentials, "P2PKH");
 
             derivationsData.P2PKH = this.getLastAddress(p2pkhAccountInfo);
-            let p2pkhAccountLockedUtxos = await this.getUtxos(CoinCredentials);
+            let p2pkhAccountLockedUtxos =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getUtxos(CoinCredentials)
+                    : await this.getUtxos(CoinCredentials);
             let lockedBalance =
                 p2pkhAccountLockedUtxos.length > 0
                     ? p2pkhAccountLockedUtxos
@@ -168,6 +178,22 @@ export class BlockbookService {
                     this.gap
             )
             .toPromise();
+    }
+
+    public async getAccountInfoMobile(
+        CoinCredentials: CoinCredentials,
+        Scheme
+    ): Promise<BlockbookInfo> {
+        let req = await this.httpnative.get(
+            this.getUrl(CoinCredentials) +
+                "/api/v2/xpub/" +
+                CoinCredentials.Derivations[Scheme].AccountPublicKey +
+                "?details=txs&tokens=used&gap=" +
+                this.gap,
+            {},
+            {}
+        );
+        return JSON.parse(req.data);
     }
 
     public getLastAddress(accountInfo: BlockbookInfo) {
@@ -257,14 +283,14 @@ export class BlockbookService {
     public async getUtxos(CoinCredentials: CoinCredentials): Promise<Utxo[]> {
         let utxos: Utxo[];
         if (CoinCredentials.isSegwit) {
-            let p2wpkhUtxos: Utxo[] = await this.getUtxosWeb(
-                CoinCredentials,
-                "P2WPKH"
-            );
-            let p2shUtxos: Utxo[] = await this.getUtxosWeb(
-                CoinCredentials,
-                "P2SHInP2WPKH"
-            );
+            let p2wpkhUtxos: Utxo[] =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getUtxosMobile(CoinCredentials, "P2WPKH")
+                    : await this.getUtxosWeb(CoinCredentials, "P2WPKH");
+            let p2shUtxos: Utxo[] =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getUtxosMobile(CoinCredentials, "P2SHInP2WPKH")
+                    : await this.getUtxosWeb(CoinCredentials, "P2SHInP2WPKH");
             p2wpkhUtxos.map((utxo) => {
                 utxo.scheme = "P2WPKH";
                 return utxo;
@@ -275,10 +301,10 @@ export class BlockbookService {
             });
             utxos = p2wpkhUtxos.concat(p2shUtxos);
         } else {
-            let p2pkhUtxos: Utxo[] = await this.getUtxosWeb(
-                CoinCredentials,
-                "P2PKH"
-            );
+            let p2pkhUtxos: Utxo[] =
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getUtxosMobile(CoinCredentials, "P2PKH")
+                    : await this.getUtxosWeb(CoinCredentials, "P2PKH");
             p2pkhUtxos.map((utxo) => {
                 utxo.scheme = "P2PKH";
                 return utxo;
@@ -303,13 +329,38 @@ export class BlockbookService {
             .toPromise();
     }
 
+    public async getUtxosMobile(
+        CoinCredentials: CoinCredentials,
+        Scheme
+    ): Promise<Utxo[]> {
+        let req = await this.httpnative.get(
+            this.getUrl(CoinCredentials) +
+                "/api/v2/utxo/" +
+                CoinCredentials.Derivations[Scheme].AccountPublicKey +
+                "?gap=" +
+                this.gap,
+            {},
+            {}
+        );
+        return JSON.parse(req.data);
+    }
+
     public async getFeeRate(
         CoinCredentials: CoinCredentials
     ): Promise<FeeRates> {
         return {
-            fast: await this.getFeeWeb(CoinCredentials, 2),
-            medium: await this.getFeeWeb(CoinCredentials, 6),
-            slow: await this.getFeeWeb(CoinCredentials, 12),
+            fast:
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getFeeMobile(CoinCredentials, 2)
+                    : await this.getFeeWeb(CoinCredentials, 2),
+            medium:
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getFeeMobile(CoinCredentials, 6)
+                    : await this.getFeeWeb(CoinCredentials, 6),
+            slow:
+                this.platform.isAndroid || this.platform.isiOS
+                    ? await this.getFeeMobile(CoinCredentials, 12)
+                    : await this.getFeeWeb(CoinCredentials, 12),
         };
     }
 
@@ -335,11 +386,29 @@ export class BlockbookService {
         }
     }
 
+    public async getFeeMobile(
+        CoinCredentials: CoinCredentials,
+        blocks: number
+    ): Promise<number> {
+        try {
+            let req = await this.httpnative.get(
+                this.getUrl(CoinCredentials) + "/api/v1/estimatefee/" + blocks,
+                {},
+                {}
+            );
+            return JSON.parse(req.data).result * 1e8;
+        } catch (e) {
+            return 20000;
+        }
+    }
+
     public async sendTx(
         CoinCredentials: CoinCredentials,
         rawTx: string
     ): Promise<any> {
-        return await this.sendTxWeb(CoinCredentials, rawTx);
+        return this.platform.isAndroid || this.platform.isiOS
+            ? await this.sendTxMobile(CoinCredentials, rawTx)
+            : await this.sendTxWeb(CoinCredentials, rawTx);
     }
 
     public async sendTxWeb(
@@ -354,11 +423,25 @@ export class BlockbookService {
             .toPromise();
     }
 
+    public async sendTxMobile(
+        CoinCredentials: CoinCredentials,
+        rawTx: string
+    ): Promise<string> {
+        let req = await this.httpnative.get(
+            this.getUrl(CoinCredentials) + "/api/v2/sendtx/" + rawTx,
+            {},
+            {}
+        );
+        return JSON.parse(req.data);
+    }
+
     public async getTx(
         CoinCredentials: CoinCredentials,
         txid: string
     ): Promise<Transaction> {
-        return await this.getTxWeb(CoinCredentials, txid);
+        return this.platform.isAndroid || this.platform.isiOS
+            ? await this.getTxMobile(CoinCredentials, txid)
+            : await this.getTxWeb(CoinCredentials, txid);
     }
 
     public async getTxWeb(
@@ -381,11 +464,26 @@ export class BlockbookService {
         return req.blockbook.coin;
     }
 
+    public async getTxMobile(
+        CoinCredentials: CoinCredentials,
+        txid: string
+    ): Promise<Transaction> {
+        let req = await this.httpnative.get(
+            this.getUrl(CoinCredentials) + "/api/v2/tx/" + txid,
+            {},
+            {}
+        );
+        return JSON.parse(req.data);
+    }
+
     public getUrl(coinCredentials: CoinCredentials): string {
-        if (this.platform.isAndroid || this.platform.isiOS) {
+        if (
+            !this.platform.isiOS &&
+            !this.platform.isAndroid &&
+            !this.platform.isElectron
+        ) {
             return this.corsAnywhere + coinCredentials.Blockbook;
-        } else {
-            return coinCredentials.Blockbook
         }
+        return coinCredentials.Blockbook;
     }
 }

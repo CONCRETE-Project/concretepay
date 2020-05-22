@@ -23,14 +23,7 @@
       </ion-item>
     </ion-row>
     <ion-row class="ion-align-items-center ion-justify-content-center">
-      <ion-button (click)="toggleCurrency()" class="modal-send currency-outline">{{this.selectedCurrency}}&nbsp;&nbsp;
-        <ion-icon class="send-icons fas fa-exchange-alt"></ion-icon>
-      </ion-button>
-    </ion-row>
-    <ion-row class="ion-align-items-center ion-justify-content-center">
-      <h3 *ngIf="isFiat && !this.satoshiAmount">{{0 | satToUnit:coin}}</h3>
-      <h3 *ngIf="isFiat && this.satoshiAmount">{{this.satoshiAmount | satToUnit:coin}}</h3>
-      <h3 *ngIf="!isFiat">${{this.fiatAmount.toLocaleString() }}&nbsp;{{this.alternative.toUpperCase()}}</h3>
+      <span class="modal-send currency-outline">{{this.selectedCurrency}}&nbsp;&nbsp;</span>
     </ion-row>
   </ion-grid>
 </ion-content>
