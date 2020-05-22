@@ -1,6 +1,6 @@
 {
     "name": "ConcretePay",
-    "version": "1.0.1",
+    "version": "1.0.",
     "description": "ConcretePay - Secure cryptocurrency wallet",
     "main": "index.js",
     "homepage": "https://polispay.com",
@@ -8,7 +8,8 @@
       "electron:start": "electron ./",
       "build:linux": "electron-builder --linux snap deb",
       "build:mac": "CSC_IDENTITY_AUTO_DISCOVERY=true electron-builder --mac dmg",
-      "build:win": "electron-builder --win nsis portable"
+      "build:win": "electron-builder --win nsis portable",
+      "build:all": "yarn run build:win && yarn run build:mac && yarn run build:linux"
     },
     "build": {
       "files": [

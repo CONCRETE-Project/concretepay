@@ -13,6 +13,7 @@ export class RateService {
     private ratesCachedTime = 60 * 5 * 1000; // 5 minutes;
 
     public rates = "http://114.67.97.142:8080/";
+    public corsAnywhere = "https://cors-anywhere-eabz.herokuapp.com/";
 
     constructor(
         private http: HttpClient,
@@ -108,7 +109,7 @@ export class RateService {
 
     public async getCoinRates(coin: string): Promise<any[]> {
         let res = await this.http
-            .get<any>(this.rates + coin.toLowerCase())
+            .get<any>(this.corsAnywhere + this.rates + coin.toLowerCase())
             .toPromise();
         return res.data;
     }

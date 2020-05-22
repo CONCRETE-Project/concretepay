@@ -56,7 +56,6 @@ export class CoinsStorageService {
             await this.clearCoinFactory();
             await this.setCoinFactory(coinsConf);
         } catch (e) {
-            console.log(e);
             // If it fails, means there is no access for coin data on remote or local, crash the app with a popup.
             await this.popupService.ionicAlert(
                 "common.error",
@@ -70,7 +69,9 @@ export class CoinsStorageService {
             try {
                 // Try to load coins stored
                 let coinsStored = await this.get();
-                if (!coinsStored || coinsStored.coins.length === 0) {
+                if (coinsStored) {
+                    await this.loadCoinsFromRemote();
+                } else if (coinsStored.coins.length === 0) {
                     await this.loadCoinsFromRemote();
                 }
                 // Check against remote server the amount of coins
@@ -80,7 +81,6 @@ export class CoinsStorageService {
                         await this.loadCoinsFromRemote();
                     }
                 } catch (e) {
-                    console.log(e);
                     await this.setCoinFactory(coinsStored.coins);
                     resolve();
                 }
@@ -88,7 +88,6 @@ export class CoinsStorageService {
                 resolve();
             } catch (e) {
                 // If there is an error, just reload all the information
-                console.log(e);
                 await this.loadCoinsFromRemote();
                 resolve();
             }
