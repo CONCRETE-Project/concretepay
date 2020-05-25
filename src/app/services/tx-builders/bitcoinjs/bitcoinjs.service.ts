@@ -212,7 +212,7 @@ export class BitcoinjsService {
         finalScriptWitness: Buffer | undefined;
     } {
         let payment: bitcoin.Payment = {
-            network: CoinFactory.getCoin("CCT").getNetwork(),
+            network: CoinFactory.getCoin("CCE").getNetwork(),
             output: script,
             input: bitcoin.script.compile([
                 input.partialSig![0].signature,

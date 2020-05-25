@@ -9,7 +9,7 @@
         "error": "Error",
         "confirm": "Confirm",
         "clear": "Clear",
-        "concirmations": "Confirmations",
+        "confirmations": "Confirmations",
         "sent": "Sent",
         "received": "Received",
         "tx-id": "Transaction ID",

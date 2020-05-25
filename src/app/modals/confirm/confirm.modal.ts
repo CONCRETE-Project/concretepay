@@ -88,7 +88,7 @@ export class ConfirmModal implements OnInit {
             slow: Math.floor((this.TxSize / 1024) * feeRate.slow),
         };
         await this.onGoingProcess.clear();
-        await this.startTx()
+        await this.startTx();
     }
 
     public async getUtxos() {

@@ -49,8 +49,21 @@ export class HomePage {
     }
 
     private async loadWallets() {
+        await this.fixWallets();
         await this.getAlternative();
         await this.getWallets();
+    }
+
+    private async fixWallets() {
+        let wallets = await this.walletStorageService.getAll(false);
+        for (let wallet of wallets) {
+            for (let credential of wallet.Credentials.wallet) {
+                if (credential.Coin === "CCT") {
+                    credential.Coin = "CCE";
+                }
+            }
+            await this.walletStorageService.updateFullWallet(wallet);
+        }
     }
 
     public async doRefresh(refresher) {

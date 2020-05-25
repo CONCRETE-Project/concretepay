@@ -126,7 +126,8 @@ export class BlockbookService {
                     ? await this.getUtxos(CoinCredentials)
                     : await this.getUtxos(CoinCredentials);
             let lockedBalance =
-                p2pkhAccountLockedUtxos.filter((utxo) => utxo.stake_contract).length > 0
+                p2pkhAccountLockedUtxos.filter((utxo) => utxo.stake_contract)
+                    .length > 0
                     ? p2pkhAccountLockedUtxos
                           .filter((utxo) => utxo.stake_contract)
                           .map((utxo) => {

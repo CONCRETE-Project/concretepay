@@ -21,9 +21,7 @@ export class CoinsService {
     async getCoins(): Promise<CoinsServiceResponse> {
         let res = await this.http
             .get<BaseResponse>(
-                this.url +
-                    "coins/" +
-                    this.platformService.version.toString()
+                this.url + "coins/" + this.platformService.version.toString()
             )
             .toPromise();
         return res.data;
@@ -39,14 +37,11 @@ export class CoinsService {
     async getStakeAddress(tag: string): Promise<string> {
         try {
             let res = await this.http
-                .get<BaseResponse>(
-                    this.url + "stake/" + tag
-                )
+                .get<BaseResponse>(this.url + "stake/" + tag)
                 .toPromise();
             return res.data;
         } catch (e) {
             return null;
         }
     }
-
 }

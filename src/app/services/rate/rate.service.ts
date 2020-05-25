@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import * as _ from "lodash";
 import { CoinRates } from "../../models/rates/rates";
 import { RatesStorageService } from "../storage/rates/rates.service";
-import { PlatformService } from '../platform/platform.service';
+import { PlatformService } from "../platform/platform.service";
 
 @Injectable({
     providedIn: "root",
@@ -114,5 +114,4 @@ export class RateService {
             .toPromise();
         return res.data;
     }
-
 }

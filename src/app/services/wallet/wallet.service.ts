@@ -78,7 +78,7 @@ export class WalletService {
             },
         };
         let wallet = new Wallet(walletInfo);
-        let succes = await wallet.newCoinCredentials("CCT", password);
+        let succes = await wallet.newCoinCredentials("CCE", password);
         if (!succes) return false;
         if (succes) {
             await this.walletStorageService.updateFullWallet(wallet);
