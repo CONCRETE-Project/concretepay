@@ -62,19 +62,6 @@ export class ConfirmModal implements OnInit {
         await this.getUtxos();
         this.FeeSatoshis = null;
         this.SerializedTx = null;
-        await this.onGoingProcess.clear();
-        let availableBalance = this.Utxos.map((utxo) =>
-            parseInt(utxo.value, 10)
-        ).reduce((a, b) => a + b, 0);
-        if (availableBalance < this.payment.amount) {
-            await this.popupProvider.ionicAlert(
-                "common.error",
-                "modals.confirm.error-balance"
-            );
-            await this.closeModal(false, false);
-            return;
-        }
-        await this.onGoingProcess.set("common.loading");
         this.TxSize = await this.getTxSize();
         this.TotalAvailable = 0;
         for (let utxo of this.Utxos) {
@@ -88,7 +75,6 @@ export class ConfirmModal implements OnInit {
             slow: Math.floor((this.TxSize / 1024) * feeRate.slow),
         };
         await this.onGoingProcess.clear();
-        await this.startTx();
     }
 
     public async getUtxos() {
@@ -176,10 +162,54 @@ export class ConfirmModal implements OnInit {
                 await this.onGoingProcess.set(
                     "modals.confirm.building-transaction"
                 );
+                let availableBalance = this.Utxos.map((utxo) =>
+                    parseInt(utxo.value, 10)
+                ).reduce((a, b) => a + b, 0);
+                if (availableBalance < this.payment.amount) {
+                    this.onGoingProcess.clear();
+                    await this.popupProvider.ionicAlert(
+                        "common.error",
+                        "modals.confirm.error-balance"
+                    );
+                    return;
+                }
                 let serializedTx = await this.buildTx(this.credentials, pass);
                 if (serializedTx) {
                     this.SerializedTx = serializedTx;
                     this.onGoingProcess.clear();
+                    let sendAmount = this.useSendMax
+                        ? (this.TotalAvailable - this.FeeSatoshis) * (1 / 1e8)
+                        : this.payment.amount * (1 / 1e8);
+                    let confirm = await this.popupProvider.ionicConfirm(
+                        "common.confirm",
+                        (await this.translateService
+                            .get("modals.confirm.confirm-send")
+                            .toPromise()) +
+                            " " +
+                            sendAmount.toFixed(8) +
+                            " " +
+                            this.credentials.Coin.toUpperCase()
+                    );
+                    if (confirm) {
+                        await this.onGoingProcess.set(
+                            "modals.confirm.broadcasting"
+                        );
+                        try {
+                            await this.blockbookProvider.sendTx(
+                                this.credentials,
+                                this.SerializedTx
+                            );
+                            this.onGoingProcess.clear();
+                            await this.closeModal(true, false);
+                        } catch (e) {
+                            this.onGoingProcess.clear();
+                            await this.popupProvider.ionicConfirm(
+                                "common.error",
+                                JSON.stringify(e)
+                            );
+                            await this.closeModal(false, false);
+                        }
+                    }
                 } else {
                     this.onGoingProcess.clear();
                     await this.popupProvider.ionicAlert(
@@ -187,6 +217,7 @@ export class ConfirmModal implements OnInit {
                         "modals.confirm.error-build"
                     );
                     await this.closeModal(false, false);
+                    return;
                 }
             } catch (e) {
                 this.onGoingProcess.clear();
@@ -195,43 +226,11 @@ export class ConfirmModal implements OnInit {
                     "modals.confirm.error-build"
                 );
                 await this.closeModal(false, false);
+                return;
             }
         } else {
             await this.popupError();
-        }
-    }
-
-    public async broadCastTx() {
-        let sendAmount = this.useSendMax
-            ? (this.TotalAvailable - this.FeeSatoshis) * (1 / 1e8)
-            : this.payment.amount * (1 / 1e8);
-        let confirm = await this.popupProvider.ionicConfirm(
-            "common.confirm",
-            (await this.translateService
-                .get("modals.confirm.confirm-send")
-                .toPromise()) +
-                " " +
-                sendAmount.toFixed(8) +
-                " " +
-                this.credentials.Coin.toUpperCase()
-        );
-        if (confirm) {
-            await this.onGoingProcess.set("modals.confirm.broadcasting");
-            try {
-                await this.blockbookProvider.sendTx(
-                    this.credentials,
-                    this.SerializedTx
-                );
-                this.onGoingProcess.clear();
-                await this.closeModal(true, false);
-            } catch (e) {
-                this.onGoingProcess.clear();
-                await this.popupProvider.ionicConfirm(
-                    "common.error",
-                    JSON.stringify(e)
-                );
-                await this.closeModal(false, false);
-            }
+            return;
         }
     }
 

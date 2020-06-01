@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ModalController } from "@ionic/angular";
-import { RateService } from "../../services/rate/rate.service";
 
 @Component({
     selector: "app-amount",
@@ -20,10 +19,7 @@ export class AmountModal implements OnInit {
     selectedAmount: number;
     selectedAmountStr = "";
     useSendMax: boolean;
-    constructor(
-        public modalCtrl: ModalController,
-        public rateService: RateService
-    ) {}
+    constructor(public modalCtrl: ModalController) {}
 
     async dismissModal() {
         await this.modalCtrl.dismiss({
@@ -76,20 +72,20 @@ export class AmountModal implements OnInit {
                 this.selectedAmountStr = "0.";
             }
         }
-        if (this.isFiat) {
-            this.fiatAmount = parseFloat(this.selectedAmountStr);
-            this.satoshiAmount = await this.rateService.fromFiat(
-                this.fiatAmount,
-                this.alternative,
-                this.coin
-            );
-        } else {
-            this.satoshiAmount = parseFloat(this.selectedAmountStr) * 1e8;
-            this.fiatAmount = await this.rateService.toFiat(
-                this.satoshiAmount,
-                this.alternative,
-                this.coin
-            );
-        }
+        // if (this.isFiat) {
+        //     this.fiatAmount = parseFloat(this.selectedAmountStr);
+        //     this.satoshiAmount = await this.rateService.fromFiat(
+        //         this.fiatAmount,
+        //         this.alternative,
+        //         this.coin
+        //     );
+        // } else {
+        this.satoshiAmount = parseFloat(this.selectedAmountStr) * 1e8;
+        //this.fiatAmount = await this.rateService.toFiat(
+        //    this.satoshiAmount,
+        //    this.alternative,
+        //    this.coin
+        //);
+        // }
     }
 }

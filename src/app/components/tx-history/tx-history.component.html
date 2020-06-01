@@ -11,9 +11,9 @@
     <ion-grid>
 
       <ion-row *ngIf="isConfirmed">
-        <span *ngIf="isReceived && !isSent && !isContract && !isContract"><span translate>components.tx-history.received-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
-        <span *ngIf="isSent && !isReceived  && !isContract && !isContract"><span translate>components.tx-history.sent-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
-        <span *ngIf="isSent && isReceived  && !isContract && !isContract"><span translate>components.tx-history.moved-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isReceived && !isSent && !isContract"><span translate>components.tx-history.received-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && !isReceived  && !isContract"><span translate>components.tx-history.sent-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isSent && isReceived  && !isContract"><span translate>components.tx-history.moved-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
         <span *ngIf="isContract" translate>common.stake-contract</span>
       </ion-row>
 
@@ -22,7 +22,7 @@
       </ion-row>
 
       <ion-row>
-        <span *ngIf="isContract" class="received">{{ StakeAmount | satToUnit:coin }}</span>
+        <span *ngIf="isContract && isConfirmed" class="received">{{ StakeAmount | satToUnit:coin }}</span>
         <span *ngIf="isReceived  && !isSent && isConfirmed && !isContract" class="received">{{ Amount | satToUnit:coin }}</span>
         <span *ngIf="isSent && isReceived  && isConfirmed && !isContract" class="moved">{{ Amount| satToUnit:coin }}</span>
         <div *ngIf="isSent && !isReceived  && isConfirmed && !isContract" class="sent" style="color: #cd4b5c">

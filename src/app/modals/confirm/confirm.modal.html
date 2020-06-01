@@ -34,7 +34,7 @@
       <ion-item-divider translate>modals.confirm.payment-information</ion-item-divider>
       <div class="ion-padding">
         <ion-row>
-          <span *ngIf="useSendMax && TotalAvailable && FeeSatoshis">{{TotalAvailable - FeeSatoshis | satToUnit:credentials.Coin}}</span>
+          <span *ngIf="useSendMax && TotalAvailable">{{TotalAvailable - FeeSatoshis | satToUnit:credentials.Coin}}</span>
           <span *ngIf="!useSendMax">{{payment.amount | satToUnit:credentials.Coin}}</span>
         </ion-row>
         <!-- <ion-row>
@@ -51,7 +51,7 @@
   </ion-card>
 </ion-content>
 <ion-footer class="page-content-with-slim-header">
-  <ion-button color="secondary" style="margin: 0" expand="full" size="large" (click)="broadCastTx()"
-              [disabled]="(!SerializedTx)" translate>common.confirm
+  <ion-button color="secondary" style="margin: 0" expand="full" size="large" (click)="startTx()"
+             translate>common.confirm
   </ion-button>
 </ion-footer>

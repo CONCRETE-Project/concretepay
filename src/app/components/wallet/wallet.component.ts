@@ -43,7 +43,7 @@ export class WalletComponent implements OnInit, OnChanges {
 
     async ngOnInit() {
         this.showBalanceFiat = true;
-        this.calculateBalance();
+        //this.calculateBalance();
         this.getDarkMode();
     }
 

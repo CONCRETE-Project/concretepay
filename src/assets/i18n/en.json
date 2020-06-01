@@ -202,11 +202,11 @@
             "building-transaction": "Building Transaction...",
             "broadcasting": "Broadcasting Transaction",
             "confirm-send": "Are you sure you want to send ",
-            "error-build": "Unable to build transactiom",
+            "error-build": "Unable to build transaction",
             "error-balance": "You don't have enough balance to perform the transaction",
             "receiver-info": "Receiver Information",
             "payment-information": "Payment Information",
-            "spend-locked": "Spend locked balance"
+            "spend-locked": "Spend staking balance"
         },
         "export-mnemonic": {
             "title": "Export Mnemonic"
