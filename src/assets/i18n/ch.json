@@ -172,7 +172,7 @@
                 "description-2": "这种方法是安全的，仅通过证明您持有资产而获得奖励，不是抵押和扣除",
                 "stake-amount": "选择要投注的金额",
                 "stake-confirm": "开始Staking",
-                "confirm-stake": "Are you sure you want to put this coins to stake?",
+                "confirm-stake": "您确定使用这些硬币进行staking奖励吗?",
                 "success": "您的Staking已成功设置",
                 "error": "提交您的交易时出错"
             }
@@ -206,7 +206,7 @@
             "error-balance": "您的余额不足，无法执行交易",
             "receiver-info": "接收者信息",
             "payment-information": "支付信息",
-            "spend-locked": "支出余额"
+            "spend-locked": "使用staking余额"
         },
         "export-mnemonic": {
             "title": "导出助记词"
