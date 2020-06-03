@@ -24,6 +24,8 @@ import { TxDetailsModal } from "../../modals/tx-details/tx-details.modal";
 import { TxDetailsModalInput } from "../../models/modals/tx-details";
 import { MnemonicSelectResponse } from "src/app/models/modals/mnemonic-select";
 import { MnemonicSelectModal } from "src/app/modals/mnemonic-select/mnemonic-select.modal";
+import { PasswordModalResponse } from "src/app/models/modals/password";
+import { PasswordModal } from "src/app/modals/password/password.modal";
 
 @Injectable({
     providedIn: "root",
@@ -113,6 +115,15 @@ export class ModalService {
         });
         await mnemonic.present();
         let resp = await mnemonic.onDidDismiss();
+        return resp.data;
+    }
+
+    public async passWordModal(): Promise<PasswordModalResponse> {
+        let password = await this.modalController.create({
+            component: PasswordModal,
+        });
+        await password.present();
+        let resp = await password.onDidDismiss();
         return resp.data;
     }
 }

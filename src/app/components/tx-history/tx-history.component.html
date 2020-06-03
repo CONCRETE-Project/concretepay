@@ -4,8 +4,9 @@
       <i *ngIf="!isConfirmed" class="fas fa-2x fa-clock" style="color: #cd4b5c"></i>
       <i *ngIf="isSent && isConfirmed && !isReceived && !isContract" class="fas fa-2x fa-arrow-circle-up" style="color: #cd4b5c"></i>
       <i *ngIf="isReceived && isConfirmed && !isSent && !isContract" class="fas fa-2x fa-arrow-circle-down" style="color: #0ed3a7"></i>
+      <i *ngIf="isContractReward && isConfirmed && !isSent && !isContract" class="fas fa-2x fa-arrow-circle-down" style="color: #0ed3a7"></i>
       <i *ngIf="isSent && isConfirmed && isReceived && !isContract" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
-      <i *ngIf="isContract" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
+      <i *ngIf="isConfirmed && isContract" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
     </ion-avatar>
 
     <ion-grid>
@@ -14,7 +15,7 @@
         <span *ngIf="isReceived && !isSent && !isContract"><span translate>components.tx-history.received-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
         <span *ngIf="isSent && !isReceived  && !isContract"><span translate>components.tx-history.sent-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
         <span *ngIf="isSent && isReceived  && !isContract"><span translate>components.tx-history.moved-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
-        <span *ngIf="isContract" translate>common.stake-contract</span>
+        <span *ngIf="isContract"><span translate>common.stake-contract</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
       </ion-row>
 
       <ion-row *ngIf="!isConfirmed">

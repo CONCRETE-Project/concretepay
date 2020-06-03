@@ -7,6 +7,7 @@ import { FinishModal } from "./finish/finish.modal";
 import { ImportModal } from "./import/import.modal";
 import { TxDetailsModal } from "./tx-details/tx-details.modal";
 import { MnemonicSelectModal } from "./mnemonic-select/mnemonic-select.modal";
+import { PasswordModal } from "./password/password.modal";
 
 export const MODALS = [
     ScanModal,
@@ -18,4 +19,5 @@ export const MODALS = [
     ImportModal,
     ExportMnemonicModal,
     MnemonicSelectModal,
+    PasswordModal,
 ];

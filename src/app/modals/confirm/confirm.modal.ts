@@ -9,6 +9,7 @@ import { OnGoingProcessService } from "../../services/on-going-process/on-going-
 import { FeeRates, Utxo } from "../../models/blockbook/blockbook";
 import * as sha from "sha.js";
 import { TranslateService } from "@ngx-translate/core";
+import { ModalService } from "src/app/services/modal/modal.service";
 
 @Component({
     selector: "app-confirm",
@@ -39,6 +40,7 @@ export class ConfirmModal implements OnInit {
     spendLocked = false;
     constructor(
         public modalCtrl: ModalController,
+        public modalService: ModalService,
         public navCtrl: NavController,
         public popupProvider: PopupService,
         public walletProvider: WalletService,
@@ -155,7 +157,14 @@ export class ConfirmModal implements OnInit {
 
     public async startTx() {
         this.FeeSatoshis = this.FeeRates.fast;
-        let pass = await this.askPassword();
+        let passResponse = await this.modalService.passWordModal();
+        if (!passResponse.success) return;
+        let pass;
+        if (!passResponse.password) {
+            pass = "empty";
+        } else {
+            pass = passResponse.password;
+        }
         let hash = sha("sha256").update(pass);
         if (hash.digest("hex") === this.wallet.Credentials.passhash) {
             try {
@@ -232,14 +241,6 @@ export class ConfirmModal implements OnInit {
             await this.popupError();
             return;
         }
-    }
-
-    public async askPassword(): Promise<string> {
-        let pass = await this.popupProvider.ionicPrompt(
-            "common.password",
-            "components.wallet.ask-password"
-        );
-        return pass;
     }
 
     public async popupError() {

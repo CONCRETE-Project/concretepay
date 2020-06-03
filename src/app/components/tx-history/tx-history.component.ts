@@ -21,6 +21,7 @@ export class TxHistoryComponent implements OnInit {
     public isSent: boolean;
     public isConfirmed: boolean;
     public isContract: boolean;
+    public isContractReward: boolean;
     public Inputs = [];
     public Outputs = [];
     public Amount: number;

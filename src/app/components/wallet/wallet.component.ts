@@ -13,6 +13,7 @@ import { WalletStorageService } from "../../services/storage/wallet/wallet.servi
 import { RateService } from "../../services/rate/rate.service";
 import { CoinFactory } from "src/app/models/coin-factory/coin-factory";
 import { TranslateService } from "@ngx-translate/core";
+import { ModalService } from "src/app/services/modal/modal.service";
 
 @Component({
     selector: "app-wallet",
@@ -33,6 +34,7 @@ export class WalletComponent implements OnInit, OnChanges {
         public actionSheetController: ActionSheetController,
         public walletService: WalletService,
         public walletStorage: WalletStorageService,
+        public modalService: ModalService,
         public popup: PopupService,
         public toastCtrl: ToastController,
         public translateService: TranslateService,
@@ -107,19 +109,21 @@ export class WalletComponent implements OnInit, OnChanges {
             return {
                 text: coin.name,
                 handler: () => {
-                    this.askPassword().then((pass) => {
-                        this.wallet
-                            .newCoinCredentials(coin.tag, pass)
-                            .then(async (success) => {
-                                if (!success) {
-                                    this.popupError();
+                    this.modalService.passWordModal().then((pass) => {
+                        if (pass.success) {
+                            this.wallet
+                                .newCoinCredentials(coin.tag, pass.password)
+                                .then(async (success) => {
+                                    if (!success) {
+                                        this.popupError();
+                                        return;
+                                    }
+                                    await this.walletStorage.updateFullWallet(
+                                        this.wallet
+                                    );
                                     return;
-                                }
-                                await this.walletStorage.updateFullWallet(
-                                    this.wallet
-                                );
-                                return;
-                            });
+                                });
+                        }
                     });
                 },
             };
@@ -132,14 +136,6 @@ export class WalletComponent implements OnInit, OnChanges {
             buttons,
         });
         await actionSheet.present();
-    }
-
-    public async askPassword(): Promise<string> {
-        let pass = await this.popup.ionicPrompt(
-            "common.password",
-            "components.wallet.ask-password"
-        );
-        return pass;
     }
 
     public async popupError() {

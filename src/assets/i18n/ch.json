@@ -23,6 +23,7 @@
         "scan": "扫描",
         "close": "关闭",
         "mnemonic-phrase": "助记词",
+        "no-password": "没有密码",
         "canceled": "取消",
         "error-wallet": "创建您的钱包时出错，请重试.",
         "error-password": "密码不匹配，请重试.",

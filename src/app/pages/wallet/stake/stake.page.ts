@@ -10,6 +10,7 @@ import { BlockbookService } from "src/app/services/blockbook/blockbook.service";
 import { CoinsService } from "src/app/services/coins-service/coins-service.service";
 import { OnGoingProcessService } from "src/app/services/on-going-process/on-going-process.service";
 import { WalletService } from "src/app/services/wallet/wallet.service";
+import { ModalService } from "src/app/services/modal/modal.service";
 
 @Component({
     selector: "app-stake",
@@ -27,6 +28,7 @@ export class WalletStakePage implements OnInit, OnDestroy {
         public walletStorageService: WalletStorageService,
         public bitcoinjsService: BitcoinjsService,
         public blockbookService: BlockbookService,
+        public modalService: ModalService,
         public coinsService: CoinsService,
         private popupService: PopupService,
         private onGoingProcessService: OnGoingProcessService,
@@ -67,8 +69,14 @@ export class WalletStakePage implements OnInit, OnDestroy {
             "pages.wallet.stake.confirm-stake"
         );
         if (confirm) {
-            let pass = await this.askPassword();
-            if (!pass) return;
+            let passResponse = await this.modalService.passWordModal();
+            if (!passResponse.success) return;
+            let pass;
+            if (!passResponse.password) {
+                pass = "empty";
+            } else {
+                pass = passResponse.password;
+            }
             let hash = sha("sha256").update(pass);
             if (this.wallet.Credentials.passhash === hash.digest("hex")) {
                 await this.onGoingProcessService.set("common.loading");
@@ -130,15 +138,6 @@ export class WalletStakePage implements OnInit, OnDestroy {
                 return;
             }
         }
-    }
-
-    public async askPassword(): Promise<string> {
-        let pass = await this.popupService.ionicPrompt(
-            "common.password",
-            "pages.wallet.add.create-password"
-        );
-        if (pass) return pass;
-        return null;
     }
 
     public async popupError() {

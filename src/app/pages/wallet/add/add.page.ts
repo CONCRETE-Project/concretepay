@@ -68,8 +68,14 @@ export class AddWalletPage implements OnInit {
         if (this.isMnemonicSeed) {
             let mnemonicData = await this.modalService.importModal();
             if (mnemonicData.success) {
-                let pass = await this.askPassword();
-                if (!pass) return;
+                let passResponse = await this.modalService.passWordModal();
+                if (!passResponse.success) return;
+                let pass;
+                if (!passResponse.password) {
+                    pass = "empty";
+                } else {
+                    pass = passResponse.password;
+                }
                 let success = await this.walletService.newWallet(
                     this.createForm.value.walletName,
                     true,
@@ -89,8 +95,14 @@ export class AddWalletPage implements OnInit {
         if (this.isRandomSeed) {
             let mnemonicData = await this.modalService.mnemonicSelectModal();
             if (mnemonicData.success) {
-                let pass = await this.askPassword();
-                if (!pass) return;
+                let passResponse = await this.modalService.passWordModal();
+                if (!passResponse.success) return;
+                let pass;
+                if (!passResponse.password) {
+                    pass = "empty";
+                } else {
+                    pass = passResponse.password;
+                }
                 let success = await this.walletService.newWallet(
                     this.createForm.value.walletName,
                     false,
@@ -112,8 +124,14 @@ export class AddWalletPage implements OnInit {
             if (scanData.success) {
                 let buff = new Buffer(scanData.data, "base64");
                 let mnemonicInfo = JSON.parse(buff.toString());
-                let pass = await this.askPassword();
-                if (!pass) return;
+                let passResponse = await this.modalService.passWordModal();
+                if (!passResponse.success) return;
+                let pass;
+                if (!passResponse.password) {
+                    pass = "empty";
+                } else {
+                    pass = passResponse.password;
+                }
                 let hash = sha("sha256").update(pass).digest("hex");
                 if (hash !== mnemonicInfo.passhash) {
                     this.popupError();
@@ -135,29 +153,6 @@ export class AddWalletPage implements OnInit {
             }
             return;
         }
-    }
-
-    public async askPassword(): Promise<string> {
-        let pass = await this.popupProvider.ionicPrompt(
-            "common.password",
-            "pages.wallet.add.create-password"
-        );
-        if (pass) {
-            let pass2 = await this.popupProvider.ionicPrompt(
-                "common.password",
-                "pages.wallet.add.create-password-confirm"
-            );
-            if (pass === pass2) {
-                return pass;
-            } else {
-                await this.popupProvider.ionicAlert(
-                    "common.error",
-                    "common.error-password"
-                );
-                return null;
-            }
-        }
-        return null;
     }
 
     public async popupError() {

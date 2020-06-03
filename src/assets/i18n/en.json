@@ -23,6 +23,7 @@
         "scan": "Scan",
         "close": "Close",
         "mnemonic-phrase": "Mnemonic Phrase",
+        "no-password": "No Password",
         "canceled": "Canceled",
         "error-wallet": "There was an error creating your wallet, please try again.",
         "error-password": "Password doesn't match, please try again.",
