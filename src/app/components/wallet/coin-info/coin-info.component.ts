@@ -35,7 +35,7 @@ export class CoinInfoComponent implements OnInit {
             (coinCred) => coinCred.Coin === this.Coin
         );
         this.coinData = CoinFactory.getCoin(this.Coin);
-        await this.getAlternative();
+        //await this.getAlternative();
         await this.getInfo();
     }
 

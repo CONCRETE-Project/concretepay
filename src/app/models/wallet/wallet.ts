@@ -162,4 +162,6 @@ export interface Tx {
     txid: string;
     timestamp: number;
     fee: number;
+    reward: boolean;
+    rewardAmount: number;
 }

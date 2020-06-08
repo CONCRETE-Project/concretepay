@@ -50,7 +50,7 @@ export class HomePage {
 
     private async loadWallets() {
         await this.fixWallets();
-        await this.getAlternative();
+        //await this.getAlternative();
         await this.getWallets();
     }
 

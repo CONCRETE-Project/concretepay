@@ -38,6 +38,7 @@ export class TxHistoryComponent implements OnInit {
         this.Amount = 0;
         this.StakeAmount = 0;
         this.isConfirmed = this.txs.confirmations > 0;
+        this.isContractReward = this.txs.reward;
         this.Inputs = this.txs.inputs;
         this.Outputs = this.txs.outputs;
         this.fee = this.txs.fee;

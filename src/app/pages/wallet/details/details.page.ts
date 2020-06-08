@@ -40,7 +40,7 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
     ) {}
 
     async ngOnInit() {
-        await this.getAlternative();
+        //await this.getAlternative();
         await this.init();
     }
 
