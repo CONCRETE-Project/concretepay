@@ -24,7 +24,7 @@ export class PasswordModal {
         this.passwordIcon = this.passwordIcon === "eye-off" ? "eye" : "eye-off";
     }
 
-    async close(success: boolean, password: string) {
+    async close(success: boolean, password: string | number) {
         await this.modalCtrl.dismiss({ success: success, password: password });
     }
 }
