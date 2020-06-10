@@ -7,6 +7,8 @@ export interface TxDetailsModalInput {
     contract: boolean;
     received: boolean;
     confirmed: boolean;
+    reward: boolean;
+    reward_amount: number;
     amount: number;
     credentials: CoinCredentials;
     fee: number;

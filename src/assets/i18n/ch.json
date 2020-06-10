@@ -32,6 +32,7 @@
         "amount": "数量",
         "bech32": "Bech32",
         "segwit": "Segwit",
+        "stake_reward": "staking 奖励",
         "miner-fee": "矿工费",
         "non-backup-title": "备份未验证",
         "non-backup-subtitle": "在设置您的钱包​​地址之前，我们建议您首先记录您的密钥并安全地进行存储，以防万一您的设备丢失或被盗，可以找回钱包。.",

@@ -88,6 +88,8 @@ export class TxHistoryComponent implements OnInit {
                 sent: this.isSent,
                 contract: this.isContract,
                 received: this.isReceived,
+                reward: this.isContractReward,
+                reward_amount: this.txs.rewardAmount,
                 confirmed: this.isConfirmed,
                 amount: this.Amount,
                 credentials: this.credentials,

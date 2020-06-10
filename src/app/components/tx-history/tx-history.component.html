@@ -6,7 +6,7 @@
       <i *ngIf="isReceived && isConfirmed && !isSent && !isContract" class="fas fa-2x fa-arrow-circle-down" style="color: #0ed3a7"></i>
       <i *ngIf="isContractReward && isConfirmed" class="fas fa-2x fa-arrow-circle-down" style="color: #0ed3a7"></i>
       <i *ngIf="isSent && isConfirmed && isReceived && !isContract" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
-      <i *ngIf="isConfirmed && isContract" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
+      <i *ngIf="isConfirmed && isContract && !isContractReward" class="fas fa-2x fa-dot-circle" style="color: #ffae42"></i>
     </ion-avatar>
 
     <ion-grid>
@@ -16,6 +16,7 @@
         <span *ngIf="isSent && !isReceived  && !isContract"><span translate>components.tx-history.sent-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
         <span *ngIf="isSent && isReceived  && !isContract"><span translate>components.tx-history.moved-on</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
         <span *ngIf="isContract && !isContractReward"><span translate>common.stake-contract</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
+        <span *ngIf="isContractReward"><span translate>common.stake_reward</span> {{ txs.timestamp * 1000 | date:'short' }}</span>
       </ion-row>
 
       <ion-row *ngIf="!isConfirmed">
@@ -23,7 +24,8 @@
       </ion-row>
 
       <ion-row>
-        <span *ngIf="isContract && isConfirmed" class="received">{{ StakeAmount | satToUnit:coin }}</span>
+        <span *ngIf="isConfirmed && isContractReward" class="received">{{ txs.rewardAmount | satToUnit:coin }}</span>
+        <span *ngIf="isContract && isConfirmed && !isContractReward" class="received">{{ StakeAmount | satToUnit:coin }}</span>
         <span *ngIf="isReceived  && !isSent && isConfirmed && !isContract" class="received">{{ Amount | satToUnit:coin }}</span>
         <span *ngIf="isSent && isReceived  && isConfirmed && !isContract" class="moved">{{ Amount| satToUnit:coin }}</span>
         <div *ngIf="isSent && !isReceived  && isConfirmed && !isContract" class="sent" style="color: #cd4b5c">

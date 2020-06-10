@@ -13,7 +13,7 @@ import {
 } from "../../models/blockbook/blockbook";
 import { Address, CoinCredentials, Tx } from "../../models/wallet/wallet";
 import { PlatformService } from "../platform/platform.service";
-import { TxHistoryComponent } from 'src/app/components/tx-history/tx-history.component';
+import { TxHistoryComponent } from "src/app/components/tx-history/tx-history.component";
 
 @Injectable({
     providedIn: "root",
@@ -268,8 +268,6 @@ export class BlockbookService {
                         });
                     }
                 }
-                let vouts = tx.vout.splice(1, tx.vout.length -1)
-                let voutsSum = vouts.length > 0 ? vouts.reduce( (a,b) => { return a.value + b.value; }) : 0
                 let newTx: Tx = {
                     confirmations: tx.confirmations,
                     timestamp: tx.blockTime,
@@ -277,8 +275,11 @@ export class BlockbookService {
                     outputs: out,
                     txid: tx.txid,
                     fee: parseInt(tx.fees, 10),
-                    reward: !!tx.vout[0].scriptPubKey,
-                    rewardAmount: !!tx.vout[0].scriptPubKey ? voutsSum - tx.vin[0].value : 0
+                    reward: tx.vout[0].hex === "f8",
+                    rewardAmount:
+                        tx.vout[0].hex === "f8"
+                            ? parseInt(tx.value) - parseInt(tx.valueIn)
+                            : 0,
                 };
                 parsedTx.push(newTx);
             }

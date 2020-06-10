@@ -32,6 +32,7 @@
         "amount": "Amount",
         "bech32": "Bech32",
         "segwit": "Segwit",
+        "stake_reward": "Stake Reward",
         "miner-fee": "Miner fee",
         "non-backup-title": "Paper Key Unverified",
         "non-backup-subtitle": "Before retrieving your wallet address, we recommended that you first write down your paper key and store it securely so that your wallet can be recovered in the case your device was lost or stolen.",

@@ -25,7 +25,8 @@ export class TxDetailsModal implements OnInit {
     @Input() fee;
     @Input() type;
     @Input() stakeAmount;
-
+    @Input() reward;
+    @Input() reward_amount;
     btx: Transaction;
     alternative;
     blockExplorerURL: string;

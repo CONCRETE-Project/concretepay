@@ -14,7 +14,8 @@
           <img src="assets/img/tx-action/icon-sent.svg" width="40" *ngIf="sent && !received && !contract"/>
           <img src="assets/img/tx-action/icon-received.svg" width="40" *ngIf="received && !sent  && !contract"/>
           <img src="assets/img/tx-action/icon-moved.svg" width="40" *ngIf="sent && received  && !contract"/>
-          <img src="assets/img/tx-action/icon-moved.svg" width="40" *ngIf="contract"/>
+          <img src="assets/img/tx-action/icon-moved.svg" width="40" *ngIf="contract && !reward"/>
+          <img src="assets/img/tx-action/icon-received.svg" width="40" *ngIf="reward"/>
         </span>
       </ion-avatar>
       <ion-grid class="ion-padding">
@@ -23,15 +24,19 @@
             <span *ngIf="sent && !received && !contract" translate>common.sent</span>
             <span *ngIf="received && !sent && !contract" translate>common.received</span>
             <span *ngIf="sent && received && !contract" translate>common.moved</span>
-            <span *ngIf="contract" translate>common.stake-contract</span>
+            <span *ngIf="contract && !reward" translate>common.stake-contract</span>
+            <span *ngIf="reward" translate>common.stake_reward</span>
           </div>
         </ion-row>
         <ion-row *ngIf="confirmed">
            <span *ngIf="!contract">
             {{ amount | satToUnit: coin }}
           </span>
-          <span *ngIf="contract">
+          <span *ngIf="contract && !reward">
             {{ stakeAmount | satToUnit: coin }}
+          </span>
+          <span *ngIf="reward">
+            {{ reward_amount | satToUnit: coin }}
           </span>
         </ion-row>
         <!-- <ion-row *ngIf="confirmed && !contract">
