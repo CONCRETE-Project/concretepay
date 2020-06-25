@@ -17,7 +17,7 @@ export class RateService {
 
     constructor(
         private http: HttpClient,
-        private ratesStorageService: RatesStorageService,
+        private ratesStorageService: RatesStorageService
     ) {}
 
     public async updateRates(coin: string) {

@@ -229,7 +229,9 @@ export class BlockbookService {
             for (let tx of Txs) {
                 let inp = [];
                 let out = [];
+                let sumVin = 0;
                 for (let vin of tx.vin) {
+                    sumVin += parseInt(vin.value, 10);
                     if (
                         AddrArray.map((addr) => addr.address).indexOf(
                             vin.addresses[0]
@@ -238,7 +240,10 @@ export class BlockbookService {
                         inp.push({ value: parseInt(vin.value, 10) });
                     }
                 }
+                let sumVout = 0;
+                let mnReward = parseInt(tx.vout[tx.vout.length - 1].value, 10);
                 for (let vout of tx.vout) {
+                    sumVout += parseInt(vout.value, 10);
                     if (
                         AddrArray.filter((addr) => addr.type === "direct")
                             .map((addr) => addr.address)
@@ -278,7 +283,7 @@ export class BlockbookService {
                     reward: tx.vout[0].hex === "f8",
                     rewardAmount:
                         tx.vout[0].hex === "f8"
-                            ? parseInt(tx.value) - parseInt(tx.valueIn)
+                            ? sumVout - sumVin - mnReward
                             : 0,
                 };
                 parsedTx.push(newTx);
