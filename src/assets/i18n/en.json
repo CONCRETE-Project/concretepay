@@ -92,6 +92,9 @@
             "select-language": "Select a language"
         },
         "wallet": {
+            "address": {
+                "title": "Addresses"
+            },
             "add": {
                 "title": "Create Wallet",
                 "wallet-name": "Wallet Name",

@@ -92,6 +92,9 @@
             "select-language": "选择语言"
         },
         "wallet": {
+            "address": {
+                "title": "Addresses"
+            },
             "add": {
                 "title": "创建钱包",
                 "wallet-name": "钱包名称",

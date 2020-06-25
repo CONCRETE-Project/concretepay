@@ -16,6 +16,7 @@ import { WalletDeletePage } from "./wallet/settings/delete/delete.page";
 import { AddWalletPage } from "./wallet/add/add.page";
 import { PIN_PAGES } from "./pin/pin";
 import { WalletStakePage } from "./wallet/stake/stake.page";
+import { WalletAddressPage } from "./wallet/address/address.page";
 
 export const PAGES = [
     ...PIN_PAGES,
@@ -36,4 +37,5 @@ export const PAGES = [
     WalletDeletePage,
     AddWalletPage,
     WalletStakePage,
+    WalletAddressPage,
 ];

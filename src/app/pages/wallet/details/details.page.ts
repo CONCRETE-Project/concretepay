@@ -28,6 +28,7 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
         { icon: "fas fa-history", click: () => this.goToTxHistory() },
         { icon: "fas fa-cog", click: () => this.goToPreferences() },
         { icon: "fas fa-snowflake", click: () => this.goToStake() },
+        { icon: "fas fa-list", click: () => this.goToAddress() },
     ];
 
     constructor(
@@ -107,6 +108,17 @@ export class WalletDetailsPage implements OnInit, OnDestroy {
                 "/" +
                 this.credentials.Coin +
                 "/stake",
+            { animated: true, animationDirection: "forward" }
+        );
+    }
+
+    async goToAddress() {
+        await this.navCtrl.navigateForward(
+            "/wallet/" +
+                this.wallet.Properties.id +
+                "/" +
+                this.credentials.Coin +
+                "/address",
             { animated: true, animationDirection: "forward" }
         );
     }
