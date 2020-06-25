@@ -13,12 +13,11 @@ export class RateService {
     private BTC_TO_SAT = 1e8;
     private ratesCachedTime = 60 * 5 * 1000; // 5 minutes;
 
-    public rates = "https://rates.concretecoin.org/";
+    public rates = "https://rates.concrete.yuetubi.cn/";
 
     constructor(
         private http: HttpClient,
         private ratesStorageService: RatesStorageService,
-        private platformService: PlatformService
     ) {}
 
     public async updateRates(coin: string) {
