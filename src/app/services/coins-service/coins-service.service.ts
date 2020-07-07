@@ -11,7 +11,7 @@ import { CoinData } from "src/app/models/coin/coin";
     providedIn: "root",
 })
 export class CoinsService {
-    public url = "https://coins.concrete.yuetubi.cn/";
+    public url = "https://coins.concretecoin.org/";
 
     constructor(
         private http: HttpClient,
