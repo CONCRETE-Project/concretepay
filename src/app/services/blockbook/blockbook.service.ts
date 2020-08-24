@@ -13,7 +13,6 @@ import {
 } from "../../models/blockbook/blockbook";
 import { Address, CoinCredentials, Tx } from "../../models/wallet/wallet";
 import { PlatformService } from "../platform/platform.service";
-import { TxHistoryComponent } from "src/app/components/tx-history/tx-history.component";
 
 @Injectable({
     providedIn: "root",
@@ -439,11 +438,9 @@ export class BlockbookService {
         CoinCredentials: CoinCredentials,
         rawTx: string
     ): Promise<string> {
-        let req = await this.httpnative.get(
-            this.getUrl(CoinCredentials) + "/api/v2/sendtx/" + rawTx,
-            {},
-            {}
-        );
+        this.httpnative.setDataSerializer("utf8")
+        let req = await this.httpnative.post(
+            this.getUrl(CoinCredentials) + "/api/v2/sendtx/", rawTx, {});
         return JSON.parse(req.data);
     }
 
