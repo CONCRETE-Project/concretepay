@@ -8,6 +8,7 @@ import {
     FeeRates,
     Transaction,
     Utxo,
+    AddressBalance,
     XpubFullInfo,
     BlockbookEndpoint,
 } from "../../models/blockbook/blockbook";
@@ -354,6 +355,29 @@ export class BlockbookService {
             {}
         );
         return JSON.parse(req.data);
+    }
+
+    public async getAddressesBalance(CoinCredentials: CoinCredentials): Promise<AddressBalance[]> {
+        let balances: AddressBalance[] = [];
+        let utxos: Utxo[] = await this.getUtxos(CoinCredentials);
+        for( let utxo of utxos) {
+            if(
+                !balances.find((balance) => {
+                    if( balance.address == utxo.address ) {
+                        balance.value += parseInt(utxo.value, 10);
+                        return true;
+                    }
+                    return false;
+                })
+            ) {
+                let balance: AddressBalance = {
+                    address: utxo.address,
+                    value: parseInt(utxo.value, 10)
+                };
+                balances.push( balance );
+            }
+        }
+        return balances;
     }
 
     public async getFeeRate(

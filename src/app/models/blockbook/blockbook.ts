@@ -109,3 +109,8 @@ export interface FeeRates {
     medium: number;
     slow: number;
 }
+
+export interface AddressBalance {
+    address: string;
+    value: number;
+}
