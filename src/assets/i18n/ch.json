@@ -241,8 +241,8 @@
         },
         "tx-history": {
             "received-on": "收到",
-            "sent-on": "在发送",
-            "moved-on": "正在转移",
+            "sent-on": "转出",
+            "moved-on": "转移",
             "confirming": "确认中..."
         },
         "receiver-info": {
