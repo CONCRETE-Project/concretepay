@@ -1,3 +1,13 @@
 .tx-history {
     background: none;
 }
+
+.info-wrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.received {
+    color: #0ed3a7;
+}

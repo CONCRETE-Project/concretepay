@@ -1,9 +1,23 @@
 <app-tool-bar [back]="true" [titleText]="'pages.wallet.address.title' | translate"></app-tool-bar>
 <ion-content class="page-content-with-slim-header ion-padding">
   <ion-list *ngIf="AddressInfo[0]" class="tx-history">
-    <ion-item *ngFor="let addr of AddressInfo">
-      <span slot="start">{{addr.address}}</span>
+    <!--ion-item *ngFor="let addr of AddressInfo">
+      <span slot="start" class="truncate-string">{{addr.address}}</span>
       <span slot="end">{{addr.value | satToUnit:credentials.Coin}}</span>
+    </ion-item-->
+    <ion-item *ngFor="let addr of AddressInfo" copyToClipboard="{{ addr.address }}">
+        <ion-grid class="ion-padding">
+            <ion-row>
+                <ion-note class="info-wrap">
+                    {{addr.address}}
+                </ion-note>
+            </ion-row>
+            <ion-row>
+                <ion-note class="received">
+                    {{addr.value | satToUnit:credentials.Coin}}
+                </ion-note>
+            </ion-row>
+        </ion-grid>
     </ion-item>
   </ion-list>
 </ion-content>
