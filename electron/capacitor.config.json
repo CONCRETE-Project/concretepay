@@ -3,5 +3,6 @@
     "appName": "concrete-pay",
     "bundledWebRuntime": false,
     "npmClient": "yarn",
+    "linuxAndroidStudioPath": "/snap/android-studio/90/android-studio/bin/studio.sh",
     "webDir": "www"
 }

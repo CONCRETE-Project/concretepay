@@ -1,50 +1,53 @@
 {
-    "name": "ConcretePay",
-    "version": "1.0.6",
-    "description": "ConcretePay - Secure cryptocurrency wallet",
-    "main": "index.js",
-    "homepage": "https://polispay.com",
-    "scripts": {
-      "electron:start": "electron ./",
-      "build:linux": "electron-builder --linux snap deb",
-      "build:mac": "CSC_IDENTITY_AUTO_DISCOVERY=true electron-builder --mac dmg",
-      "build:win": "electron-builder --win nsis portable",
-      "build:all": "yarn run build:win && yarn run build:mac && yarn run build:linux"
+  "name": "ConcretePay",
+  "version": "1.0.7",
+  "description": "ConcretePay - Secure cryptocurrency wallet",
+  "main": "index.js",
+  "homepage": "https://polispay.com",
+  "scripts": {
+    "electron:start": "electron ./",
+    "build:linux": "electron-builder --linux snap deb",
+    "build:mac": "CSC_IDENTITY_AUTO_DISCOVERY=true electron-builder --mac dmg",
+    "build:win": "electron-builder --win nsis portable",
+    "build:all": "yarn run build:win && yarn run build:mac && yarn run build:linux"
+  },
+  "build": {
+    "files": [
+      "index.js",
+      "app/**/*"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "release-desktop/"
     },
-    "build": {
-      "files": [
-        "index.js",
-        "app/**/*"
-      ],
-      "directories": {
-        "buildResources": "resources",
-        "output": "release-desktop/"
-      },
-      "mac": {
-        "icon": "resources/mac/icon.icns",
-        "darkModeSupport": false
-      },
-      "win": {
-        "target": "appx",
-        "icon": "resources/windows/icon.ico"
-      },
-      "linux": {
-        "category": "Finance",
-        "icon": "resources/linux/icon.png"
-      }
+    "mac": {
+      "icon": "resources/mac/icon.icns",
+      "darkModeSupport": false
     },
-    "dependencies": {
-      "@capacitor/android": "1.5.1",
-      "@capacitor/cli": "1.5.1",
-      "@capacitor/core": "1.5.1",
-      "@capacitor/electron": "^2.0.2",
-      "@capacitor/ios": "1.5.1",
-      "electron-is-dev": "1.1.0"
+    "win": {
+      "target": "appx",
+      "icon": "resources/windows/icon.ico"
     },
-    "devDependencies": {
-      "electron": "8.3.0",
-      "electron-builder": "22.6.0"
-    },
-    "license": "MIT",
-    "author": {"name": "", "email": "dev@concretepay.com"}
+    "linux": {
+      "category": "Finance",
+      "icon": "resources/linux/icon.png"
+    }
+  },
+  "dependencies": {
+    "@capacitor/android": "1.5.1",
+    "@capacitor/cli": "1.5.1",
+    "@capacitor/core": "1.5.1",
+    "@capacitor/electron": "^2.0.2",
+    "@capacitor/ios": "1.5.1",
+    "electron-is-dev": "1.1.0"
+  },
+  "devDependencies": {
+    "electron": "8.3.0",
+    "electron-builder": "22.6.0"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "",
+    "email": "dev@concretepay.com"
   }
+}
