@@ -62,7 +62,7 @@
         "@angular/language-service": "9.1.1",
         "@capacitor/cli": "2.0.1",
         "@ionic/angular-toolkit": "2.2.0",
-        "@ionic/cli": "6.9.2",
+        "@ionic/cli": "6.20.1",
         "@types/node": "13.11.1",
         "codelyzer": "5.2.2",
         "prettier": "2.0.4",
